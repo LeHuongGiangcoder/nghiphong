@@ -31,11 +31,20 @@ export const metadata: Metadata = {
   title: "My Nghi & Thanh Phong — 13.12.2026",
   description:
     "Ngô Mỹ Nghi Nghi & Nguyễn Thanh Phong invite you to celebrate their wedding on 13 December 2026 at Hotel Nikko Saigon.",
+  icons: {
+    icon: "/component/19.png", // Chosen from public/component as the browser logo
+  },
   openGraph: {
     title: "My Nghi & Thanh Phong — 13.12.2026",
-    description:
-      "Join us at Hotel Nikko Saigon on 13 December 2026.",
+    description: "Join us at Hotel Nikko Saigon on 13 December 2026.",
     type: "website",
+    images: [], // Temporarily leave preview image empty
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "My Nghi & Thanh Phong — 13.12.2026",
+    description: "Join us at Hotel Nikko Saigon on 13 December 2026.",
+    images: [], // Temporarily leave preview image empty
   },
 };
 
