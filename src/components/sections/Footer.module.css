@@ -1,0 +1,20 @@
+.footer {
+  border-top: 1px solid var(--c-line-soft);
+}
+
+.flourish {
+  width: 5rem;
+  height: auto;
+  margin: 0 auto var(--sp-md);
+  opacity: 0.8;
+}
+
+.names {
+  font-size: clamp(1.5rem, 7vw, 2rem);
+}
+
+.date {
+  margin-top: var(--sp-2xs);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+}

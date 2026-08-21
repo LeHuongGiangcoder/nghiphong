@@ -1,0 +1,101 @@
+.agenda {
+  overflow: hidden;
+}
+
+.title {
+  font-size: clamp(2.25rem, 11vw, 3.25rem);
+}
+
+.dateFull {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-indent: 0.16em;
+  color: var(--c-body);
+}
+
+/* — timeline ——————————————————————————————————— */
+.timeline {
+  position: relative;
+  list-style: none;
+  padding-left: 2.5rem;
+}
+
+/* the vertical hairline the pearls sit on */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  bottom: 2.4rem;
+  left: 0.5rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--c-line),
+    var(--c-line-soft) 85%,
+    transparent
+  );
+}
+
+.item {
+  position: relative;
+  padding-bottom: var(--sp-xl);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.marker {
+  position: absolute;
+  top: 0.15rem;
+  left: -2.5rem;
+  width: 1.0625rem;
+  height: 1.0625rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-bg);
+}
+
+.marker img {
+  width: 100%;
+  height: auto;
+}
+
+.time {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.2em;
+  color: var(--c-gold-soft);
+  line-height: 1.4;
+}
+
+.itemTitle {
+  margin-top: var(--sp-3xs);
+}
+
+.note {
+  margin-top: var(--sp-2xs);
+  line-height: 1.7;
+}
+
+/* — venue —————————————————————————————————————— */
+.venue {
+  --gap: var(--sp-md);
+  padding-block: var(--sp-xl);
+}
+
+.venueName {
+  margin-bottom: var(--sp-2xs);
+}
+
+.actions {
+  --gap: var(--sp-2xs);
+}
+
+.pampas {
+  top: 4%;
+  left: -14%;
+  width: min(40%, 10rem);
+  --decor-opacity: 0.4;
+}

@@ -1,0 +1,53 @@
+.greeting {
+  text-align: center;
+  overflow: hidden;
+}
+
+/* The lace frame is a watermark sized to enclose the copy no matter how long
+   it runs — stretching the ornament to fit the text would distort the lace. */
+.frameWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(2rem, 9vw, 3.5rem);
+}
+
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(132%, 34rem);
+  height: auto;
+  max-width: none;
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.content {
+  position: relative;
+  --gap: var(--sp-md);
+  max-width: 24rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 12vw, 3.5rem);
+}
+
+.signoff {
+  margin-bottom: var(--sp-2xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.signature {
+  font-size: clamp(1.5rem, 7vw, 2rem);
+}
+
+.cherub {
+  right: 6%;
+  bottom: 0;
+  width: min(26%, 6.5rem);
+  --decor-opacity: 0.5;
+}

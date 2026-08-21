@@ -1,0 +1,104 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: clamp(5rem, 18vw, 8rem);
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+.names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  font-weight: 400;
+}
+
+.amp {
+  display: block;
+  margin-block: -0.15em;
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  color: var(--c-gold-soft);
+}
+
+/* A sentence, not a name plate — sentence case and a gentler measure so it
+   stays readable under the script names. */
+.invite {
+  max-width: 22rem;
+  margin-inline: auto;
+  font-size: var(--fs-sm);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 1.75;
+  color: var(--c-body);
+}
+
+.date {
+  font-size: clamp(1.125rem, 5vw, 1.375rem);
+  letter-spacing: 0.3em;
+  color: var(--c-heading);
+  text-indent: 0.3em;
+}
+
+.dateMeta {
+  margin-top: var(--sp-3xs);
+}
+
+/* — ornaments ————————————————————————————————— */
+.pampas {
+  right: -12%;
+  bottom: -4%;
+  width: min(48%, 12rem);
+  --decor-opacity: 0.5;
+  transform: scaleX(-1);
+}
+
+/* — scroll cue ———————————————————————————————— */
+.scroll {
+  position: absolute;
+  bottom: var(--sp-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2xs);
+  font-size: 0.625rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-indent: 0.28em;
+  color: var(--c-gold-soft);
+}
+
+.scrollLine {
+  display: block;
+  width: 1px;
+  height: 2.5rem;
+  background: linear-gradient(to bottom, var(--c-line), transparent);
+  animation: drop 2.4s var(--ease) infinite;
+  transform-origin: top;
+}
+
+@keyframes drop {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}

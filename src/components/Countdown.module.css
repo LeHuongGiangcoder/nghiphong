@@ -1,0 +1,41 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3xs);
+  padding-inline: var(--sp-2xs);
+}
+
+.cell + .cell {
+  border-left: 1px solid var(--c-line-soft);
+}
+
+.value {
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--c-heading);
+}
+
+.label {
+  font-size: 0.625rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-indent: 0.24em;
+  color: var(--c-body);
+  opacity: 0.75;
+}
+
+.over {
+  text-align: center;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--c-heading);
+  opacity: 1;
+}

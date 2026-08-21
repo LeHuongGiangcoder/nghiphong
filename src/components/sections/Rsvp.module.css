@@ -1,0 +1,74 @@
+.rsvp {
+  overflow: hidden;
+}
+
+/* — dress code ————————————————————————————————— */
+.dress {
+  --gap: var(--sp-sm);
+}
+
+.flower {
+  width: 4.5rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.dressTitle {
+  font-size: clamp(2.25rem, 11vw, 3rem);
+}
+
+.swatches {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-2xs);
+  list-style: none;
+  margin-top: var(--sp-3xs);
+}
+
+.swatches li {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 1px 6px -2px rgba(120, 100, 65, 0.4);
+}
+
+.avoid {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* — form ——————————————————————————————————————— */
+.formTitle {
+  font-size: clamp(1.75rem, 7.5vw, 2.25rem);
+}
+
+.form {
+  --gap: var(--sp-lg);
+  padding: var(--sp-xl) var(--sp-md);
+}
+
+.form fieldset {
+  border: none;
+}
+
+.form legend {
+  margin-bottom: var(--sp-xs);
+}
+
+/* — confirmation ——————————————————————————————— */
+.thanks {
+  --gap: var(--sp-md);
+  padding-block: var(--sp-2xl);
+}
+
+.seal {
+  width: 4.5rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.thanksTitle {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+}
+
