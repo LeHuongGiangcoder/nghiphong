@@ -79,7 +79,7 @@
   --shell: 40rem;                              /* the "invitation" column  */
   --container: 30rem;                          /* general content width    */
   --measure: 18rem;                            /* prose column             */
-  --seam-size: 8rem;                           /* section-divider ornament */
+  --seam-size: 16rem;                          /* section-divider ornament */
 
   /* — surface —————————————————————————————— */
   --radius-sm: 2px;
@@ -205,12 +205,21 @@ a {
    meet, making the gap between sections twice the gap at the page edges.
    `.seam` marks the ornament that sits between them; both sides then give
    half a band, so one seam is worth one band. */
-.section:has(+ .seam) {
+.section:has(+ .seam),
+.section:has(+ .section) {
   padding-bottom: calc(var(--section-py) / 2);
 }
 
-.seam + .section {
+.seam + .section,
+.section + .section {
   padding-top: calc(var(--section-py) / 2);
+}
+
+/* The hero's rule is flush with its band, so its padding is the space inside
+   the frame, not a gap between bands. It keeps both sides at full height —
+   the doubled class matches the seam selectors' specificity so it wins. */
+.section.section--hero {
+  padding-block: var(--section-py);
 }
 
 .section--tight {

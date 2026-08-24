@@ -12,7 +12,6 @@ export default function Home() {
       <Nav />
       <main id="main">
         <Greeting />
-        <SectionDivider />
         <Hero />
         <SectionDivider />
         <Agenda />

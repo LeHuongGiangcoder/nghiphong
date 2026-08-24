@@ -35,10 +35,15 @@
   position: relative;
 }
 
+.head {
+  gap: 0 !important; /* Giảm khoảng cách giữa "a note from us" và "welcome" */
+  margin-bottom: var(--sp-md) !important; /* Giảm khoảng cách giữa welcome và content */
+}
+
 /* the two paragraphs of the note */
 .note {
   --gap: var(--sp-md);
-  margin-bottom: var(--section-gap);
+  margin-bottom: var(--sp-lg); /* Đưa block signature cao lên */
 }
 
 /* `.body` is a global utility — CSS Modules would hash it without :global. */

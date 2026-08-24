@@ -1,45 +1,33 @@
 .hero {
-  --frame-inset: clamp(0.75rem, 3.5vw, 1.25rem);
-  --crest-size: clamp(3.25rem, 15vw, 4.5rem);
-  overflow: hidden;
+  --crest-figure: clamp(4.75rem, 21vw, 6.5rem);
+  /* symmetric — this band is not halved at the seam, see globals.css */
+  --section-py: clamp(4.25rem, 16vw, 6rem);
 }
 
-/* The border box. The top edge is drawn as a background gradient rather than
-   a border so it can carry a gap in the middle for the crest — a real
-   border-top cannot be interrupted. */
-.border {
-  position: absolute;
-  inset: var(--frame-inset);
-  z-index: -1;
-  border: 1px solid var(--c-line);
-  border-top: none;
-  background-image: linear-gradient(
-    to right,
-    var(--c-line) 0 calc(50% - var(--crest-size) * 0.44),
-    transparent calc(50% - var(--crest-size) * 0.44)
-      calc(50% + var(--crest-size) * 0.44),
-    var(--c-line) calc(50% + var(--crest-size) * 0.44) 100%
-  );
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: top center;
-  pointer-events: none;
-}
-
-/* Sits in the gap, straddling the top rule. */
+/* The cherub with a flourish tail either side. It sits in the flow at the
+   head of the column rather than straddling the section boundary, so the
+   band's own padding gives it room above and its margin gives it room below. */
 .crest {
-  position: absolute;
-  top: var(--frame-inset);
-  left: 50%;
-  z-index: -1;
-  width: var(--crest-size);
-  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.25rem, 1.5vw, 0.75rem);
+  width: min(100%, 17rem);
+  margin-bottom: var(--sp-sm);
   pointer-events: none;
   user-select: none;
 }
 
-.crest img {
-  width: 100%;
+.crestFigure {
+  flex: none;
+  width: var(--crest-figure);
+  height: auto;
+}
+
+/* the tails take whatever width is left, equally */
+.crestWing {
+  flex: 1 1 0;
+  min-width: 0;
   height: auto;
 }
 
@@ -135,42 +123,3 @@
 }
 
 
-/* — scroll cue ————————————————————————————————
-   In flow at the end of the column. It used to be absolutely positioned
-   against a 100svh hero; now that the hero sizes to its content it would
-   land on top of the RSVP button. */
-.scroll {
-  margin-top: var(--sp-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--sp-2xs);
-  font-size: 0.625rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  text-indent: 0.28em;
-  color: var(--c-gold-soft);
-}
-
-.scrollLine {
-  display: block;
-  width: 1px;
-  height: 2.5rem;
-  background: linear-gradient(to bottom, var(--c-line), transparent);
-  animation: drop 2.4s var(--ease) infinite;
-  transform-origin: top;
-}
-
-@keyframes drop {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-}

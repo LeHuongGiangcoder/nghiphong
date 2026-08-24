@@ -24,20 +24,33 @@ export function Hero() {
         />
       </div>
 
-      {/* thin rule inset from the section edge, broken at the top centre for
-          the cherub crest */}
-      <div className={styles.border} aria-hidden="true" />
-      <div className={styles.crest} aria-hidden="true">
-        <Image
-          src="/component/12.png"
-          alt=""
-          width={2475}
-          height={2475}
-          sizes="72px"
-        />
-      </div>
-
       <div className={`container ${styles.content}`}>
+        {/* cherub flanked by the two flourish tails */}
+        <div className={styles.crest} aria-hidden="true">
+          <Image
+            className={styles.crestWing}
+            src="/decor/flourish-left.webp"
+            alt=""
+            width={900}
+            height={123}
+          />
+          <Image
+            className={styles.crestFigure}
+            src="/component/12.png"
+            alt=""
+            width={2475}
+            height={2475}
+            sizes="128px"
+          />
+          <Image
+            className={styles.crestWing}
+            src="/decor/flourish-right.webp"
+            alt=""
+            width={900}
+            height={127}
+          />
+        </div>
+
         <Reveal as="p" className="eyebrow" delay={100}>
           {t.hero.eyebrow}
         </Reveal>
@@ -84,10 +97,6 @@ export function Hero() {
           </a>
         </Reveal>
 
-        <p className={styles.scroll} aria-hidden="true">
-          <span>{t.hero.scroll}</span>
-          <span className={styles.scrollLine} />
-        </p>
       </div>
     </section>
   );

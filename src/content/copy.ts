@@ -37,7 +37,6 @@ type Dict = {
     dayLine: string;
     venueShort: string;
     cta: string;
-    scroll: string;
   };
   countdown: { days: string; hours: string; minutes: string; seconds: string; over: string };
   greeting: { eyebrow: string; title: string; body: string[]; signoff: string };
@@ -100,7 +99,6 @@ export const COPY: Record<Lang, Dict> = {
       dayLine: "Sunday",
       venueShort: "Hotel Nikko Saigon",
       cta: "RSVP",
-      scroll: "Scroll",
     },
     countdown: {
       days: "Days",
@@ -192,7 +190,6 @@ export const COPY: Record<Lang, Dict> = {
       dayLine: "Chủ Nhật",
       venueShort: "Khách sạn Nikko Sài Gòn",
       cta: "Xác nhận tham dự",
-      scroll: "Kéo xuống",
     },
     countdown: {
       days: "Ngày",

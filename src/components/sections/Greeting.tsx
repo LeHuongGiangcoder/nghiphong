@@ -32,7 +32,7 @@ export function Greeting() {
         />
 
         <div className={`measure ${styles.content}`}>
-          <div className="section__head">
+          <div className={`section__head ${styles.head}`}>
             <Reveal as="p" className="eyebrow">
               {t.greeting.eyebrow}
             </Reveal>
