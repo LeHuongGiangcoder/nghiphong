@@ -3,18 +3,40 @@
 }
 
 .flourish {
-  width: 5rem;
+  width: 6rem;
   height: auto;
   margin: 0 auto var(--sp-md);
   opacity: 0.8;
 }
 
 .names {
-  font-size: clamp(1.5rem, 7vw, 2rem);
+  font-size: clamp(1.25rem, 5vw, 1.6rem);
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--f-display);
 }
 
 .date {
   margin-top: var(--sp-2xs);
   letter-spacing: 0.28em;
   text-indent: 0.28em;
+}
+
+.couple {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 8vw, 3rem);
+  /* Offset the section's own bottom padding so the image sits flush */
+  margin-bottom: calc(-1 * var(--section-py));
+  width: 100%;
+  pointer-events: none;
+}
+
+.couple img {
+  width: 110%;
+  max-width: 44rem; 
+  min-width: 40rem;
+  height: auto;
+  opacity: 0.95; 
 }

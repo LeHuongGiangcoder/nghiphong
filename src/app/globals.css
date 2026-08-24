@@ -18,7 +18,7 @@
   --c-bg: #f9f4ea;          /* base beige, sampled from the panel art  */
   --c-bg-deep: #f2ead9;     /* alternating band                        */
   --c-surface: #fffdf8;     /* cards on beige                          */
-  --c-heading: #a5854d;     /* headings (brand)                        */
+  --c-heading: #7d7166;     /* headings (brand)                        */
   --c-body: #686767;        /* body copy (brand)                       */
   --c-ink: #4a4948;         /* emphasis inside body copy               */
   --c-gold: #a5854d;
@@ -28,8 +28,13 @@
   --c-line-soft: rgba(165, 133, 77, 0.16);
   --c-error: #a8574b;
 
-  /* — typography ————————————————————————————— */
-  --f-script: var(--font-citadel), "Snell Roundhand", cursive;
+  /* — typography ——————————————————————————————
+     Three faces, one job each:
+       --f-script   Quick Signature  → headings & flourish lines
+       --f-display  Season Serif     → couple names, dates, times, sub-heads
+       --f-serif    Noto Serif       → body copy  */
+  --f-script: var(--font-quick-signature), "Snell Roundhand", cursive;
+  --f-display: var(--font-season), "Times New Roman", serif;
   --f-serif: var(--font-noto-serif), "Times New Roman", serif;
 
   --fs-display: clamp(3.25rem, 15vw, 5.5rem);
@@ -61,14 +66,19 @@
   --sp-2xl: 3.5rem;    /* 56 */
   --sp-3xl: 5rem;      /* 80 */
 
-  /* — rhythm rules (the whole site obeys these) ——————— */
-  --section-py: clamp(4.5rem, 15vw, 7.5rem);   /* section vertical padding */
-  --gutter: clamp(1.5rem, 6vw, 2.5rem);        /* horizontal page gutter   */
-  --container: 32rem;                          /* readable content width   */
+  /* — rhythm rules (the whole site obeys these) ———————
+     Every section is built from these five values and nothing else. If a
+     section needs a different measurement, it picks a modifier below — it
+     does not invent its own padding. */
+  --section-py: clamp(5rem, 16vw, 7.5rem);     /* top == bottom, every band */
+  --gutter: clamp(1.5rem, 6vw, 2.5rem);        /* left == right, every band */
+  --section-gap: clamp(2.5rem, 9vw, 3.5rem);   /* head → body               */
+  --head-gap: var(--sp-sm);                    /* eyebrow → title → meta    */
+  --block-gap: var(--sp-xl);                   /* block → block inside body */
+
   --shell: 40rem;                              /* the "invitation" column  */
-  --eyebrow-gap: var(--sp-md);   /* eyebrow  → heading */
-  --heading-gap: var(--sp-md);   /* heading  → body    */
-  --block-gap: var(--sp-xl);     /* block    → block   */
+  --container: 30rem;                          /* general content width    */
+  --measure: 18rem;                            /* prose column             */
 
   /* — surface —————————————————————————————— */
   --radius-sm: 2px;
@@ -164,6 +174,21 @@ a {
   }
 }
 
+/* ---- SECTION CONTRACT -----------------------------------------------
+   Sections never set their own padding. They take the standard band and,
+   if they need something else, one of the modifiers below.
+
+     .section            standard band  (--section-py / --gutter)
+       .section--hero      fills the viewport, contents optically centred
+       .section--tight     shorter band (footer)
+       .section--flush     no horizontal padding, for full-bleed children
+
+   Inside a section:
+     .section__head      eyebrow → title → meta, gap = --head-gap,
+                         and exactly --section-gap down to the body
+     .section__body      the content below the head, gap = --block-gap
+     .measure            prose column, narrower than .container
+-------------------------------------------------------------------- */
 .section {
   position: relative;
   padding-block: var(--section-py);
@@ -176,12 +201,49 @@ a {
 }
 
 .section--tight {
-  padding-block: clamp(3rem, 10vw, 4.5rem);
+  --section-py: clamp(3rem, 10vw, 4.5rem);
+}
+
+.section--hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  text-align: center;
+}
+
+.section__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--head-gap);
+  margin-bottom: var(--section-gap);
+  text-align: center;
+}
+
+/* the head owns its own rhythm — children must not add their own margins */
+.section__head > * {
+  margin-block: 0;
+}
+
+.section__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap, var(--block-gap));
 }
 
 .container {
   width: 100%;
   max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* Prose sits in a narrower column than cards and forms, so body copy never
+   runs edge to edge inside the band. */
+.measure {
+  width: 100%;
+  max-width: var(--measure);
   margin-inline: auto;
 }
 
@@ -217,10 +279,11 @@ a {
 
 /* --------------------------------------------------------- TYPOGRAPHY */
 
-/* Citadel Script has no Vietnamese diacritics (no đ, ệ, ớ, ỳ …).
-   Any element carrying `.script` therefore falls back to the serif italic
-   automatically when the page language is Vietnamese — see the rule at the
-   bottom of this block. Latin-only strings (names, dates) keep the script. */
+/* Neither Quick Signature nor Season carries the stacked Vietnamese accents
+   (ệ, ớ, ữ …). Anything on `.script` or `.display` therefore falls back to
+   Noto Serif italic when the page language is Vietnamese — see the rule at
+   the bottom of this block. `.script--latin` opts out for strings that are
+   Latin in both languages (names, "Pastel", times). */
 .script {
   font-family: var(--f-script);
   font-weight: 400;
@@ -228,20 +291,24 @@ a {
   color: var(--c-heading);
 }
 
+/* The couple's names — Season Serif, widely tracked, all caps. */
 .display {
-  font-family: var(--f-script);
+  font-family: var(--f-display);
   font-size: var(--fs-display);
-  line-height: 0.95;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  text-transform: uppercase;
   color: var(--c-heading);
-  font-weight: 400;
 }
 
 .h1,
 .h2,
 .h3 {
-  font-family: var(--f-serif);
+  font-family: var(--f-display);
   color: var(--c-heading);
-  font-weight: 400;
+  font-weight: 300;
   line-height: var(--lh-heading);
   letter-spacing: var(--ls-heading);
 }
@@ -294,18 +361,31 @@ a {
   opacity: 0.75;
 }
 
+/* Dates, times and the countdown — Season Serif. */
 .num {
+  font-family: var(--f-display);
   font-variant-numeric: lining-nums tabular-nums;
+  font-weight: 300;
   letter-spacing: 0.08em;
 }
 
 .gold {
-  color: var(--c-heading);
+  color: var(--c-gold);
 }
 
 /* Opt out: text that is Latin-only in both languages (names, "Pastel",
    dates) keeps the script face even when the page is Vietnamese. */
+/* Season is missing the stacked caps (Ễ, Ệ, Ả) and several lowercase forms,
+   so Vietnamese strings would otherwise pull glyphs from a fallback face
+   mid-word. Hand the whole run to Noto, which covers the language fully. */
+html[lang="vi"] .h1:not(.script--latin),
+html[lang="vi"] .h2:not(.script--latin),
+html[lang="vi"] .h3:not(.script--latin) {
+  font-family: var(--f-serif);
+}
+
 html[lang="vi"] .script:not(.script--latin),
+html[lang="vi"] .num:not(.script--latin),
 html[lang="vi"] .display:not(.script--latin) {
   font-family: var(--f-serif);
   font-style: italic;
@@ -315,7 +395,10 @@ html[lang="vi"] .display:not(.script--latin) {
 }
 
 html[lang="vi"] .display:not(.script--latin) {
-  font-size: clamp(2.5rem, 11vw, 3.75rem);
+  font-size: clamp(1.75rem, 7.5vw, 2.5rem);
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 0.1em;
 }
 
 /* ------------------------------------------------------------ DIVIDERS */
@@ -340,10 +423,12 @@ html[lang="vi"] .display:not(.script--latin) {
 
 /* ------------------------------------------------------------- SURFACE */
 .card {
+  --card-py: var(--sp-xl);
+  --card-px: var(--sp-lg);
   background: var(--c-surface);
   border: 1px solid var(--c-line-soft);
   border-radius: var(--radius);
-  padding: var(--sp-lg) var(--sp-md);
+  padding: var(--card-py) var(--card-px);
   box-shadow: var(--shadow-card);
 }
 
@@ -434,7 +519,7 @@ html[lang="vi"] .display:not(.script--latin) {
 }
 
 .btn--outline {
-  color: var(--c-heading);
+  color: var(--c-gold);
   border-color: var(--c-line);
 }
 
@@ -462,7 +547,7 @@ html[lang="vi"] .display:not(.script--latin) {
     border-color: var(--c-gold);
   }
   .btn--ghost:hover {
-    color: var(--c-heading);
+    color: var(--c-gold);
   }
 }
 
@@ -582,7 +667,7 @@ html[lang="vi"] .display:not(.script--latin) {
 .choice:has(input:checked) {
   border-color: var(--c-gold);
   background: var(--c-gold-wash);
-  color: var(--c-heading);
+  color: var(--c-gold);
 }
 
 .choice:has(input:checked) .choice__dot {
@@ -617,6 +702,12 @@ html[lang="vi"] .display:not(.script--latin) {
 
 .reveal.is-visible {
   opacity: 1;
+  transform: none;
+}
+
+/* Fade only. Use on absolutely-positioned children: a `transform` would make
+   the element a containing block and re-anchor anything positioned inside it. */
+.reveal--fade {
   transform: none;
 }
 

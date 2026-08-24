@@ -49,7 +49,7 @@ export function Countdown() {
     <ul className={styles.grid} aria-live="off">
       {cells.map(({ value, label }) => (
         <li key={label} className={styles.cell}>
-          <span className={`num ${styles.value}`}>
+          <span className={`num script--latin ${styles.value}`}>
             {pending ? "––" : String(value).padStart(2, "0")}
           </span>
           <span className={styles.label}>{label}</span>

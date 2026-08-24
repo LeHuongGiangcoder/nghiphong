@@ -1,0 +1,97 @@
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* The curve column is centred and fixed-width; labels flow around it. */
+.curve {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--c-gold);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.list {
+  list-style: none;
+  height: 100%;
+}
+
+.row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* the node sits on the curve; pull the label block onto its centre line */
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+/* Label on the outside of the swing it belongs to. The padding keeps the
+   text clear of the curve column (76px wide, centred) plus a small gap. */
+.row[data-side="left"] {
+  justify-content: flex-start;
+  padding-right: calc(50% + 42px);
+  text-align: right;
+}
+
+.row[data-side="right"] {
+  justify-content: flex-end;
+  padding-left: calc(50% + 42px);
+  text-align: left;
+}
+
+/* Fill the track. If the box shrink-wraps to its content, a short label
+   ("Dinner") ends further from the curve than a long one — the gap has to be
+   the padding edge, not the text width. */
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.time {
+  font-style: italic;
+  font-size: clamp(1.25rem, 5.4vw, 1.625rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--c-gold);
+}
+
+.title {
+  margin-top: 0.3rem;
+  font-size: clamp(0.9375rem, 3.8vw, 1.0625rem);
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+}
+
+.note {
+  margin-top: var(--sp-3xs);
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+}
+
+/* pearls stay — they are the joints of the ribbon */
+.pearl {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  transform: translate(-50%, -50%);
+}
+
+.pearl img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 22rem) {
+  .row[data-side="left"] {
+    padding-right: calc(50% + 38px);
+  }
+  .row[data-side="right"] {
+    padding-left: calc(50% + 38px);
+  }
+}

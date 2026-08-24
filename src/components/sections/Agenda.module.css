@@ -3,7 +3,8 @@
 }
 
 .title {
-  font-size: clamp(2.25rem, 11vw, 3.25rem);
+  font-size: clamp(3.75rem, 18vw, 5rem);
+  line-height: 1;
 }
 
 .dateFull {
@@ -14,75 +15,18 @@
   color: var(--c-body);
 }
 
-/* — timeline ——————————————————————————————————— */
-.timeline {
-  position: relative;
-  list-style: none;
-  padding-left: 2.5rem;
-}
-
-/* the vertical hairline the pearls sit on */
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 0.6rem;
-  bottom: 2.4rem;
-  left: 0.5rem;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    var(--c-line),
-    var(--c-line-soft) 85%,
-    transparent
-  );
-}
-
-.item {
-  position: relative;
-  padding-bottom: var(--sp-xl);
-}
-
-.item:last-child {
-  padding-bottom: 0;
-}
-
-.marker {
-  position: absolute;
-  top: 0.15rem;
-  left: -2.5rem;
-  width: 1.0625rem;
-  height: 1.0625rem;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--c-bg);
-}
-
-.marker img {
-  width: 100%;
+.wave {
+  display: block;
+  width: min(100%, 13rem);
   height: auto;
-}
-
-.time {
-  font-size: var(--fs-caption);
-  letter-spacing: 0.2em;
-  color: var(--c-gold-soft);
-  line-height: 1.4;
-}
-
-.itemTitle {
-  margin-top: var(--sp-3xs);
-}
-
-.note {
-  margin-top: var(--sp-2xs);
-  line-height: 1.7;
+  margin-inline: auto;
+  color: var(--c-gold);
+  opacity: 0.7;
 }
 
 /* — venue —————————————————————————————————————— */
 .venue {
   --gap: var(--sp-md);
-  padding-block: var(--sp-xl);
 }
 
 .venueName {
@@ -93,9 +37,10 @@
   --gap: var(--sp-2xs);
 }
 
-.pampas {
-  top: 4%;
-  left: -14%;
-  width: min(40%, 10rem);
-  --decor-opacity: 0.4;
+.vanilla {
+  bottom: 6%;
+  left: -20%;
+  width: min(48%, 12rem);
+  --decor-opacity: 0.35;
+  transform: rotate(-18deg);
 }

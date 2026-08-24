@@ -31,16 +31,18 @@ export function Greeting() {
           aria-hidden="true"
         />
 
-        <div className={`container stack ${styles.content}`}>
-          <Reveal as="p" className="eyebrow">
-            {t.greeting.eyebrow}
-          </Reveal>
+        <div className={`measure ${styles.content}`}>
+          <div className="section__head">
+            <Reveal as="p" className="eyebrow">
+              {t.greeting.eyebrow}
+            </Reveal>
 
-          <Reveal delay={120}>
-            <h2 className={`script ${styles.title}`}>{t.greeting.title}</h2>
-          </Reveal>
+            <Reveal delay={120}>
+              <h2 className={`script ${styles.title}`}>{t.greeting.title}</h2>
+            </Reveal>
+          </div>
 
-          <Reveal className="stack stack--md" delay={220}>
+          <Reveal className={`section__body ${styles.note}`} delay={220}>
             {t.greeting.body.map((paragraph, i) => (
               <p className="body" key={i}>
                 {paragraph}
@@ -62,9 +64,6 @@ export function Greeting() {
         </div>
       </div>
 
-      <div className={`decor ${styles.cherub}`} aria-hidden="true">
-        <Image src="/decor/cherub.webp" alt="" width={800} height={821} />
-      </div>
     </section>
   );
 }

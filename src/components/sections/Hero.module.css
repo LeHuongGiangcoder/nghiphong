@@ -1,11 +1,5 @@
 .hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100svh;
-  padding-block: clamp(5rem, 18vw, 8rem);
-  text-align: center;
+  overflow: hidden;
 }
 
 .content {
@@ -19,20 +13,65 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 0.1em;
   margin: 0;
-  font-weight: 400;
+  font-weight: 300;
+  /* sized + tracked so "NGUYEN THANH PHONG" stays on one line down to 320px */
+  font-size: clamp(1.25rem, 5.4vw, 2rem);
 }
 
+.names :global(.display) {
+  font-size: inherit;
+  letter-spacing: 0.06em;
+  text-indent: 0.06em;
+  white-space: nowrap;
+}
+
+/* Season italic, lower-case — a classic invitation ampersand against the
+   upright tracked caps of the names. */
 .amp {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.5em;
+  line-height: 1.1;
+  color: var(--c-gold);
+}
+
+.saveTheDate {
+  font-size: clamp(3.5rem, 17vw, 5.25rem);
+  line-height: 1;
+  margin-block: -0.18em;
+  color: var(--c-gold);
+}
+
+.date {
+  font-size: clamp(1rem, 4.4vw, 1.25rem);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.dateMeta {
+  margin-top: var(--sp-3xs);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  color: var(--c-body);
+}
+
+.wave {
   display: block;
-  margin-block: -0.15em;
-  font-size: clamp(1.75rem, 8vw, 2.5rem);
-  color: var(--c-gold-soft);
+  width: min(100%, 15rem);
+  height: auto;
+  margin-inline: auto;
+  color: var(--c-gold);
+  opacity: 0.7;
 }
 
 /* A sentence, not a name plate — sentence case and a gentler measure so it
-   stays readable under the script names. */
+   stays readable under the display names. */
 .invite {
   max-width: 22rem;
   margin-inline: auto;
@@ -43,25 +82,6 @@
   color: var(--c-body);
 }
 
-.date {
-  font-size: clamp(1.125rem, 5vw, 1.375rem);
-  letter-spacing: 0.3em;
-  color: var(--c-heading);
-  text-indent: 0.3em;
-}
-
-.dateMeta {
-  margin-top: var(--sp-3xs);
-}
-
-/* — ornaments ————————————————————————————————— */
-.pampas {
-  right: -12%;
-  bottom: -4%;
-  width: min(48%, 12rem);
-  --decor-opacity: 0.5;
-  transform: scaleX(-1);
-}
 
 /* — scroll cue ———————————————————————————————— */
 .scroll {

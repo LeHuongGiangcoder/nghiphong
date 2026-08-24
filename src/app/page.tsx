@@ -1,6 +1,6 @@
 import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/sections/Hero";
 import { Greeting } from "@/components/sections/Greeting";
+import { Hero } from "@/components/sections/Hero";
 import { Agenda } from "@/components/sections/Agenda";
 import { Rsvp } from "@/components/sections/Rsvp";
 import { Footer } from "@/components/sections/Footer";
@@ -10,8 +10,8 @@ export default function Home() {
     <div className="shell">
       <Nav />
       <main id="main">
-        <Hero />
         <Greeting />
+        <Hero />
         <Agenda />
         <Rsvp />
       </main>

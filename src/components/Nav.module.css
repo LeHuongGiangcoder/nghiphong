@@ -53,13 +53,13 @@
 }
 
 .link[aria-current="true"] {
-  color: var(--c-heading);
+  color: var(--c-gold);
   border-bottom-color: var(--c-gold);
 }
 
 @media (hover: hover) {
   .link:hover {
-    color: var(--c-heading);
+    color: var(--c-gold);
   }
 }
 
@@ -68,7 +68,7 @@
   margin-left: auto;
   --btn-px: 0.75rem;
   font-size: 0.6875rem;
-  color: var(--c-heading);
+  color: var(--c-gold);
   border-color: var(--c-line-soft);
   border-radius: var(--radius-pill);
 }

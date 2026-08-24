@@ -20,7 +20,7 @@
   font-size: clamp(1.5rem, 7vw, 2rem);
   font-weight: 300;
   line-height: 1.1;
-  color: var(--c-heading);
+  color: var(--c-gold);
 }
 
 .label {
@@ -36,6 +36,6 @@
   text-align: center;
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
-  color: var(--c-heading);
+  color: var(--c-gold);
   opacity: 1;
 }

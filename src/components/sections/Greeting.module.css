@@ -9,7 +9,6 @@
   position: relative;
   display: flex;
   justify-content: center;
-  padding-block: clamp(2rem, 9vw, 3.5rem);
 }
 
 .frame {
@@ -27,27 +26,38 @@
 
 .content {
   position: relative;
+}
+
+/* the two paragraphs of the note */
+.note {
   --gap: var(--sp-md);
-  max-width: 24rem;
+  margin-bottom: var(--section-gap);
+}
+
+/* `.body` is a global utility — CSS Modules would hash it without :global. */
+.content :global(.body) {
+  font-size: 0.875rem;
+  line-height: 1.85;
+}
+
+.signBlock {
+  text-align: center;
 }
 
 .title {
-  font-size: clamp(2.5rem, 12vw, 3.5rem);
+  font-size: clamp(4.75rem, 24vw, 6.5rem);
+  line-height: 1;
 }
 
 .signoff {
-  margin-bottom: var(--sp-2xs);
+  margin-bottom: 0;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .signature {
-  font-size: clamp(1.5rem, 7vw, 2rem);
-}
-
-.cherub {
-  right: 6%;
-  bottom: 0;
-  width: min(26%, 6.5rem);
-  --decor-opacity: 0.5;
+  /* the script face carries a tall ascent — pull it back up under the sign-off */
+  margin-top: -0.28em;
+  font-size: clamp(2.5rem, 12vw, 3.25rem);
+  line-height: 1;
 }

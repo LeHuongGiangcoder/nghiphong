@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useId, useState } from "react";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
+import { WaveHeart } from "@/components/Flourish";
 import styles from "./Rsvp.module.css";
 
 type Attending = "yes" | "no";
@@ -74,19 +75,19 @@ export function Rsvp() {
         />
       </div>
 
-      <div className="container stack">
+      <div className="container">
         {/* — dress code ——————————————————————————— */}
-        <Reveal>
-          <div className={`center stack stack--md ${styles.dress}`}>
-            <Image
-              className={styles.flower}
-              src="/decor/flower-pearl.webp"
-              alt=""
-              width={800}
-              height={724}
-            />
-            <p className="eyebrow">{t.dress.eyebrow}</p>
-            <h2 className={`script script--latin ${styles.dressTitle}`}>{t.dress.title}</h2>
+        <Reveal className="section__head">
+          <Image
+            className={styles.flower}
+            src="/decor/vanilla.webp"
+            alt=""
+            width={900}
+            height={803}
+          />
+          <p className="eyebrow">{t.dress.eyebrow}</p>
+          <h2 className={`script script--latin ${styles.dressTitle}`}>{t.dress.title}</h2>
+          <div className={`measure ${styles.dressBody}`}>
             <p className="body">{t.dress.body}</p>
             <ul className={styles.swatches} aria-hidden="true">
               {["#f3d9d6", "#f6ecd2", "#dfe7d8", "#d8e3ec", "#e2dae9"].map((c) => (
@@ -96,33 +97,28 @@ export function Rsvp() {
             <p className="caption">{t.dress.yes}</p>
             <p className={`caption ${styles.avoid}`}>{t.dress.no}</p>
           </div>
+          <WaveHeart className={styles.wave} />
         </Reveal>
-
-        <Image
-          className="divider"
-          src="/decor/rule-gold.webp"
-          alt=""
-          width={900}
-          height={159}
-        />
 
         {/* — form ————————————————————————————————— */}
-        <Reveal className="center stack stack--md">
+        <Reveal className="section__head">
           <p className="eyebrow">{t.rsvp.eyebrow}</p>
           <h2 className={`h1 ${styles.formTitle}`}>{t.rsvp.title}</h2>
-          <p className="lead">{t.rsvp.intro}</p>
-          <p className="caption">{t.rsvp.deadline}</p>
+          <div className={`measure ${styles.formIntro}`}>
+            <p className="lead">{t.rsvp.intro}</p>
+            <p className="caption">{t.rsvp.deadline}</p>
+          </div>
         </Reveal>
 
-        <Reveal>
+        <Reveal className="section__body">
           {sent ? (
             <div className={`card center stack stack--md ${styles.thanks}`}>
               <Image
                 className={styles.seal}
-                src="/decor/wax-seal.webp"
+                src="/decor/vanilla.webp"
                 alt=""
-                width={600}
-                height={613}
+                width={900}
+                height={803}
               />
               <h3 className={`script ${styles.thanksTitle}`}>
                 {sent === "yes" ? t.rsvp.thanksYesTitle : t.rsvp.thanksNoTitle}

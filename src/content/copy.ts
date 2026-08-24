@@ -7,19 +7,21 @@ export type Lang = "en" | "vi";
 
 /* ------------------------------------------------------------------ facts */
 
-/** Ceremony start, Asia/Ho_Chi_Minh (UTC+7). */
-export const WEDDING_DATE_ISO = "2026-12-13T16:00:00+07:00";
-export const WEDDING_END_ISO = "2026-12-13T19:00:00+07:00";
+/** Day starts at the first look, Asia/Ho_Chi_Minh (UTC+7). */
+export const WEDDING_DATE_ISO = "2026-12-13T16:30:00+07:00";
+/** TODO: confirm when the after-party actually ends. */
+export const WEDDING_END_ISO = "2026-12-13T22:30:00+07:00";
 
 export const MAPS_URL = "https://maps.app.goo.gl/zuj5tnv3C6Ak7R4C7";
 
-/** Names without diacritics — safe for the Citadel Script display face. */
-export const DISPLAY_NAMES = { bride: "My Nghi", groom: "Thanh Phong" };
+/** Names without diacritics — Season Serif has no stacked Vietnamese accents. */
+export const DISPLAY_NAMES = {
+  bride: "Ngo My Nghi",
+  groom: "Nguyen Thanh Phong",
+};
 
 /** Monogram initials — taken from the given names (Nghi, Phong). */
 export const INITIALS = { bride: "N", groom: "P" };
-
-export const AGENDA_TIMES = ["16:00", "17:00", "17:30", "19:00"] as const;
 
 /* ------------------------------------------------------------------- copy */
 
@@ -29,6 +31,7 @@ type Dict = {
   hero: {
     eyebrow: string;
     and: string;
+    saveTheDate: string;
     invite: string;
     dateLine: string;
     dayLine: string;
@@ -91,6 +94,7 @@ export const COPY: Record<Lang, Dict> = {
     hero: {
       eyebrow: "Together with our families",
       and: "and",
+      saveTheDate: "Save the Date",
       invite: "joyfully invite you to the celebration of our marriage",
       dateLine: "13 . 12 . 2026",
       dayLine: "Sunday",
@@ -119,29 +123,19 @@ export const COPY: Record<Lang, Dict> = {
       title: "The Celebration",
       dateFull: "Sunday, 13 December 2026",
       items: [
-        {
-          time: "16:00",
-          title: "Welcome",
-          note: "Doors open — drinks, photographs and hellos.",
-        },
-        {
-          time: "17:00",
-          title: "Wedding Ceremony",
-          note: "Please be seated ten minutes beforehand.",
-        },
-        {
-          time: "17:30",
-          title: "Dinner & Celebration",
-          note: "Dinner is served, followed by toasts and dancing.",
-        },
-        { time: "19:00", title: "Farewell", note: "Thank you for celebrating with us." },
+        { time: "16:30", title: "First Look", note: "" },
+        { time: "17:00", title: "Welcome", note: "" },
+        { time: "18:00", title: "Photos with Guests", note: "" },
+        { time: "19:00 –\u00A019:30", title: "Ceremony", note: "" },
+        { time: "19:30", title: "Dinner", note: "" },
+        { time: "21:00", title: "After Party", note: "" },
       ],
       venueTitle: "The venue",
       venueName: "Hotel Nikko Saigon",
       venueAddress: "235 Nguyễn Văn Cừ, District 1, Ho Chi Minh City",
       mapCta: "Open in maps",
       calendarCta: "Add to calendar",
-      calendarTitle: "Wedding of My Nghi & Thanh Phong",
+      calendarTitle: "Wedding of Ngo My Nghi & Nguyen Thanh Phong",
     },
     dress: {
       eyebrow: "Dress code",
@@ -177,7 +171,7 @@ export const COPY: Record<Lang, Dict> = {
         "We will miss you on the day, but we are grateful you let us know. Your wishes mean the world.",
       again: "Send another reply",
     },
-    footer: { line: "My Nghi & Thanh Phong", date: "13 . 12 . 2026" },
+    footer: { line: "Ngo My Nghi & Nguyen Thanh Phong", date: "13 . 12 . 2026" },
   },
 
   vi: {
@@ -191,6 +185,7 @@ export const COPY: Record<Lang, Dict> = {
     hero: {
       eyebrow: "Cùng với gia đình hai bên",
       and: "và",
+      saveTheDate: "Save the Date",
       invite:
         "trân trọng kính mời bạn đến chung vui trong ngày hạnh phúc của chúng mình",
       dateLine: "13 . 12 . 2026",
@@ -220,29 +215,19 @@ export const COPY: Record<Lang, Dict> = {
       title: "Chương trình",
       dateFull: "Chủ Nhật, ngày 13 tháng 12 năm 2026",
       items: [
-        {
-          time: "16:00",
-          title: "Đón khách",
-          note: "Mời quý khách dùng nước và chụp ảnh lưu niệm.",
-        },
-        {
-          time: "17:00",
-          title: "Lễ thành hôn",
-          note: "Kính mời quý khách an tọa trước 10 phút.",
-        },
-        {
-          time: "17:30",
-          title: "Tiệc mừng",
-          note: "Khai tiệc, nâng ly chúc mừng và giao lưu.",
-        },
-        { time: "19:00", title: "Tạm biệt", note: "Cảm ơn bạn đã đến chung vui." },
+        { time: "16:30", title: "First Look", note: "" },
+        { time: "17:00", title: "Đón khách", note: "" },
+        { time: "18:00", title: "Đón khách chụp ảnh", note: "" },
+        { time: "19:00 –\u00A019:30", title: "Lễ thành hôn", note: "" },
+        { time: "19:30", title: "Dùng tiệc", note: "" },
+        { time: "21:00", title: "After Party", note: "" },
       ],
       venueTitle: "Địa điểm",
       venueName: "Khách sạn Nikko Sài Gòn",
       venueAddress: "235 Nguyễn Văn Cừ, Quận 1, TP. Hồ Chí Minh",
       mapCta: "Xem bản đồ",
       calendarCta: "Thêm vào lịch",
-      calendarTitle: "Lễ thành hôn My Nghi & Thanh Phong",
+      calendarTitle: "Lễ thành hôn Ngo My Nghi & Nguyen Thanh Phong",
     },
     dress: {
       eyebrow: "Trang phục",
@@ -278,6 +263,6 @@ export const COPY: Record<Lang, Dict> = {
         "Chúng mình sẽ nhớ bạn trong ngày ấy, nhưng thật biết ơn vì bạn đã báo trước. Lời chúc của bạn là món quà lớn.",
       again: "Gửi phản hồi khác",
     },
-    footer: { line: "My Nghi & Thanh Phong", date: "13 . 12 . 2026" },
+    footer: { line: "Ngo My Nghi & Nguyen Thanh Phong", date: "13 . 12 . 2026" },
   },
 };
