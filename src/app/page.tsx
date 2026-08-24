@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Agenda } from "@/components/sections/Agenda";
 import { Rsvp } from "@/components/sections/Rsvp";
 import { Footer } from "@/components/sections/Footer";
+import { SectionDivider } from "@/components/SectionDivider";
 
 export default function Home() {
   return (
@@ -11,8 +12,11 @@ export default function Home() {
       <Nav />
       <main id="main">
         <Greeting />
+        <SectionDivider />
         <Hero />
+        <SectionDivider />
         <Agenda />
+        <SectionDivider />
         <Rsvp />
       </main>
       <Footer />

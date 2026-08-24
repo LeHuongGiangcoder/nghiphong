@@ -67,7 +67,7 @@ export function Rsvp() {
     <section className={`section ${styles.rsvp}`} id="rsvp">
       <div className="section-bg">
         <Image
-          src="/decor/panel-section.webp"
+          src="/decor/panel-hero.webp"
           alt=""
           fill
           sizes="(max-width: 40rem) 100vw, 40rem"

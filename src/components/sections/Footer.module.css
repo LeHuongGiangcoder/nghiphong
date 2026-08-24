@@ -10,11 +10,8 @@
 }
 
 .names {
-  font-size: clamp(1.25rem, 5vw, 1.6rem);
-  letter-spacing: 0.14em;
-  text-indent: 0.14em;
-  text-transform: uppercase;
-  font-family: var(--f-display);
+  font-size: clamp(3rem, 10vw, 4rem);
+  color: var(--c-gold);
 }
 
 .date {

@@ -16,7 +16,7 @@ export function Agenda() {
     <section className={`section ${styles.agenda}`} id="agenda">
       <div className="section-bg">
         <Image
-          src="/decor/panel-section.webp"
+          src="/decor/panel-hero.webp"
           alt=""
           fill
           sizes="(max-width: 40rem) 100vw, 40rem"

@@ -1,0 +1,18 @@
+/* The ornament that bridges two bands. It overlaps both by half its own
+   height, so it reads as sitting *in* the seam rather than adding a third
+   block of space to it. */
+.seam {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-block: calc(var(--seam-size) / -2);
+  pointer-events: none;
+}
+
+.seam img {
+  width: 100%;
+  max-width: var(--seam-size);
+  height: auto;
+}

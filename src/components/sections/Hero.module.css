@@ -27,15 +27,26 @@
   white-space: nowrap;
 }
 
-/* Season italic, lower-case — a classic invitation ampersand against the
-   upright tracked caps of the names. */
 .amp {
-  font-family: var(--f-display);
-  font-style: italic;
-  font-weight: 300;
   font-size: 1.5em;
   line-height: 1.1;
-  color: var(--c-gold);
+  display: flex;
+  justify-content: center;
+}
+
+.ampImage {
+  width: 1.6em;
+  height: 1.6em;
+  background-color: var(--c-gold);
+  -webkit-mask-image: url('/component/and.png');
+  mask-image: url('/component/and.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  display: inline-block;
 }
 
 .saveTheDate {

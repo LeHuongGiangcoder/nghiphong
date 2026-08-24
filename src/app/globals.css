@@ -79,6 +79,7 @@
   --shell: 40rem;                              /* the "invitation" column  */
   --container: 30rem;                          /* general content width    */
   --measure: 18rem;                            /* prose column             */
+  --seam-size: 8rem;                           /* section-divider ornament */
 
   /* — surface —————————————————————————————— */
   --radius-sm: 2px;
@@ -200,16 +201,30 @@ a {
   padding-inline: 0;
 }
 
+/* Two stacked bands would each contribute a full --section-py where they
+   meet, making the gap between sections twice the gap at the page edges.
+   `.seam` marks the ornament that sits between them; both sides then give
+   half a band, so one seam is worth one band. */
+.section:has(+ .seam) {
+  padding-bottom: calc(var(--section-py) / 2);
+}
+
+.seam + .section {
+  padding-top: calc(var(--section-py) / 2);
+}
+
 .section--tight {
   --section-py: clamp(3rem, 10vw, 4.5rem);
 }
 
+/* The greeting opens the page, so the hero is a mid-page band. Forcing it to
+   100svh left ~250px of dead air above its content; it sizes to content and
+   simply centres its column. */
 .section--hero {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100svh;
   text-align: center;
 }
 

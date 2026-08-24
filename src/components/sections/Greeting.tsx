@@ -13,7 +13,7 @@ export function Greeting() {
     <section className={`section ${styles.greeting}`} id="greeting">
       <div className="section-bg">
         <Image
-          src="/decor/panel-section.webp"
+          src="/decor/panel-hero.webp"
           alt=""
           fill
           sizes="(max-width: 40rem) 100vw, 40rem"

@@ -34,7 +34,7 @@ export function Hero() {
           <h1 className={styles.names}>
             <span className="display script--latin">{DISPLAY_NAMES.bride}</span>
             <span className={styles.amp} aria-hidden="true">
-              &amp;
+              <span className={styles.ampImage} />
             </span>
             <span className="sr-only"> {t.hero.and} </span>
             <span className="display script--latin">{DISPLAY_NAMES.groom}</span>
