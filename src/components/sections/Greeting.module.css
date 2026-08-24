@@ -29,6 +29,7 @@
   opacity: 0.6;
   pointer-events: none;
   user-select: none;
+  transform: scale(1.25); /* Enlarge while keeping center */
 }
 
 .content {
