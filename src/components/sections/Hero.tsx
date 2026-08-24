@@ -24,6 +24,18 @@ export function Hero() {
         />
       </div>
 
+      {/* thin rule inset from the section edge, broken at the top centre for
+          the cherub crest */}
+      <div className={styles.border} aria-hidden="true" />
+      <div className={styles.crest} aria-hidden="true">
+        <Image
+          src="/component/12.png"
+          alt=""
+          width={2475}
+          height={2475}
+          sizes="72px"
+        />
+      </div>
 
       <div className={`container ${styles.content}`}>
         <Reveal as="p" className="eyebrow" delay={100}>
@@ -71,12 +83,12 @@ export function Hero() {
             {t.hero.cta}
           </a>
         </Reveal>
-      </div>
 
-      <p className={styles.scroll} aria-hidden="true">
-        <span>{t.hero.scroll}</span>
-        <span className={styles.scrollLine} />
-      </p>
+        <p className={styles.scroll} aria-hidden="true">
+          <span>{t.hero.scroll}</span>
+          <span className={styles.scrollLine} />
+        </p>
+      </div>
     </section>
   );
 }
