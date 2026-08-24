@@ -24,9 +24,6 @@ export function Agenda() {
         />
       </div>
 
-      <div className={`decor ${styles.vanilla}`} aria-hidden="true">
-        <Image src="/decor/vanilla.webp" alt="" width={900} height={803} />
-      </div>
 
       <div className="container">
         <Reveal className="section__head">

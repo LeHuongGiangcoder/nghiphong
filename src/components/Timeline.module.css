@@ -27,49 +27,72 @@
   transform: translateY(-50%);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-/* Label on the outside of the swing it belongs to. The padding keeps the
-   text clear of the curve column (76px wide, centred) plus a small gap. */
 .row[data-side="left"] {
-  justify-content: flex-start;
-  padding-right: calc(50% + 42px);
-  text-align: right;
+  flex-direction: row;
 }
 
 .row[data-side="right"] {
-  justify-content: flex-end;
-  padding-left: calc(50% + 42px);
+  flex-direction: row-reverse;
+}
+
+.label, .imageWrap {
+  flex: 0 0 calc(50% - 42px);
+  width: calc(50% - 42px);
+  min-width: 0;
+}
+
+.row[data-side="left"] .label {
+  text-align: right;
+}
+
+.row[data-side="right"] .label {
   text-align: left;
 }
 
-/* Fill the track. If the box shrink-wraps to its content, a short label
-   ("Dinner") ends further from the curve than a long one — the gap has to be
-   the padding edge, not the text width. */
-.label {
-  flex: 1 1 auto;
-  min-width: 0;
+.imageWrap {
+  display: flex;
+  align-items: center;
+}
+
+.row[data-side="left"] .imageWrap {
+  justify-content: flex-start;
+}
+
+.row[data-side="right"] .imageWrap {
+  justify-content: flex-end;
+}
+
+.image {
+  width: 100%;
+  max-width: 6rem; /* Giảm size hình */
+  height: auto;
+  border-radius: var(--radius); /* Thêm chút bo tròn nếu muốn, hoặc bỏ đi tùy ý, mình cứ để nguyên không bo */
 }
 
 .time {
   font-style: italic;
-  font-size: clamp(1.25rem, 5.4vw, 1.625rem);
+  font-weight: 600; /* In đậm thời gian */
+  font-size: clamp(0.95rem, 4vw, 1.2rem); /* Giảm size */
   letter-spacing: 0.04em;
   line-height: 1.1;
   color: var(--c-gold);
 }
 
 .title {
-  margin-top: 0.3rem;
-  font-size: clamp(0.9375rem, 3.8vw, 1.0625rem);
-  letter-spacing: 0.12em;
+  margin-top: 0.25rem;
+  font-size: clamp(0.75rem, 3vw, 0.875rem); /* Giảm size */
+  letter-spacing: 0.05em; /* Giảm letter-spacing vì không còn uppercase */
   line-height: 1.35;
+  text-transform: none; /* Bỏ uppercase */
 }
 
 .note {
   margin-top: var(--sp-3xs);
-  font-size: var(--fs-caption);
-  line-height: 1.6;
+  font-size: 0.6875rem; /* var(--fs-eyebrow) or similar small size */
+  line-height: 1.5;
 }
 
 /* pearls stay — they are the joints of the ribbon */

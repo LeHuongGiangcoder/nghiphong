@@ -227,6 +227,12 @@ a {
   margin-block: 0;
 }
 
+/* Script and display faces carry a tall ascent, so the optical gap above them
+   reads far larger than the metric gap. Pull them back onto the rhythm. */
+.section__head :is(.script, .display) {
+  margin-top: -0.3em;
+}
+
 .section__body {
   display: flex;
   flex-direction: column;

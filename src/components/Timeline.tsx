@@ -8,7 +8,7 @@ export type TimelineItem = { time: string; title: string; note: string };
 
 /* Geometry of the ribbon. The curve column is a fixed width so the stroke is
    never scaled non-uniformly; only the labels beside it are fluid. */
-const ROW = 148; // vertical distance between two events
+const ROW = 120; // vertical distance between two events
 const COL = 76; // width of the curve column
 const LEFT = 20; // x of a node on the left swing
 const RIGHT = COL - 20; // x of a node on the right swing
@@ -76,6 +76,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
       <ol className={styles.list}>
         {items.map((item, i) => {
           const side = i % 2 === 0 ? "left" : "right";
+          const imageIndex = 24 + i;
           return (
             <li
               key={item.time + item.title}
@@ -88,6 +89,18 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
                 <h3 className={`h3 ${styles.title}`}>{item.title}</h3>
                 {item.note ? <p className={`small ${styles.note}`}>{item.note}</p> : null}
               </Reveal>
+              
+              <Reveal className={`reveal--fade ${styles.imageWrap}`} delay={i * 120 + 200}>
+                <Image 
+                  src={`/component/${imageIndex}.png`} 
+                  alt="" 
+                  width={300} 
+                  height={300} 
+                  className={styles.image} 
+                  style={{ objectFit: "contain" }}
+                />
+              </Reveal>
+
               <span
                 className={styles.pearl}
                 aria-hidden="true"

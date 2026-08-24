@@ -11,14 +11,15 @@
   justify-content: center;
 }
 
+/* Sized to the band, not past it — at 132% the corner ornaments were being
+   clipped by the shell, which read as the frame being off-centre. */
 .frame {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(132%, 34rem);
+  width: min(100%, 30rem);
   height: auto;
-  max-width: none;
   opacity: 0.5;
   pointer-events: none;
   user-select: none;

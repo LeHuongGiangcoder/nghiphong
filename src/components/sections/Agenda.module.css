@@ -27,6 +27,7 @@
 /* — venue —————————————————————————————————————— */
 .venue {
   --gap: var(--sp-md);
+  box-shadow: none;
 }
 
 .venueName {
@@ -35,12 +36,4 @@
 
 .actions {
   --gap: var(--sp-2xs);
-}
-
-.vanilla {
-  bottom: 6%;
-  left: -20%;
-  width: min(48%, 12rem);
-  --decor-opacity: 0.35;
-  transform: rotate(-18deg);
 }
