@@ -14,6 +14,7 @@
   display: flex;
   justify-content: center;
   padding-block: clamp(3rem, 11vw, 4.5rem);
+  margin-top: 1.5rem; /* Lùi toàn bộ khung ren và chữ xuống 1 chút */
 }
 
 /* Sized to the band, not past it — at 132% the corner ornaments were being
