@@ -15,7 +15,7 @@ export default function Home() {
         <Hero />
         <SectionDivider />
         <Agenda />
-        <SectionDivider />
+
         <Rsvp />
       </main>
       <Footer />
