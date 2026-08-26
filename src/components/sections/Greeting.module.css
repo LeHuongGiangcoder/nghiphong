@@ -62,7 +62,7 @@
 }
 
 .title {
-  font-size: var(--fs-script-xl);
+  font-size: var(--fs-script);
   line-height: 1;
 }
 

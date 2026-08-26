@@ -16,7 +16,7 @@
 }
 
 .dressTitle {
-  font-size: var(--fs-script-lg);
+  font-size: var(--fs-script);
   line-height: 1;
 }
 
@@ -43,7 +43,7 @@
 
 /* — form ——————————————————————————————————————— */
 .formTitle {
-  font-size: var(--fs-script-lg);
+  font-size: var(--fs-script);
   line-height: 1;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .thanksTitle {
-  font-size: var(--fs-script-md);
+  font-size: var(--fs-script);
   line-height: 1;
 }
 

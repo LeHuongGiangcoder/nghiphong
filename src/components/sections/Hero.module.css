@@ -41,9 +41,10 @@
   align-items: center;
   gap: 0.6em;
   margin: 0;
-  font-weight: 400;
-  /* sized + tracked so "NGUYEN THANH PHONG" stays on one line down to 320px */
-  font-size: clamp(1.25rem, 5.4vw, 2rem);
+  font-weight: 500;
+  /* sized + tracked so "NGUYEN THANH PHONG" stays on one line down to 320px —
+     the longer name is measured at that width before this is raised */
+  font-size: clamp(1.25rem, 6vw, 2.125rem);
 }
 
 .names :global(.display) {
@@ -79,7 +80,7 @@
    and the -0.18em pull that Quick Signature's shallow ascent calls for,
    rather than the --fs-script-* scale tuned for Great Vibes. */
 .saveTheDate {
-  font-size: clamp(3.5rem, 17vw, 5.25rem);
+  font-size: clamp(3.875rem, 18.5vw, 5.75rem);
   line-height: 1;
   margin-block: -0.18em;
   color: var(--c-gold);

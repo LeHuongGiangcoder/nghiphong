@@ -9,14 +9,14 @@
 /* The closing mark carries the section on its own now that the date line is
    gone, so it sits a step larger than the greeting's sign-off. */
 .names {
-  font-size: clamp(3.75rem, 13vw, 5rem);
+  font-size: clamp(5.5rem, 18vw, 7.5rem);
   color: var(--c-gold);
 }
 
 .couple {
   display: flex;
   justify-content: center;
-  margin-top: clamp(2rem, 8vw, 3rem);
+  margin-top: clamp(-2rem, -4vw, 0rem);
   /* Offset the section's own bottom padding so the image sits flush */
   margin-bottom: calc(-1 * var(--section-py));
   width: 100%;
@@ -24,9 +24,9 @@
 }
 
 .couple img {
-  width: 110%;
-  max-width: 44rem; 
-  min-width: 40rem;
+  width: 125%;
+  max-width: 55rem; 
+  min-width: 45rem;
   height: auto;
   opacity: 0.95; 
 }

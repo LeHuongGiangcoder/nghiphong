@@ -54,12 +54,11 @@
   --fs-caption: 0.8125rem;
   --fs-eyebrow: 0.6875rem;
 
-  /* Script headings. Sections pick one of these three rather than setting a
-     size of their own, so the Vietnamese step-down below reaches all of them
-     at once. */
-  --fs-script-xl: clamp(3.25rem, 16.5vw, 4.5rem);   /* the greeting      */
-  --fs-script-lg: clamp(2.625rem, 12.5vw, 3.5rem);  /* section titles    */
-  --fs-script-md: clamp(2.125rem, 10.5vw, 2.75rem); /* the thank-you card*/
+  /* Script headings. Sections take this token rather than setting a size of
+     their own, so they cannot drift apart. */
+  /* Every script heading is this one size — the greeting, the section titles
+     and the thank-you card all read as the same rank. */
+  --fs-script: clamp(2.625rem, 12.5vw, 3.5rem);
 
   --lh-tight: 1.1;
   --lh-heading: 1.25;
