@@ -37,8 +37,11 @@
   position: relative;
 }
 
+/* The gap was zeroed to pull the old serif title up under the eyebrow. Great
+   Vibes sets its ink right at the top of its line box, so at gap 0 the title
+   crowds the eyebrow instead — it needs a real gap back. */
 .head {
-  gap: 0 !important; /* Giảm khoảng cách giữa "a note from us" và "welcome" */
+  gap: var(--sp-2xs) !important;
   margin-bottom: var(--sp-md) !important; /* Giảm khoảng cách giữa welcome và content */
 }
 

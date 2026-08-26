@@ -1,15 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
 import { Vanilla } from "@/components/Vanilla";
 import { INITIALS, DISPLAY_NAMES } from "@/content/copy";
 import styles from "./Footer.module.css";
 
 export function Footer() {
-  const { t } = useLang();
-
   return (
     <footer className={`section section--tight center ${styles.footer}`}>
       <div className="section-bg">
@@ -22,7 +19,7 @@ export function Footer() {
         />
       </div>
       <Vanilla className={styles.flourish} />
-      <p className={`script script--latin ${styles.names}`}>
+      <p className={`signature ${styles.names}`}>
         <span className="sr-only">
           {DISPLAY_NAMES.bride} &amp; {DISPLAY_NAMES.groom}
         </span>
@@ -30,7 +27,6 @@ export function Footer() {
           {INITIALS.bride} &amp; {INITIALS.groom}
         </span>
       </p>
-      <p className={`num script--latin caption ${styles.date}`}>{t.footer.date}</p>
 
       <Reveal className={styles.couple}>
         <Image

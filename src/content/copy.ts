@@ -144,7 +144,7 @@ export const COPY: Record<Lang, Dict> = {
     },
     rsvp: {
       eyebrow: "Répondez s'il vous plaît",
-      title: "Will you join us?",
+      title: "Please reply",
       intro: "Let us know so we can save you a seat.",
       deadline: "Kindly reply before 13 November 2026.",
       name: "Your name",
@@ -235,7 +235,7 @@ export const COPY: Record<Lang, Dict> = {
     },
     rsvp: {
       eyebrow: "Xác nhận tham dự",
-      title: "Bạn sẽ đến chứ?",
+      title: "Please reply",
       intro: "Cho chúng mình biết để dành sẵn một chỗ ngồi nhé.",
       deadline: "Vui lòng phản hồi trước ngày 13.11.2026.",
       name: "Tên của bạn",

@@ -35,12 +35,12 @@
 
   /* — typography ——————————————————————————————
      Three faces, one job each:
-       --f-script   Quick Signature  → headings & flourish lines
+       --f-script   Great Vibes      → every script heading, both languages
+       --f-signature Quick Signature → the N & P mark and "Save the Date"
        --f-display  Season Serif     → couple names, dates, times, sub-heads
        --f-serif    Noto Serif       → body copy  */
-  --f-script: var(--font-quick-signature), "Snell Roundhand", cursive;
-  /* stands in for --f-script under html[lang="vi"] — see the block below */
-  --f-script-vi: var(--font-great-vibes), "Snell Roundhand", cursive;
+  --f-script: var(--font-great-vibes), "Snell Roundhand", cursive;
+  --f-signature: var(--font-quick-signature), "Snell Roundhand", cursive;
   --f-display: var(--font-season), "Times New Roman", serif;
   --f-serif: var(--font-noto-serif), "Times New Roman", serif;
 
@@ -57,9 +57,9 @@
   /* Script headings. Sections pick one of these three rather than setting a
      size of their own, so the Vietnamese step-down below reaches all of them
      at once. */
-  --fs-script-xl: clamp(4.75rem, 24vw, 6.5rem);   /* the greeting        */
-  --fs-script-lg: clamp(3.75rem, 18vw, 5rem);     /* section titles      */
-  --fs-script-md: clamp(3rem, 15vw, 4rem);        /* the thank-you card  */
+  --fs-script-xl: clamp(3.25rem, 16.5vw, 4.5rem);   /* the greeting      */
+  --fs-script-lg: clamp(2.625rem, 12.5vw, 3.5rem);  /* section titles    */
+  --fs-script-md: clamp(2.125rem, 10.5vw, 2.75rem); /* the thank-you card*/
 
   --lh-tight: 1.1;
   --lh-heading: 1.25;
@@ -271,10 +271,17 @@ a {
   margin-block: 0;
 }
 
-/* Script and display faces carry a tall ascent, so the optical gap above them
-   reads far larger than the metric gap. Pull them back onto the rhythm. */
-.section__head :is(.script, .display) {
+/* The display face carries a tall ascent, so the optical gap above it reads
+   far larger than the metric gap. Pull it back onto the rhythm. */
+.section__head .display {
   margin-top: -0.3em;
+}
+
+/* Great Vibes has no such slack: at line-height 1 its ascender and descender
+   fill the whole line box, so a pull here would drive a capital's swash
+   straight through the eyebrow. It needs room, not less of it. */
+.section__head .script {
+  margin-top: 0.15em;
 }
 
 .section__body {
@@ -329,14 +336,24 @@ a {
 
 /* --------------------------------------------------------- TYPOGRAPHY */
 
-/* Neither Quick Signature nor Season carries the stacked Vietnamese accents
-   (ệ, ớ, ữ …). Anything on `.script` or `.display` therefore falls back to
-   Noto Serif italic when the page language is Vietnamese — see the rule at
-   the bottom of this block. `.script--latin` opts out for strings that are
-   Latin in both languages (names, "Pastel", times). */
+/* Season does not carry the stacked Vietnamese accents (ệ, ớ, ữ …), so
+   `.display` and `.num` fall back to Noto Serif when the page language is
+   Vietnamese — see the rule at the bottom of this block. `.script--latin`
+   opts out for strings that are Latin in both languages (names, times).
+   `.script` needs no such rule: Great Vibes covers both languages. */
 .script {
   font-family: var(--f-script);
   font-weight: 500;
+  line-height: var(--lh-tight);
+  color: var(--c-heading);
+}
+
+/* The couple's mark — N & P — and the "Save the Date" line. Quick Signature
+   has no Vietnamese glyphs, which is why it no longer sets any heading, but
+   both of these strings are Latin in either language. */
+.signature {
+  font-family: var(--f-signature);
+  font-weight: 400;
   line-height: var(--lh-tight);
   color: var(--c-heading);
 }
@@ -431,36 +448,6 @@ html[lang="vi"] .h1:not(.script--latin),
 html[lang="vi"] .h2:not(.script--latin),
 html[lang="vi"] .h3:not(.script--latin) {
   font-family: var(--f-serif);
-}
-
-/* Great Vibes sits taller in the em than Quick Signature — measured at the
-   same font-size its ink is 98/68 as tall, and it carries a real descender
-   where Quick Signature has almost none. Left at the Latin sizes the script
-   headings render half again too large and their swashes climb into the
-   eyebrow above. Scaling the three tokens by ~0.7 puts the two languages at
-   the same optical size. */
-html[lang="vi"] {
-  --fs-script-xl: clamp(3.25rem, 16.5vw, 4.5rem);
-  --fs-script-lg: clamp(2.625rem, 12.5vw, 3.5rem);
-  --fs-script-md: clamp(2.125rem, 10.5vw, 2.75rem);
-}
-
-/* The -0.3em pull above buys back the empty band Quick Signature leaves over
-   its ink. Great Vibes has none to give: at line-height 1 its ascender and
-   descender together fill the whole line box, so any pull at all drives the
-   capital's swash straight through the eyebrow. */
-html[lang="vi"] .section__head .script:not(.script--latin) {
-  margin-top: 0;
-}
-
-/* Quick Signature has no Vietnamese glyphs (no ơ/ư, none of U+1EA0–1EF9), so
-   a Vietnamese heading set in it would drop letters into a serif fallback
-   mid-word. Great Vibes is the same kind of formal signature script and covers
-   the language in full, so the script face simply swaps rather than falling
-   back to a serif. Keep the size in step with .script above — it is a script
-   face too, so the sizes tuned for Quick Signature carry over. */
-html[lang="vi"] .script:not(.script--latin) {
-  font-family: var(--f-script-vi);
 }
 
 html[lang="vi"] .num:not(.script--latin),

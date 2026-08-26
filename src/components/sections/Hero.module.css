@@ -75,6 +75,9 @@
   display: inline-block;
 }
 
+/* Set in the signature face, not the heading face — so it keeps the sizing
+   and the -0.18em pull that Quick Signature's shallow ascent calls for,
+   rather than the --fs-script-* scale tuned for Great Vibes. */
 .saveTheDate {
   font-size: clamp(3.5rem, 17vw, 5.25rem);
   line-height: 1;

@@ -43,7 +43,8 @@
 
 /* — form ——————————————————————————————————————— */
 .formTitle {
-  font-size: clamp(1.75rem, 7.5vw, 2.25rem);
+  font-size: var(--fs-script-lg);
+  line-height: 1;
 }
 
 .form {

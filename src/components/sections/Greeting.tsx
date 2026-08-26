@@ -52,7 +52,7 @@ export function Greeting() {
 
           <Reveal delay={320}>
             <p className={`caption ${styles.signoff}`}>{t.greeting.signoff}</p>
-            <p className={`script script--latin ${styles.signature}`}>
+            <p className={`signature ${styles.signature}`}>
               <span className="sr-only">
                 {DISPLAY_NAMES.bride} &amp; {DISPLAY_NAMES.groom}
               </span>

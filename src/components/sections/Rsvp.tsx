@@ -81,7 +81,7 @@ export function Rsvp() {
         <Reveal className="section__head">
           <Vanilla />
           <p className="eyebrow">{t.dress.eyebrow}</p>
-          <h2 className={`script script--latin ${styles.dressTitle}`}>{t.dress.title}</h2>
+          <h2 className={`script ${styles.dressTitle}`}>{t.dress.title}</h2>
           <div className={`measure ${styles.dressBody}`}>
             <p className="body">{t.dress.body}</p>
             <ul className={styles.swatches} aria-hidden="true">
@@ -98,7 +98,7 @@ export function Rsvp() {
         {/* — form ————————————————————————————————— */}
         <Reveal className="section__head">
           <p className="eyebrow">{t.rsvp.eyebrow}</p>
-          <h2 className={`h1 ${styles.formTitle}`}>{t.rsvp.title}</h2>
+          <h2 className={`script ${styles.formTitle}`}>{t.rsvp.title}</h2>
           <div className={`measure ${styles.formIntro}`}>
             <p className="lead">{t.rsvp.intro}</p>
             <p className="caption">{t.rsvp.deadline}</p>

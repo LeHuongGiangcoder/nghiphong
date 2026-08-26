@@ -6,15 +6,11 @@
   margin-bottom: var(--sp-md);
 }
 
+/* The closing mark carries the section on its own now that the date line is
+   gone, so it sits a step larger than the greeting's sign-off. */
 .names {
-  font-size: clamp(3rem, 10vw, 4rem);
+  font-size: clamp(3.75rem, 13vw, 5rem);
   color: var(--c-gold);
-}
-
-.date {
-  margin-top: var(--sp-2xs);
-  letter-spacing: 0.28em;
-  text-indent: 0.28em;
 }
 
 .couple {

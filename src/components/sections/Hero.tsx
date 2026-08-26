@@ -61,7 +61,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={300}>
-          <p className={`script script--latin ${styles.saveTheDate}`}>
+          <p className={`signature ${styles.saveTheDate}`}>
             {t.hero.saveTheDate}
           </p>
         </Reveal>
