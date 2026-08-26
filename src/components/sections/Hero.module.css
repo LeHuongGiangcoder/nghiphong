@@ -1,10 +1,9 @@
 .hero {
-  --crest-figure: clamp(4.75rem, 21vw, 6.5rem);
   /* symmetric — this band is not halved at the seam, see globals.css */
   --section-py: clamp(4.25rem, 16vw, 6rem);
 }
 
-/* The cherub with a flourish tail either side. It sits in the flow at the
+/* The vanilla motif with a flourish tail either side. It sits in the flow at the
    head of the column rather than straddling the section boundary, so the
    band's own padding gives it room above and its margin gives it room below. */
 .crest {
@@ -20,8 +19,6 @@
 
 .crestFigure {
   flex: none;
-  width: var(--crest-figure);
-  height: auto;
 }
 
 /* the tails take whatever width is left, equally */
@@ -44,7 +41,7 @@
   align-items: center;
   gap: 0.6em;
   margin: 0;
-  font-weight: 300;
+  font-weight: 400;
   /* sized + tracked so "NGUYEN THANH PHONG" stays on one line down to 320px */
   font-size: clamp(1.25rem, 5.4vw, 2rem);
 }

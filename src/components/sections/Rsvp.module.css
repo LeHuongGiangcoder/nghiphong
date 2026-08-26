@@ -15,16 +15,8 @@
   gap: var(--sp-2xs);
 }
 
-.flower {
-  width: 8.5rem;
-  height: auto;
-  margin-inline: auto;
-  /* the artwork is very pale on beige — lift it so it reads as the motif */
-  filter: saturate(1.2) contrast(1.12) brightness(0.97);
-}
-
 .dressTitle {
-  font-size: clamp(3.75rem, 18vw, 5rem);
+  font-size: var(--fs-script-lg);
   line-height: 1;
 }
 
@@ -76,15 +68,8 @@
   margin-inline: auto;
 }
 
-.seal {
-  width: 6rem;
-  height: auto;
-  margin-inline: auto;
-  filter: saturate(1.2) contrast(1.12) brightness(0.97);
-}
-
 .thanksTitle {
-  font-size: clamp(3rem, 15vw, 4rem);
+  font-size: var(--fs-script-md);
   line-height: 1;
 }
 

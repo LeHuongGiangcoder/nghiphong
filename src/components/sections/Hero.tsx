@@ -5,6 +5,7 @@ import { useLang } from "@/components/LanguageProvider";
 import { Countdown } from "@/components/Countdown";
 import { Reveal } from "@/components/Reveal";
 import { WaveHeart } from "@/components/Flourish";
+import { Vanilla } from "@/components/Vanilla";
 import { DISPLAY_NAMES } from "@/content/copy";
 import styles from "./Hero.module.css";
 
@@ -25,7 +26,7 @@ export function Hero() {
       </div>
 
       <div className={`container ${styles.content}`}>
-        {/* cherub flanked by the two flourish tails */}
+        {/* the vanilla motif flanked by the two flourish tails */}
         <div className={styles.crest} aria-hidden="true">
           <Image
             className={styles.crestWing}
@@ -34,14 +35,7 @@ export function Hero() {
             width={900}
             height={123}
           />
-          <Image
-            className={styles.crestFigure}
-            src="/component/12.png"
-            alt=""
-            width={2475}
-            height={2475}
-            sizes="128px"
-          />
+          <Vanilla className={styles.crestFigure} />
           <Image
             className={styles.crestWing}
             src="/decor/flourish-right.webp"

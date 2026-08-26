@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Great_Vibes } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
@@ -9,6 +10,20 @@ const quickSignature = localFont({
   display: "swap",
   weight: "400",
   style: "normal",
+  fallback: ["Snell Roundhand", "cursive"],
+  adjustFontFallback: false,
+});
+
+/* Quick Signature has no Vietnamese glyphs — it is missing ơ, ư and the whole
+   U+1EA0–1EF9 block, so a Vietnamese heading set in it drops letters into a
+   serif fallback mid-word. Great Vibes is the same kind of formal signature
+   script and ships a full `vietnamese` subset, so it stands in for the script
+   face whenever the page language is Vietnamese. */
+const greatVibes = Great_Vibes({
+  subsets: ["latin", "vietnamese"],
+  weight: "400",
+  variable: "--font-great-vibes",
+  display: "swap",
   fallback: ["Snell Roundhand", "cursive"],
   adjustFontFallback: false,
 });
@@ -65,7 +80,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${season.variable} ${notoSerif.variable}`}>
+    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${season.variable} ${notoSerif.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

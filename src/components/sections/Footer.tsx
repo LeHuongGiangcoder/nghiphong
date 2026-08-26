@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
+import { Vanilla } from "@/components/Vanilla";
 import { INITIALS, DISPLAY_NAMES } from "@/content/copy";
 import styles from "./Footer.module.css";
 
@@ -20,13 +21,7 @@ export function Footer() {
           style={{ objectFit: "cover" }}
         />
       </div>
-      <Image
-        className={styles.flourish}
-        src="/component/vanilla.png"
-        alt=""
-        width={2813}
-        height={2813}
-      />
+      <Vanilla className={styles.flourish} />
       <p className={`script script--latin ${styles.names}`}>
         <span className="sr-only">
           {DISPLAY_NAMES.bride} &amp; {DISPLAY_NAMES.groom}

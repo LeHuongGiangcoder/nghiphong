@@ -5,6 +5,7 @@ import { useId, useState } from "react";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
 import { WaveHeart } from "@/components/Flourish";
+import { Vanilla } from "@/components/Vanilla";
 import styles from "./Rsvp.module.css";
 
 type Attending = "yes" | "no";
@@ -78,13 +79,7 @@ export function Rsvp() {
       <div className="container">
         {/* — dress code ——————————————————————————— */}
         <Reveal className="section__head">
-          <Image
-            className={styles.flower}
-            src="/decor/vanilla.webp"
-            alt=""
-            width={900}
-            height={803}
-          />
+          <Vanilla />
           <p className="eyebrow">{t.dress.eyebrow}</p>
           <h2 className={`script script--latin ${styles.dressTitle}`}>{t.dress.title}</h2>
           <div className={`measure ${styles.dressBody}`}>
@@ -113,13 +108,7 @@ export function Rsvp() {
         <Reveal className="section__body">
           {sent ? (
             <div className={`card center stack stack--md ${styles.thanks}`}>
-              <Image
-                className={styles.seal}
-                src="/decor/vanilla.webp"
-                alt=""
-                width={900}
-                height={803}
-              />
+              <Vanilla />
               <h3 className={`script ${styles.thanksTitle}`}>
                 {sent === "yes" ? t.rsvp.thanksYesTitle : t.rsvp.thanksNoTitle}
               </h3>

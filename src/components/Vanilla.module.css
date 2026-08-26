@@ -1,0 +1,8 @@
+/* The artwork is drawn very pale on white; on beige it would all but vanish,
+   so it is pushed a step warmer and darker to hold its own as the motif. */
+.vanilla {
+  width: var(--vanilla-size);
+  height: auto;
+  margin-inline: auto;
+  filter: var(--vanilla-ink);
+}

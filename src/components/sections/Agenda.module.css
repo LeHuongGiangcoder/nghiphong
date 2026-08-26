@@ -3,7 +3,7 @@
 }
 
 .title {
-  font-size: clamp(3.75rem, 18vw, 5rem);
+  font-size: var(--fs-script-lg);
   line-height: 1;
 }
 

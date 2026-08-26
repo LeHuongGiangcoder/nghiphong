@@ -3,10 +3,7 @@
 }
 
 .flourish {
-  width: 6rem;
-  height: auto;
-  margin: 0 auto var(--sp-md);
-  opacity: 0.8;
+  margin-bottom: var(--sp-md);
 }
 
 .names {
