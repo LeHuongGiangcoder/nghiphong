@@ -23,14 +23,7 @@ export function Greeting() {
       </div>
 
       <div className={styles.frameWrap}>
-        <Image
-          className={styles.frame}
-          src="/decor/oval-frame.webp"
-          alt=""
-          width={774}
-          height={1081}
-          aria-hidden="true"
-        />
+        <div className={styles.frame} aria-hidden="true" />
 
         <div className={`measure ${styles.content}`}>
           <Vanilla className={styles.crown} />

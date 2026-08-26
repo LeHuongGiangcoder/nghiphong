@@ -28,14 +28,7 @@ export function Footer() {
         </span>
       </p>
 
-      <Reveal className={styles.couple}>
-        <Image
-          src="/component/couple.png"
-          alt="Hands of the couple"
-          width={2160}
-          height={728}
-        />
-      </Reveal>
+
     </footer>
   );
 }
