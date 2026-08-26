@@ -94,7 +94,7 @@ export const COPY: Record<Lang, Dict> = {
       eyebrow: "Together with our families",
       and: "and",
       saveTheDate: "Save the Date",
-      invite: "joyfully invite you to the celebration of our marriage",
+      invite: "joyfully invite you to our wedding",
       dateLine: "13 . 12 . 2026",
       dayLine: "Sunday",
       venueShort: "Hotel Nikko Saigon",
@@ -145,7 +145,7 @@ export const COPY: Record<Lang, Dict> = {
     rsvp: {
       eyebrow: "Répondez s'il vous plaît",
       title: "Please reply",
-      intro: "Let us know so we can save you a seat.",
+      intro: "So we can save you a seat.",
       deadline: "Kindly reply before 13 November 2026.",
       name: "Your name",
       namePlaceholder: "Full name",

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
+import { Vanilla } from "@/components/Vanilla";
 import { DISPLAY_NAMES, INITIALS } from "@/content/copy";
 import styles from "./Greeting.module.css";
 
@@ -24,14 +25,16 @@ export function Greeting() {
       <div className={styles.frameWrap}>
         <Image
           className={styles.frame}
-          src="/decor/lace-frame.webp"
+          src="/decor/oval-frame.webp"
           alt=""
-          width={900}
-          height={1286}
+          width={774}
+          height={1081}
           aria-hidden="true"
         />
 
         <div className={`measure ${styles.content}`}>
+          <Vanilla className={styles.crown} />
+
           <div className={`section__head ${styles.head}`}>
             <Reveal as="p" className="eyebrow">
               {t.greeting.eyebrow}

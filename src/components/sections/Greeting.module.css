@@ -3,11 +3,11 @@
   overflow: hidden;
 }
 
-/* The lace frame is a watermark sized to enclose the copy no matter how long
-   it runs — stretching the ornament to fit the text would distort the lace. */
+/* The oval frame is a watermark sized to enclose the copy no matter how long
+   it runs — stretching the ornament to fit the text would distort the band. */
 /* The frame is sized by its content rather than by its own aspect ratio: at
    the band's width its natural height cannot cover the note, which pushed the
-   eyebrow and the signature outside the lace. The padding is the inset
+   eyebrow and the signature outside the oval. The padding is the inset
    between the text and the ornament. */
 .frameWrap {
   position: relative;
@@ -17,8 +17,11 @@
   margin-top: 1.5rem; /* Lùi toàn bộ khung ren và chữ xuống 1 chút */
 }
 
-/* Sized to the band, not past it — at 132% the corner ornaments were being
-   clipped by the shell, which read as the frame being off-centre. */
+/* Only the oval band is left of the old lace panel, repainted in the
+   decorative gold — as flat white it read as a glare on the beige rather than
+   as a border. It is stretched wider than it is tall: the band has to clear
+   the longest line of the note horizontally, while a uniform blow-up pushed
+   its bottom past the section and got it clipped. */
 .frame {
   position: absolute;
   inset: 0;
@@ -27,10 +30,15 @@
   /* fills the box — a modest vertical stretch on an ornamental oval reads
      far better than text spilling past the frame */
   object-fit: fill;
-  opacity: 0.6;
+  opacity: 0.5;
   pointer-events: none;
   user-select: none;
-  transform: scale(1.25); /* Enlarge while keeping center */
+  transform: scaleX(1.3) scaleY(1.12);
+}
+
+/* the vanilla motif crowning the note, tucked just inside the top of the oval */
+.crown {
+  margin-bottom: var(--sp-2xs);
 }
 
 .content {

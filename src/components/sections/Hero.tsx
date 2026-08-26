@@ -16,7 +16,7 @@ export function Hero() {
     <section className={`section section--hero ${styles.hero}`} id="hero">
       <div className="section-bg">
         <Image
-          src="/decor/panel-hero.webp"
+          src="/decor/panel-hero-17.webp"
           alt=""
           fill
           priority
@@ -61,7 +61,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={300}>
-          <p className={`signature ${styles.saveTheDate}`}>
+          <p className={`num script--latin ${styles.saveTheDate}`}>
             {t.hero.saveTheDate}
           </p>
         </Reveal>

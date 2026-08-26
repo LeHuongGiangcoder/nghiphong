@@ -23,14 +23,18 @@
 .swatches {
   display: flex;
   justify-content: center;
-  gap: var(--sp-2xs);
+  gap: var(--sp-xs);
   list-style: none;
   margin-top: var(--sp-3xs);
 }
 
+/* The row sat in a lot of open space at 1.75rem — the palette is the point of
+   the dress-code block, so the dots carry it at a size you can actually read
+   the hues off. */
 .swatches li {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: clamp(2.75rem, 11vw, 3.25rem);
+  height: clamp(2.75rem, 11vw, 3.25rem);
+  flex: none;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: 0 1px 6px -2px rgba(120, 100, 65, 0.4);

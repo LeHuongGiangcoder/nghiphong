@@ -76,14 +76,16 @@
   display: inline-block;
 }
 
-/* Set in the signature face, not the heading face — so it keeps the sizing
-   and the -0.18em pull that Quick Signature's shallow ascent calls for,
-   rather than the --fs-script-* scale tuned for Great Vibes. */
+/* Set in Season Serif, the same face and the same tracking as the date line
+   below — the two read as one stacked block rather than two competing marks.
+   Only the size separates them. */
 .saveTheDate {
-  font-size: clamp(3.875rem, 18.5vw, 5.75rem);
-  line-height: 1;
-  margin-block: -0.18em;
+  font-size: clamp(1.375rem, 6vw, 1.75rem);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
   color: var(--c-gold);
+  margin-block: var(--sp-2xs) var(--sp-xs);
 }
 
 .date {
