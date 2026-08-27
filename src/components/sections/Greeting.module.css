@@ -1,6 +1,9 @@
 .greeting {
   text-align: center;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
 }
 
 /* The oval frame is a watermark sized to enclose the copy no matter how long
@@ -13,36 +16,9 @@
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
   padding-block: clamp(3rem, 11vw, 4.5rem);
-  margin-top: 1.5rem; /* Lùi toàn bộ khung ren và chữ xuống 1 chút */
-}
-
-/* Only the oval band is left of the old lace panel, and it is painted rather
-   than drawn: the artwork is used as a mask so the ring takes --c-gold-soft
-   like every other ornament on the page. As flat white it read as a glare on
-   the beige. */
-.frame {
-  position: absolute;
-  /* The overhang is set here rather than with a scale, because both sides of
-     it are bounded: horizontally it takes back exactly the section gutter, so
-     the widest point of the ring lands on the edge of the band instead of
-     being cut off by its overflow; vertically a fixed 1.5rem, so a longer
-     note (Vietnamese runs longer than English) cannot push the bottom of the
-     ring past the section and get it clipped. */
-  inset: -1.5rem calc(var(--gutter) * -1);
-  background-color: var(--c-gold-soft);
-  -webkit-mask-image: url('/decor/oval-frame.webp');
-  mask-image: url('/decor/oval-frame.webp');
-  /* 100% 100% == the old object-fit: fill — a modest stretch on an ornamental
-     oval reads far better than text spilling past the frame */
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  opacity: 0.34;
-  pointer-events: none;
 }
 
 /* the vanilla motif crowning the note, tucked just inside the top of the oval */
@@ -55,7 +31,8 @@
    longest line clearing the ring there, not by comfortable line length. */
 .content {
   position: relative;
-  max-width: 16.5rem;
+  max-width: 24rem;
+  transform: translateY(-2rem); /* Đẩy toàn bộ nội dung lên trên một chút để bù trừ thị giác */
 }
 
 /* The gap was zeroed to pull the old serif title up under the eyebrow. Great
@@ -63,7 +40,7 @@
    crowds the eyebrow instead — it needs a real gap back. */
 .head {
   gap: var(--sp-2xs) !important;
-  margin-bottom: var(--sp-md) !important; /* Giảm khoảng cách giữa welcome và content */
+  margin-bottom: var(--sp-lg) !important; /* Tăng khoảng cách để đẩy hoa và heading lên cao hơn so với chữ */
 }
 
 /* the two paragraphs of the note */
@@ -74,7 +51,7 @@
 
 /* `.body` is a global utility — CSS Modules would hash it without :global. */
 .content :global(.body) {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.85;
 }
 

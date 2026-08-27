@@ -38,11 +38,11 @@
        --f-script   Great Vibes      → every script heading, both languages
        --f-signature Quick Signature → the N & P mark and "Save the Date"
        --f-display  Season Serif     → couple names, dates, times, sub-heads
-       --f-serif    Noto Serif       → body copy  */
+       --f-body     Lato             → body copy  */
   --f-script: var(--font-great-vibes), "Snell Roundhand", cursive;
   --f-signature: var(--font-quick-signature), "Snell Roundhand", cursive;
   --f-display: var(--font-season), "Times New Roman", serif;
-  --f-serif: var(--font-noto-serif), "Times New Roman", serif;
+  --f-body: var(--font-lato), "Helvetica Neue", sans-serif;
 
   --fs-display: clamp(3.25rem, 15vw, 5.5rem);
   --fs-h1: clamp(2rem, 8.5vw, 3rem);
@@ -134,7 +134,7 @@ body {
   min-height: 100%;
   background: var(--c-bg);
   color: var(--c-body);
-  font-family: var(--f-serif);
+  font-family: var(--f-body);
   font-size: var(--fs-body);
   font-weight: 400;
   line-height: var(--lh-body);
@@ -336,7 +336,7 @@ a {
 /* --------------------------------------------------------- TYPOGRAPHY */
 
 /* Season does not carry the stacked Vietnamese accents (ệ, ớ, ữ …), so
-   `.display` and `.num` fall back to Noto Serif when the page language is
+   `.display` and `.num` fall back to Lato when the page language is
    Vietnamese — see the rule at the bottom of this block. `.script--latin`
    opts out for strings that are Latin in both languages (names, times).
    `.script` needs no such rule: Great Vibes covers both languages. */
@@ -393,7 +393,7 @@ a {
 }
 
 .eyebrow {
-  font-family: var(--f-serif);
+  font-family: var(--f-body);
   font-size: var(--fs-eyebrow);
   font-weight: 500;
   letter-spacing: var(--ls-eyebrow);
@@ -440,18 +440,17 @@ a {
 
 /* Opt out: text that is Latin-only in both languages (names, "Pastel",
    dates) keeps the script face even when the page is Vietnamese. */
-/* Season is missing the stacked caps (Ễ, Ệ, Ả) and several lowercase forms,
-   so Vietnamese strings would otherwise pull glyphs from a fallback face
-   mid-word. Hand the whole run to Noto, which covers the language fully. */
+/* Season Serif has no Vietnamese glyphs. A Vietnamese date set in `.num` would
+   fallback to times new roman mid-word. Hand the whole run to Lato, which covers the language fully. */
 html[lang="vi"] .h1:not(.script--latin),
 html[lang="vi"] .h2:not(.script--latin),
 html[lang="vi"] .h3:not(.script--latin) {
-  font-family: var(--f-serif);
+  font-family: var(--f-body);
 }
 
 html[lang="vi"] .num:not(.script--latin),
 html[lang="vi"] .display:not(.script--latin) {
-  font-family: var(--f-serif);
+  font-family: var(--f-body);
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -543,7 +542,7 @@ html[lang="vi"] .display:not(.script--latin) {
   gap: var(--sp-2xs);
   padding: var(--btn-py) var(--btn-px);
   min-height: 2.75rem;
-  font-family: var(--f-serif);
+  font-family: var(--f-body);
   font-size: var(--fs-caption);
   font-weight: 500;
   letter-spacing: var(--ls-wide);

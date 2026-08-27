@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Great_Vibes } from "next/font/google";
+import { Great_Vibes, Lato } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
@@ -40,18 +40,12 @@ const season = localFont({
   fallback: ["Times New Roman", "serif"],
 });
 
-const notoSerif = localFont({
-  src: [
-    { path: "./fonts/noto-serif-display.woff2", weight: "300 700", style: "normal" },
-    {
-      path: "./fonts/noto-serif-display-italic.woff2",
-      weight: "300 700",
-      style: "italic",
-    },
-  ],
-  variable: "--font-noto-serif",
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-lato",
   display: "swap",
-  fallback: ["Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -81,7 +75,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${season.variable} ${notoSerif.variable}`}>
+    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${season.variable} ${lato.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

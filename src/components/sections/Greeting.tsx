@@ -23,7 +23,6 @@ export function Greeting() {
       </div>
 
       <div className={styles.frameWrap}>
-        <div className={styles.frame} aria-hidden="true" />
 
         <div className={`measure ${styles.content}`}>
           <Vanilla className={styles.crown} />
