@@ -6,29 +6,49 @@
   min-height: 100svh;
 }
 
-/* The oval frame is a watermark sized to enclose the copy no matter how long
-   it runs — stretching the ornament to fit the text would distort the band. */
-/* The frame is sized by its content rather than by its own aspect ratio: at
-   the band's width its natural height cannot cover the note, which pushed the
-   eyebrow and the signature outside the oval. The padding is the inset
-   between the text and the ornament. */
+/* The box the lace oval is drawn around. Its padding is the inset between the
+   copy and the ornament, so the frame grows with the note instead of the note
+   having to fit a fixed oval. */
 .frameWrap {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-block: clamp(3rem, 11vw, 4.5rem);
+  /* deep enough that the eyebrow and the signature clear the band, which is
+     ~15% of the frame's height at the top and again at the bottom */
+  padding-block: clamp(7.5rem, 24vw, 10rem);
+  /* almost none: every pixel here is width the oval and the copy lose */
+  padding-inline: 0.5rem;
 }
 
+/* The lace oval. A mask rather than an <img>, so the ornament takes a token
+   colour, and stretched to the box rather than keeping its own 4:5 ratio —
+   the note is far taller than the source oval.
 
+   Its ring eats ~19% of its own width on each side, so the opening is only
+   ~61% of what the frame measures. Everything below is sized off that number:
+   the oval runs as wide as it can without being clipped by the section, and
+   the note is held to what the opening leaves. */
+.lace {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100% + 9rem), calc(100vw - 1rem));
+  background-color: #fff;
+  -webkit-mask: url('/component/lace-frame.png') center / 100% 100% no-repeat;
+  mask: url('/component/lace-frame.png') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
 
-/* Narrower than the default measure: an oval tapers, so the last lines of the
-   note sit where the band has already closed in. The width is set by the
-   longest line clearing the ring there, not by comfortable line length. */
+/* The copy runs the full width the oval allows. On a wide column that lands
+   just inside the opening; on a phone the longest lines reach into the band,
+   which is the trade for a note that is not squeezed into a 200px measure. */
 .content {
   position: relative;
-  max-width: 24rem;
+  max-width: min(78%, 25rem);
 }
 
 /* The gap was zeroed to pull the old serif title up under the eyebrow. Great
@@ -37,6 +57,13 @@
 .head {
   gap: var(--sp-2xs) !important;
   margin-bottom: var(--sp-lg) !important; /* Tăng khoảng cách để đẩy hoa và heading lên cao hơn so với chữ */
+}
+
+/* The measure inside the oval is narrow enough that the eyebrow's full
+   tracking breaks it onto a second line. */
+.head :global(.eyebrow) {
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
 }
 
 /* the two paragraphs of the note */

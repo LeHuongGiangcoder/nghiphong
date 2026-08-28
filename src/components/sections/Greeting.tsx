@@ -23,6 +23,7 @@ export function Greeting() {
       </div>
 
       <div className={styles.frameWrap}>
+        <span className={styles.lace} aria-hidden="true" />
 
         <div className={`measure ${styles.content}`}>
 
