@@ -54,38 +54,46 @@
   white-space: nowrap;
 }
 
+/* The "and" is drawn art, not type. Both marks below are single-colour PNGs
+   used as masks so the ink stays a token — change --c-gold and they follow. */
 .amp {
-  font-size: 1.5em;
-  line-height: 1.1;
   display: flex;
   justify-content: center;
+  line-height: 1;
 }
 
 .ampImage {
-  width: 4.8em;
-  height: 0.8em;
+  display: block;
+  /* 1400 x 1024 in the source — the ratio holds the flourish undistorted.
+     Sized in em so it tracks the names it sits between. */
+  width: 1.7em;
+  aspect-ratio: 1400 / 1024;
   background-color: var(--c-gold);
-  -webkit-mask-image: url('/component/and.png');
-  mask-image: url('/component/and.png');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  display: inline-block;
+  -webkit-mask: url('/component/and-mark.png') center / contain no-repeat;
+  mask: url('/component/and-mark.png') center / contain no-repeat;
 }
 
-/* Set in Season Serif, the same face and the same tracking as the date line
-   below — the two read as one stacked block rather than two competing marks.
-   Only the size separates them. */
+/* The Reveal wrapper is a flex item under `align-items: center`, so it would
+   shrink to its content. Stretching it gives the mark below a real width to
+   measure against — the container's, so the mark grows with the column. */
+.saveTheDateRow {
+  align-self: stretch;
+}
+
+/* Drawn art like the "and" above: the text stays in the DOM for screen
+   readers and search, and the mask paints the calligraphy over it. */
 .saveTheDate {
-  font-size: clamp(1.375rem, 6vw, 1.75rem);
-  letter-spacing: 0.28em;
-  text-indent: 0.28em;
-  text-transform: uppercase;
-  color: var(--c-gold);
+  width: min(88%, 24rem);
+  margin-inline: auto;
+  /* 1400 x 147 in the source */
+  aspect-ratio: 1400 / 147;
   margin-block: var(--sp-2xs) var(--sp-xs);
+  background-color: var(--c-gold);
+  -webkit-mask: url('/component/save-the-date-mark.png') center / contain no-repeat;
+  mask: url('/component/save-the-date-mark.png') center / contain no-repeat;
+  /* push the live text out of sight without hiding it from assistive tech */
+  color: transparent;
+  font-size: 0;
 }
 
 .date {

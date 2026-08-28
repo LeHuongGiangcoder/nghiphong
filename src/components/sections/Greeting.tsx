@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
-import { Vanilla } from "@/components/Vanilla";
+
 import { DISPLAY_NAMES, INITIALS } from "@/content/copy";
 import styles from "./Greeting.module.css";
 
@@ -25,7 +25,7 @@ export function Greeting() {
       <div className={styles.frameWrap}>
 
         <div className={`measure ${styles.content}`}>
-          <Vanilla className={styles.crown} />
+
 
           <div className={`section__head ${styles.head}`}>
             <Reveal as="p" className="eyebrow">

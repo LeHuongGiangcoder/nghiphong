@@ -38,21 +38,23 @@
        --f-script   Great Vibes      → every script heading, both languages
        --f-signature Quick Signature → the N & P mark and "Save the Date"
        --f-display  Season Serif     → couple names, dates, times, sub-heads
-       --f-body     Lato             → body copy  */
+       --f-body     Cormorant Garamond → body copy  */
   --f-script: var(--font-great-vibes), "Snell Roundhand", cursive;
   --f-signature: var(--font-quick-signature), "Snell Roundhand", cursive;
   --f-display: var(--font-season), "Times New Roman", serif;
-  --f-body: var(--font-lato), "Helvetica Neue", sans-serif;
+  --f-body: var(--font-cormorant), Garamond, "Times New Roman", serif;
 
   --fs-display: clamp(3.25rem, 15vw, 5.5rem);
   --fs-h1: clamp(2rem, 8.5vw, 3rem);
   --fs-h2: clamp(1.625rem, 6.5vw, 2.25rem);
   --fs-h3: clamp(1.125rem, 4.5vw, 1.375rem);
-  --fs-lead: clamp(1rem, 4.2vw, 1.125rem);
-  --fs-body: 1rem;
-  --fs-sm: 0.9375rem;
-  --fs-caption: 0.8125rem;
-  --fs-eyebrow: 0.6875rem;
+  --fs-lead: clamp(1.125rem, 4.4vw, 1.25rem);
+  /* Cormorant runs on a small x-height — every step below is a notch above
+     what a sans would take so the copy reads at the same optical size. */
+  --fs-body: 1.125rem;
+  --fs-sm: 1.0625rem;
+  --fs-caption: 0.875rem;
+  --fs-eyebrow: 0.75rem;
 
   /* Script headings. Sections take this token rather than setting a size of
      their own, so they cannot drift apart. */
@@ -138,6 +140,9 @@ body {
   font-size: var(--fs-body);
   font-weight: 400;
   line-height: var(--lh-body);
+  /* Cormorant defaults to old-style figures, which sit below the cap line and
+     read as a different size next to the all-caps dates and times. */
+  font-variant-numeric: lining-nums;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -336,7 +341,7 @@ a {
 /* --------------------------------------------------------- TYPOGRAPHY */
 
 /* Season does not carry the stacked Vietnamese accents (ệ, ớ, ữ …), so
-   `.display` and `.num` fall back to Lato when the page language is
+   `.display` and `.num` fall back to Cormorant Garamond when the page language is
    Vietnamese — see the rule at the bottom of this block. `.script--latin`
    opts out for strings that are Latin in both languages (names, times).
    `.script` needs no such rule: Great Vibes covers both languages. */
@@ -441,7 +446,8 @@ a {
 /* Opt out: text that is Latin-only in both languages (names, "Pastel",
    dates) keeps the script face even when the page is Vietnamese. */
 /* Season Serif has no Vietnamese glyphs. A Vietnamese date set in `.num` would
-   fallback to times new roman mid-word. Hand the whole run to Lato, which covers the language fully. */
+   fallback to times new roman mid-word. Hand the whole run to Cormorant Garamond,
+   which covers the language fully. */
 html[lang="vi"] .h1:not(.script--latin),
 html[lang="vi"] .h2:not(.script--latin),
 html[lang="vi"] .h3:not(.script--latin) {
@@ -627,9 +633,11 @@ html[lang="vi"] .display:not(.script--latin) {
 
 .label {
   font-size: var(--fs-eyebrow);
-  letter-spacing: var(--ls-eyebrow);
+  /* tighter than an eyebrow: a field label is a sentence, and the full
+     eyebrow tracking breaks the longer Vietnamese ones onto a second line */
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  text-indent: var(--ls-eyebrow);
+  text-indent: 0.22em;
   color: var(--c-gold-ink);
   font-weight: 500;
 }

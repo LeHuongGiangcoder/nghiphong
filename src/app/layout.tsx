@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Great_Vibes, Lato } from "next/font/google";
+import { Great_Vibes } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
@@ -40,12 +40,25 @@ const season = localFont({
   fallback: ["Times New Roman", "serif"],
 });
 
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-lato",
+/* Body copy. Cormorant Garamond ships both axes as one variable file per
+   style, so the whole 300–700 range comes down in two requests and every
+   Vietnamese diacritic is covered by the same face as the Latin text. */
+const cormorant = localFont({
+  src: [
+    {
+      path: "./fonts/cormorant-garamond.woff2",
+      weight: "300 700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/cormorant-garamond-italic.woff2",
+      weight: "300 700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-cormorant",
   display: "swap",
+  fallback: ["Garamond", "Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -75,7 +88,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${season.variable} ${lato.variable}`}>
+    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${season.variable} ${cormorant.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

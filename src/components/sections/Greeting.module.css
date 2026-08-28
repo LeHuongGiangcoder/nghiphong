@@ -21,10 +21,7 @@
   padding-block: clamp(3rem, 11vw, 4.5rem);
 }
 
-/* the vanilla motif crowning the note, tucked just inside the top of the oval */
-.crown {
-  margin-bottom: var(--sp-2xs);
-}
+
 
 /* Narrower than the default measure: an oval tapers, so the last lines of the
    note sit where the band has already closed in. The width is set by the
@@ -32,7 +29,6 @@
 .content {
   position: relative;
   max-width: 24rem;
-  transform: translateY(-2rem); /* Đẩy toàn bộ nội dung lên trên một chút để bù trừ thị giác */
 }
 
 /* The gap was zeroed to pull the old serif title up under the eyebrow. Great

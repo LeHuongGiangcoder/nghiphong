@@ -60,10 +60,8 @@ export function Hero() {
           </h1>
         </Reveal>
 
-        <Reveal delay={300}>
-          <p className={`num script--latin ${styles.saveTheDate}`}>
-            {t.hero.saveTheDate}
-          </p>
+        <Reveal delay={300} className={styles.saveTheDateRow}>
+          <p className={styles.saveTheDate}>{t.hero.saveTheDate}</p>
         </Reveal>
 
         <Reveal delay={400}>
