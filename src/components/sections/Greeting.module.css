@@ -17,38 +17,36 @@
   width: 100%;
   /* deep enough that the eyebrow and the signature clear the band, which is
      ~15% of the frame's height at the top and again at the bottom */
-  padding-block: clamp(7.5rem, 24vw, 10rem);
+  padding-block: clamp(6.5rem, 20vw, 7.5rem);
   /* almost none: every pixel here is width the oval and the copy lose */
   padding-inline: 0.5rem;
 }
 
-/* The lace oval. A mask rather than an <img>, so the ornament takes a token
-   colour, and stretched to the box rather than keeping its own 4:5 ratio —
-   the note is far taller than the source oval.
-
-   Its ring eats ~19% of its own width on each side, so the opening is only
-   ~61% of what the frame measures. Everything below is sized off that number:
-   the oval runs as wide as it can without being clipped by the section, and
-   the note is held to what the opening leaves. */
+/* The lace oval, at the ornament's own 4:5 ratio — top and bottom pin its
+   height to the box, and `aspect-ratio` derives the width from that, so it is
+   never squeezed. Its ring eats ~19% of its width and ~15% of its height, so
+   the opening is 61% x 70% of the oval; the padding above and the measure
+   below are what keep the copy inside those bounds. */
 .lace {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(calc(100% + 9rem), calc(100vw - 1rem));
+  width: auto;
+  aspect-ratio: 960 / 1200;
   background-color: #fff;
   -webkit-mask: url('/component/lace-frame.png') center / 100% 100% no-repeat;
   mask: url('/component/lace-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
 }
 
-/* The copy runs the full width the oval allows. On a wide column that lands
-   just inside the opening; on a phone the longest lines reach into the band,
-   which is the trade for a note that is not squeezed into a 200px measure. */
+/* Held to the opening. The oval settles at ~550px wide for this note, so 61%
+   of that — a little under 20rem — is the widest the copy can run and still
+   clear the band. On a phone the section gutters take over. */
 .content {
   position: relative;
-  max-width: min(78%, 25rem);
+  max-width: min(82vw, 19.5rem);
 }
 
 /* The gap was zeroed to pull the old serif title up under the eyebrow. Great
@@ -56,7 +54,7 @@
    crowds the eyebrow instead — it needs a real gap back. */
 .head {
   gap: var(--sp-2xs) !important;
-  margin-bottom: var(--sp-lg) !important; /* Tăng khoảng cách để đẩy hoa và heading lên cao hơn so với chữ */
+  margin-bottom: var(--sp-md) !important; /* Tăng khoảng cách để đẩy hoa và heading lên cao hơn so với chữ */
 }
 
 /* The measure inside the oval is narrow enough that the eyebrow's full
@@ -69,7 +67,7 @@
 /* the two paragraphs of the note */
 .note {
   --gap: var(--sp-md);
-  margin-bottom: var(--sp-lg); /* Đưa block signature cao lên */
+  margin-bottom: var(--sp-md); /* Đưa block signature cao lên */
 }
 
 /* `.body` is a global utility — CSS Modules would hash it without :global. */
