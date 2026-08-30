@@ -20,6 +20,10 @@
   padding-block: clamp(6.5rem, 20vw, 7.5rem);
   /* almost none: every pixel here is width the oval and the copy lose */
   padding-inline: 0.5rem;
+  /* How far the oval is grown past this box on every side. It is what buys the
+     clearance between the lace band and the copy — the ring simply runs off
+     the screen instead of the note being squeezed to fit inside it. */
+  --lace-bleed: clamp(3.5rem, 11vw, 5rem);
 }
 
 /* The lace oval, at the ornament's own 4:5 ratio — top and bottom pin its
@@ -29,13 +33,18 @@
    below are what keep the copy inside those bounds. */
 .lace {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  /* grown past the box top and bottom; `aspect-ratio` widens it to match, so
+     it overruns the screen sideways — `.greeting` clips it */
+  top: calc(var(--lace-bleed) * -1);
+  bottom: calc(var(--lace-bleed) * -1);
   left: 50%;
   transform: translateX(-50%);
   width: auto;
   aspect-ratio: 960 / 1200;
-  background-color: #fff;
+  /* a warm white at part strength — the lace should settle into the beige
+     panel behind it, not sit on top of it as a cut-out */
+  background-color: var(--c-surface);
+  opacity: 0.62;
   -webkit-mask: url('/component/lace-frame.png') center / 100% 100% no-repeat;
   mask: url('/component/lace-frame.png') center / 100% 100% no-repeat;
   pointer-events: none;
@@ -72,7 +81,7 @@
 
 /* `.body` is a global utility — CSS Modules would hash it without :global. */
 .content :global(.body) {
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.85;
 }
 

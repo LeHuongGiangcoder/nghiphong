@@ -75,7 +75,7 @@
 .time {
   font-style: italic;
   font-weight: 600; /* In đậm thời gian */
-  font-size: clamp(0.95rem, 4vw, 1.2rem); /* Giảm size */
+  font-size: clamp(1.05rem, 4.4vw, 1.3rem);
   letter-spacing: 0.04em;
   line-height: 1.1;
   color: var(--c-gold);
@@ -83,7 +83,7 @@
 
 .title {
   margin-top: 0.25rem;
-  font-size: clamp(0.75rem, 3vw, 0.875rem); /* Giảm size */
+  font-size: clamp(0.875rem, 3.5vw, 1rem);
   letter-spacing: 0.05em; /* Giảm letter-spacing vì không còn uppercase */
   line-height: 1.35;
   text-transform: none; /* Bỏ uppercase */
@@ -91,7 +91,7 @@
 
 .note {
   margin-top: var(--sp-3xs);
-  font-size: 0.6875rem; /* var(--fs-eyebrow) or similar small size */
+  font-size: 0.8125rem;
   line-height: 1.5;
 }
 

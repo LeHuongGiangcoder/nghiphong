@@ -42,7 +42,7 @@
 .link {
   display: inline-block;
   padding-block: var(--sp-2xs);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: clamp(0.06em, 0.6vw, 0.18em);
   text-transform: uppercase;
   color: var(--c-body);
@@ -67,7 +67,7 @@
   flex: none;
   margin-left: auto;
   --btn-px: 0.75rem;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   color: var(--c-gold);
   border-color: var(--c-line-soft);
   border-radius: var(--radius-pill);

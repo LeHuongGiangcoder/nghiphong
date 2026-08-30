@@ -48,13 +48,13 @@
   --fs-h1: clamp(2rem, 8.5vw, 3rem);
   --fs-h2: clamp(1.625rem, 6.5vw, 2.25rem);
   --fs-h3: clamp(1.125rem, 4.5vw, 1.375rem);
-  --fs-lead: clamp(1.125rem, 4.4vw, 1.25rem);
+  --fs-lead: clamp(1.25rem, 4.8vw, 1.375rem);
   /* Cormorant runs on a small x-height — every step below is a notch above
      what a sans would take so the copy reads at the same optical size. */
-  --fs-body: 1.125rem;
-  --fs-sm: 1.0625rem;
-  --fs-caption: 0.875rem;
-  --fs-eyebrow: 0.75rem;
+  --fs-body: 1.25rem;
+  --fs-sm: 1.1875rem;
+  --fs-caption: 0.9375rem;
+  --fs-eyebrow: 0.8125rem;
 
   /* Script headings. Sections take this token rather than setting a size of
      their own, so they cannot drift apart. */
@@ -99,7 +99,7 @@
 
   --shell: 40rem;                              /* the "invitation" column  */
   --container: 30rem;                          /* general content width    */
-  --measure: 18rem;                            /* prose column             */
+  --measure: 20rem;                            /* prose column             */
   --seam-size: 16rem;                          /* section-divider ornament */
 
   /* — surface —————————————————————————————— */
@@ -568,7 +568,7 @@ html[lang="vi"] .display:not(.script--latin) {
   --btn-py: 0.625rem;
   --btn-px: 1.25rem;
   min-height: 2.25rem;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
 }
 
 .btn--lg {

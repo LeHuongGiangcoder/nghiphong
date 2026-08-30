@@ -80,24 +80,26 @@
   align-self: stretch;
 }
 
-/* Drawn art like the "and" above: the text stays in the DOM for screen
-   readers and search, and the mask paints the calligraphy over it. */
+/* Both lines are set in caps at the body's 1.85 line-height, which hangs half
+   a line of leading under "SAVE THE DATE" and another half over the date — on
+   top of the column's own gap. Tight leading here, and the pair reads as one
+   block: a wider step down from the names, a closer one to its own date. */
 .saveTheDate {
-  width: min(88%, 24rem);
-  margin-inline: auto;
-  /* 1400 x 147 in the source */
-  aspect-ratio: 1400 / 147;
-  margin-block: var(--sp-2xs) var(--sp-xs);
-  background-color: var(--c-gold);
-  -webkit-mask: url('/component/save-the-date-mark.png') center / contain no-repeat;
-  mask: url('/component/save-the-date-mark.png') center / contain no-repeat;
-  /* push the live text out of sight without hiding it from assistive tech */
-  color: transparent;
-  font-size: 0;
+  margin-block: var(--sp-xs) 0;
+  font-size: clamp(1.125rem, 5vw, 1.4rem);
+  line-height: 1.3;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-gold);
 }
 
 .date {
+  /* pulled up against the save-the-date it dates — the column gap alone left
+     the two lines reading as unrelated blocks */
+  margin-top: calc(var(--sp-2xs) * -1);
   font-size: clamp(1rem, 4.4vw, 1.25rem);
+  line-height: 1.3;
   letter-spacing: 0.28em;
   text-indent: 0.28em;
   text-transform: uppercase;

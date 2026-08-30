@@ -63,11 +63,16 @@ type Dict = {
     nameError: string;
     attending: string;
     attendingError: string;
+    guests: string;
+    guestsPlaceholder: string;
+    guestsError: string;
     yes: string;
     no: string;
     meal: string;
     mealHint: string;
     meals: string[];
+    mealNotesPlaceholder: string;
+    mealNotesError: string;
     wishes: string;
     wishesPlaceholder: string;
     submit: string;
@@ -152,11 +157,16 @@ export const COPY: Record<Lang, Dict> = {
       nameError: "Please tell us your name.",
       attending: "Will you attend?",
       attendingError: "Please choose one.",
+      guests: "Number of guests",
+      guestsPlaceholder: "1",
+      guestsError: "Please enter the number of guests.",
       yes: "Joyfully accepts",
       no: "Regretfully declines",
       meal: "Meal preference",
       mealHint: "So the kitchen can look after you.",
       meals: ["No preference", "Vegetarian", "No seafood", "Other / allergy"],
+      mealNotesPlaceholder: "Please specify your requirements...",
+      mealNotesError: "Please tell us your requirements.",
       wishes: "A wish for the couple",
       wishesPlaceholder: "Write something we can keep…",
       submit: "Send",
@@ -243,11 +253,16 @@ export const COPY: Record<Lang, Dict> = {
       nameError: "Bạn cho chúng mình biết tên với nhé.",
       attending: "Bạn có tham dự không?",
       attendingError: "Vui lòng chọn một mục.",
+      guests: "Số người tham dự",
+      guestsPlaceholder: "1",
+      guestsError: "Vui lòng cho biết số người tham dự.",
       yes: "Chắc chắn có mặt",
       no: "Rất tiếc, mình không đến được",
       meal: "Khẩu phần ăn",
       mealHint: "Để nhà bếp chuẩn bị chu đáo cho bạn.",
       meals: ["Không yêu cầu đặc biệt", "Món chay", "Không hải sản", "Khác / dị ứng"],
+      mealNotesPlaceholder: "Vui lòng ghi rõ yêu cầu của bạn...",
+      mealNotesError: "Bạn cho chúng mình biết yêu cầu nhé.",
       wishes: "Lời chúc gửi cô dâu chú rể",
       wishesPlaceholder: "Viết đôi dòng để chúng mình giữ lại…",
       submit: "Gửi",

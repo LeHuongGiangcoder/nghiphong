@@ -17,7 +17,9 @@ type Attending = "yes" | "no";
 export type RsvpPayload = {
   name: string;
   attending: Attending;
+  guests?: number;
   meal: string | null;
+  mealNotes?: string;
   wishes: string;
   lang: string;
   submittedAt: string;
@@ -28,23 +30,32 @@ export function Rsvp() {
   const uid = useId();
 
   const [name, setName] = useState("");
+  const [guests, setGuests] = useState("1");
   const [attending, setAttending] = useState<Attending | null>(null);
   const [meal, setMeal] = useState<number>(0);
+  const [mealNotes, setMealNotes] = useState("");
   const [wishes, setWishes] = useState("");
-  const [errors, setErrors] = useState<{ name?: boolean; attending?: boolean }>({});
+  const [errors, setErrors] = useState<{ name?: boolean; attending?: boolean; guests?: boolean; mealNotes?: boolean }>({});
   const [sent, setSent] = useState<Attending | null>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const next = { name: name.trim().length === 0, attending: attending === null };
+    const next = { 
+      name: name.trim().length === 0, 
+      attending: attending === null,
+      guests: attending === "yes" && (!guests || isNaN(Number(guests)) || Number(guests) < 1),
+      mealNotes: attending === "yes" && meal === 3 && mealNotes.trim().length === 0
+    };
     setErrors(next);
-    if (next.name || next.attending) return;
+    if (next.name || next.attending || next.guests || next.mealNotes) return;
 
     const payload: RsvpPayload = {
       name: name.trim(),
       attending: attending as Attending,
+      guests: attending === "yes" ? Number(guests) : undefined,
       meal: attending === "yes" ? t.rsvp.meals[meal] : null,
+      mealNotes: attending === "yes" && meal === 3 ? mealNotes.trim() : undefined,
       wishes: wishes.trim(),
       lang,
       submittedAt: new Date().toISOString(),
@@ -57,8 +68,10 @@ export function Rsvp() {
 
   function reset() {
     setName("");
+    setGuests("1");
     setAttending(null);
     setMeal(0);
+    setMealNotes("");
     setWishes("");
     setErrors({});
     setSent(null);
@@ -176,26 +189,76 @@ export function Rsvp() {
               </fieldset>
 
               {attending === "yes" && (
-                <fieldset className="field">
-                  <legend className="label">{t.rsvp.meal}</legend>
-                  <div className="choices">
-                    {t.rsvp.meals.map((label, i) => (
-                      <label className="choice" key={label} htmlFor={`${uid}-meal-${i}`}>
-                        <input
-                          id={`${uid}-meal-${i}`}
-                          type="radio"
-                          name={`${uid}-meal`}
-                          value={label}
-                          checked={meal === i}
-                          onChange={() => setMeal(i)}
-                        />
-                        <span className="choice__dot" aria-hidden="true" />
-                        <span>{label}</span>
-                      </label>
-                    ))}
+                <>
+                  <div className="field" data-invalid={errors.guests || undefined}>
+                    <label className="label" htmlFor={`${uid}-guests`}>
+                      {t.rsvp.guests}
+                    </label>
+                    <input
+                      id={`${uid}-guests`}
+                      className="input"
+                      type="number"
+                      min="1"
+                      placeholder={t.rsvp.guestsPlaceholder}
+                      value={guests}
+                      aria-invalid={errors.guests || undefined}
+                      aria-describedby={errors.guests ? `${uid}-guests-err` : undefined}
+                      onChange={(e) => {
+                        setGuests(e.target.value);
+                        if (errors.guests) setErrors((p) => ({ ...p, guests: false }));
+                      }}
+                    />
+                    {errors.guests && (
+                      <p className="error" id={`${uid}-guests-err`}>
+                        {t.rsvp.guestsError}
+                      </p>
+                    )}
                   </div>
-                  <p className="hint">{t.rsvp.mealHint}</p>
-                </fieldset>
+
+                  <fieldset className="field">
+                    <legend className="label">{t.rsvp.meal}</legend>
+                    <div className="choices">
+                      {t.rsvp.meals.map((label, i) => (
+                        <label className="choice" key={label} htmlFor={`${uid}-meal-${i}`}>
+                          <input
+                            id={`${uid}-meal-${i}`}
+                            type="radio"
+                            name={`${uid}-meal`}
+                            value={label}
+                            checked={meal === i}
+                            onChange={() => setMeal(i)}
+                          />
+                          <span className="choice__dot" aria-hidden="true" />
+                          <span>{label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    <p className="hint">{t.rsvp.mealHint}</p>
+                  </fieldset>
+
+                  {meal === 3 && (
+                    <div className="field" data-invalid={errors.mealNotes || undefined}>
+                      <input
+                        id={`${uid}-mealNotes`}
+                        className="input"
+                        type="text"
+                        placeholder={t.rsvp.mealNotesPlaceholder}
+                        value={mealNotes}
+                        aria-invalid={errors.mealNotes || undefined}
+                        aria-describedby={errors.mealNotes ? `${uid}-mealNotes-err` : undefined}
+                        onChange={(e) => {
+                          setMealNotes(e.target.value);
+                          if (errors.mealNotes) setErrors((p) => ({ ...p, mealNotes: false }));
+                        }}
+                      />
+                      {errors.mealNotes && (
+                        <p className="error" id={`${uid}-mealNotes-err`}>
+                          {t.rsvp.mealNotesError}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </>
               )}
 
               <div className="field">
