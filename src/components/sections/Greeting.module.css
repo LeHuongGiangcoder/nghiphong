@@ -16,16 +16,19 @@
   align-items: center;
   width: 100%;
   /* Deep enough that the eyebrow and the signature clear the band, and no
-     deeper — the band is ~11.5% of the medallion's height at the top and again
-     at the bottom, and everything past that reads as the frame drifting away
-     from the note it is meant to hold. */
+     deeper — the doily's body runs solid to 35% of the box and the pierced
+     band sits outside that, so the copy has to clear the last 15% on each
+     side. Everything past that reads as the frame drifting away from the note
+     it is meant to hold. */
   padding-block: clamp(4.75rem, 13.5vw, 5.25rem);
   /* almost none: every pixel here is width the medallion and the copy lose */
   padding-inline: 0.5rem;
   /* How far the ring is grown past this box on every side. It is what buys the
      clearance between the lace band and the copy — the ring simply runs off
-     the screen instead of the note being squeezed to fit inside it. */
-  --lace-bleed: clamp(2.25rem, 6.5vw, 2.75rem);
+     the screen instead of the note being squeezed to fit inside it. Lace 2
+     leaves a margin of its own around the doily, so it is grown harder than
+     the first lace needed. */
+  --lace-bleed: clamp(4.5rem, 9vw, 5rem);
 }
 
 /* The lace medallion, at the ornament's own ratio — top and bottom pin its
@@ -41,7 +44,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: auto;
-  aspect-ratio: 3422.7334 / 3475.5601;
+  aspect-ratio: 1 / 1;
   /* The shadow has to sit here rather than on the masked layer below: `filter`
      runs before `mask`, so a drop-shadow set on the element that carries the
      mask would trace its rectangle and then be masked away with it. On the
@@ -53,10 +56,11 @@
   pointer-events: none;
 }
 
-/* The ornament itself. Lace.svg is a filled doily and the body is kept along
+/* The ornament itself. Lace 2.svg is a filled doily and the body is kept along
    with the border, so the note sits on the lace rather than inside a ring of
    it. The pierced dots and the petal openings stay clear — they are holes in
-   the artwork — so the panel behind still reads through them. */
+   the artwork — so the panel behind still reads through them. The file is
+   served from a path with a space in it, hence the %20. */
 .lace::before {
   content: "";
   position: absolute;
@@ -66,8 +70,8 @@
      settling instead, so the ink itself does not have to be faint. */
   background-color: rgb(255 253 249);
   opacity: 0.92;
-  -webkit-mask: url('/decor/Lace.svg') center / 100% 100% no-repeat;
-  mask: url('/decor/Lace.svg') center / 100% 100% no-repeat;
+  -webkit-mask: url('/decor/Lace%202.svg') center / 100% 100% no-repeat;
+  mask: url('/decor/Lace%202.svg') center / 100% 100% no-repeat;
 }
 
 /* Held to the opening. The oval settles at ~550px wide for this note, so 61%
