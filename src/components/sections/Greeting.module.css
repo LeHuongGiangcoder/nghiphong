@@ -31,7 +31,7 @@
 /* The lace medallion, at the ornament's own ratio — top and bottom pin its
    height to the box, and `aspect-ratio` derives the width from that, so it is
    never squeezed into an oval. Being round it runs wider than the column, and
-   `.greeting` clips what overhangs; the copy sits in the open middle. */
+   `.greeting` clips what overhangs; the copy sits on the doily body. */
 .lace {
   position: absolute;
   /* grown past the box top and bottom; `aspect-ratio` widens it to match, so
@@ -42,24 +42,16 @@
   transform: translateX(-50%);
   width: auto;
   aspect-ratio: 3422.7334 / 3475.5601;
-  /* Lace.svg is a filled doily, not an open ring: its disc runs solid out to
-     77% of the way to the edge, where the pierced dots, the rim and the petals
-     begin. Painting it through a radial ramp instead of a flat colour dissolves
-     that disc and leaves only the border — the ink fades in across the last of
-     the plate, so the band arrives as lace rather than as a cut edge.
-     Stops are % of the half-width; the dot ring lands at 79%. Held tight so
-     the plate does not linger as a haze behind the note — the ramp reads as
-     the lace thinning out, not as a second surface. */
-  background-image: radial-gradient(
-    ellipse closest-side at 50% 50%,
-    rgb(255 252 245 / 0) 0 66%,
-    rgb(255 252 245 / 0.16) 74%,
-    rgb(255 252 245 / 1) 79%
-  );
+  /* The whole ornament, flat: Lace.svg is a filled doily and the body is kept
+     along with the border, so the note sits on the lace rather than inside a
+     ring of it. The pierced dots and the petal openings stay clear — they are
+     holes in the artwork — so the panel behind still reads through them. */
+  background-color: rgb(255 252 245);
   /* a warm white at part strength — the lace should settle into the beige
-     panel behind it, not sit on top of it as a cut-out. The ramp above keeps
-     this off the copy, so the band can carry more weight than the old oval. */
-  opacity: 0.88;
+     panel behind it, not sit on top of it as a cut-out. Carrying the body as
+     well as the band, it covers far more of the panel than the border alone
+     did, so it is held lighter. */
+  opacity: 0.72;
   -webkit-mask: url('/decor/Lace.svg') center / 100% 100% no-repeat;
   mask: url('/decor/Lace.svg') center / 100% 100% no-repeat;
   pointer-events: none;
