@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   min-height: 100svh;
+  /* The lace runs to the band's own edges so both side curves stay on screen,
+     so the section gives up the standard gutter — `.content` below sets the
+     copy's own margins instead. */
+  padding-inline: 0;
 }
 
 /* The box the lace medallion is drawn around. Its padding is the inset between
@@ -16,38 +20,43 @@
   align-items: center;
   width: 100%;
   /* Deep enough that the eyebrow and the signature clear the band, and no
-     deeper — the band is ~11.5% of the medallion's height at the top and again
-     at the bottom, and everything past that reads as the frame drifting away
-     from the note it is meant to hold. */
-  padding-block: clamp(4.75rem, 13.5vw, 5.25rem);
-  /* almost none: every pixel here is width the medallion and the copy lose */
-  padding-inline: 0.5rem;
-  /* How far the ring is grown past this box on every side. It is what buys the
-     clearance between the lace band and the copy — the ring simply runs off
-     the screen instead of the note being squeezed to fit inside it. */
+     deeper — the band is ~11.5% of the oval's height at the top and again at
+     the bottom, and everything past that reads as the frame drifting away from
+     the note it is meant to hold.
+     The slope runs backwards on purpose: a narrower screen gives the copy a
+     narrower measure, which makes the note taller, which makes the oval taller,
+     which thickens the band. So the inset has to grow as the screen shrinks
+     just to hold the clearance level — it settles at the floor by ~430px. */
+  padding-block: clamp(4.75rem, 12rem - 27vw, 6.625rem);
+  /* none: the lace is pinned to this box's sides, so every pixel here is width
+     the frame and the copy inside it lose */
+  padding-inline: 0;
+  /* How far the ring is grown past this box top and bottom. Sideways it has
+     nowhere to go — it is already at the edge of the band. */
   --lace-bleed: clamp(2.25rem, 6.5vw, 2.75rem);
 }
 
-/* The lace medallion, at the ornament's own ratio — top and bottom pin its
-   height to the box, and `aspect-ratio` derives the width from that, so it is
-   never squeezed into an oval. Being round it runs wider than the column, and
-   `.greeting` clips what overhangs; the copy sits in the open middle. */
+/* The lace, drawn to the four sides of the box. The ornament is round and the
+   note is a tall column, so holding its 1:1 ratio would push both side curves
+   off the screen to reach the note's height — it is stretched to an oval
+   instead, which is the shape a frame around this column wants anyway.
+   Lace.svg carries `preserveAspectRatio="none"` so it follows the box; without
+   it the circle letterboxes inside and the top and bottom bands disappear. */
 .lace {
   position: absolute;
-  /* grown past the box top and bottom; `aspect-ratio` widens it to match, so
-     it overruns the screen sideways — `.greeting` clips it */
+  /* grown past the box top and bottom only — sideways it is already flush */
   top: calc(var(--lace-bleed) * -1);
   bottom: calc(var(--lace-bleed) * -1);
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  aspect-ratio: 3422.7334 / 3475.5601;
+  left: 0;
+  right: 0;
   /* Lace.svg is a filled doily, not an open ring: its disc runs solid out to
      77% of the way to the edge, where the pierced dots, the rim and the petals
      begin. Painting it through a radial ramp instead of a flat colour dissolves
      that disc and leaves only the border — the ink fades in across the last of
      the plate, so the band arrives as lace rather than as a cut edge.
-     Stops are % of the half-width; the dot ring lands at 79%. Held tight so
+     Stops are % of each half-axis — `closest-side` makes the ramp an ellipse
+     of the same proportions as the box, so it tracks the stretched lace on
+     both axes at once. The dot ring lands at 79%. Held tight so
      the plate does not linger as a haze behind the note — the ramp reads as
      the lace thinning out, not as a second surface. */
   background-image: radial-gradient(
@@ -65,12 +74,14 @@
   pointer-events: none;
 }
 
-/* Held to the opening. The oval settles at ~550px wide for this note, so 61%
-   of that — a little under 20rem — is the widest the copy can run and still
-   clear the band. On a phone the section gutters take over. */
+/* Held to the opening. The band takes 11.5% of the oval off each side, so the
+   opening is 77% of the band's width and the copy has to sit inside that — it
+   is what the gutter would otherwise have been, measured off the frame instead
+   of the screen. 66vw leaves about 20px of air either side on a phone; the
+   20rem cap takes over once the shell stops growing. */
 .content {
   position: relative;
-  max-width: min(82vw, 19.5rem);
+  max-width: min(66vw, 19.5rem);
 }
 
 /* The gap was zeroed to pull the old serif title up under the eyebrow. Great
