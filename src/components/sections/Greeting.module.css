@@ -42,19 +42,32 @@
   transform: translateX(-50%);
   width: auto;
   aspect-ratio: 3422.7334 / 3475.5601;
-  /* The whole ornament, flat: Lace.svg is a filled doily and the body is kept
-     along with the border, so the note sits on the lace rather than inside a
-     ring of it. The pierced dots and the petal openings stay clear — they are
-     holes in the artwork — so the panel behind still reads through them. */
-  background-color: rgb(255 252 245);
-  /* a warm white at part strength — the lace should settle into the beige
-     panel behind it, not sit on top of it as a cut-out. Carrying the body as
-     well as the band, it covers far more of the panel than the border alone
-     did, so it is held lighter. */
-  opacity: 0.72;
+  /* The shadow has to sit here rather than on the masked layer below: `filter`
+     runs before `mask`, so a drop-shadow set on the element that carries the
+     mask would trace its rectangle and then be masked away with it. On the
+     parent it takes the already-masked child, so it follows the scalloped edge
+     and every pierced dot. Two passes, both barely there — a close one to lift
+     the ornament off the panel and a wide one to give it somewhere to land. */
+  filter: drop-shadow(0 1px 1px rgba(120, 100, 65, 0.1))
+    drop-shadow(0 5px 12px rgba(120, 100, 65, 0.13));
+  pointer-events: none;
+}
+
+/* The ornament itself. Lace.svg is a filled doily and the body is kept along
+   with the border, so the note sits on the lace rather than inside a ring of
+   it. The pierced dots and the petal openings stay clear — they are holes in
+   the artwork — so the panel behind still reads through them. */
+.lace::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Warm white, near full strength. Held back it sank into the beige and the
+     lace stopped reading as an object on the panel; the shadow above does the
+     settling instead, so the ink itself does not have to be faint. */
+  background-color: rgb(255 253 249);
+  opacity: 0.92;
   -webkit-mask: url('/decor/Lace.svg') center / 100% 100% no-repeat;
   mask: url('/decor/Lace.svg') center / 100% 100% no-repeat;
-  pointer-events: none;
 }
 
 /* Held to the opening. The oval settles at ~550px wide for this note, so 61%
