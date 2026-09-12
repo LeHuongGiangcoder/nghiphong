@@ -14,10 +14,11 @@ export const WEDDING_END_ISO = "2026-12-13T22:30:00+07:00";
 
 export const MAPS_URL = "https://maps.app.goo.gl/zuj5tnv3C6Ak7R4C7";
 
-/** Names without diacritics — Season Serif has no stacked Vietnamese accents. */
+/** Full Vietnamese spelling — CE Season Serif, the face `.display` now rides,
+    carries the stacked accents the old Season Serif was missing. */
 export const DISPLAY_NAMES = {
-  bride: "Ngo My Nghi",
-  groom: "Nguyen Thanh Phong",
+  bride: "Ngô Mỹ Nghi",
+  groom: "Nguyễn Thanh Phong",
 };
 
 /** Monogram initials — taken from the given names (Nghi, Phong). */
@@ -138,7 +139,7 @@ export const COPY: Record<Lang, Dict> = {
       venueAddress: "235 Nguyễn Văn Cừ, District 1, Ho Chi Minh City",
       mapCta: "Open in maps",
       calendarCta: "Add to calendar",
-      calendarTitle: "Wedding of Ngo My Nghi & Nguyen Thanh Phong",
+      calendarTitle: "Wedding of Ngô Mỹ Nghi & Nguyễn Thanh Phong",
     },
     dress: {
       eyebrow: "Dress code",
@@ -179,7 +180,7 @@ export const COPY: Record<Lang, Dict> = {
         "We will miss you on the day, but we are grateful you let us know. Your wishes mean the world.",
       again: "Send another reply",
     },
-    footer: { line: "Ngo My Nghi & Nguyen Thanh Phong", date: "13 . 12 . 2026" },
+    footer: { line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong", date: "13 . 12 . 2026" },
   },
 
   vi: {
@@ -234,7 +235,7 @@ export const COPY: Record<Lang, Dict> = {
       venueAddress: "235 Nguyễn Văn Cừ, Quận 1, TP. Hồ Chí Minh",
       mapCta: "Xem bản đồ",
       calendarCta: "Thêm vào lịch",
-      calendarTitle: "Lễ thành hôn Ngo My Nghi & Nguyen Thanh Phong",
+      calendarTitle: "Lễ thành hôn Ngô Mỹ Nghi & Nguyễn Thanh Phong",
     },
     dress: {
       eyebrow: "Trang phục",
@@ -275,6 +276,6 @@ export const COPY: Record<Lang, Dict> = {
         "Chúng mình sẽ nhớ bạn trong ngày ấy, nhưng thật biết ơn vì bạn đã báo trước. Lời chúc của bạn là món quà lớn.",
       again: "Gửi phản hồi khác",
     },
-    footer: { line: "Ngo My Nghi & Nguyen Thanh Phong", date: "13 . 12 . 2026" },
+    footer: { line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong", date: "13 . 12 . 2026" },
   },
 };

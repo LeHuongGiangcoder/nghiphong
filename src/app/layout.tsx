@@ -28,6 +28,18 @@ const greatVibes = Great_Vibes({
   adjustFontFallback: false,
 });
 
+/* The couple's names, and only those. CE Season Serif is the Vietnamese cut of
+   the same family — it carries the stacked accents (ô, ỹ, ễ) the trial Season
+   Serif below is missing, which is what lets the names be set in full. */
+const ceSeason = localFont({
+  src: "./fonts/ce-season-serif.woff2",
+  variable: "--font-ce-season",
+  display: "swap",
+  weight: "400",
+  style: "normal",
+  fallback: ["Times New Roman", "serif"],
+});
+
 const season = localFont({
   src: [
     { path: "./fonts/season-serif-light.woff2", weight: "300", style: "normal" },
@@ -62,21 +74,21 @@ const cormorant = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Ngo My Nghi & Nguyen Thanh Phong — 13.12.2026",
+  title: "Ngô Mỹ Nghi & Nguyễn Thanh Phong — 13.12.2026",
   description:
-    "Ngô Mỹ Nghi Nghi & Nguyễn Thanh Phong invite you to celebrate their wedding on 13 December 2026 at Hotel Nikko Saigon.",
+    "Ngô Mỹ Nghi & Nguyễn Thanh Phong invite you to celebrate their wedding on 13 December 2026 at Hotel Nikko Saigon.",
   icons: {
     icon: "/component/19.png", // Chosen from public/component as the browser logo
   },
   openGraph: {
-    title: "Ngo My Nghi & Nguyen Thanh Phong — 13.12.2026",
+    title: "Ngô Mỹ Nghi & Nguyễn Thanh Phong — 13.12.2026",
     description: "Join us at Hotel Nikko Saigon on 13 December 2026.",
     type: "website",
     images: [], // Temporarily leave preview image empty
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ngo My Nghi & Nguyen Thanh Phong — 13.12.2026",
+    title: "Ngô Mỹ Nghi & Nguyễn Thanh Phong — 13.12.2026",
     description: "Join us at Hotel Nikko Saigon on 13 December 2026.",
     images: [], // Temporarily leave preview image empty
   },
@@ -88,7 +100,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${season.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

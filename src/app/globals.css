@@ -37,10 +37,12 @@
      Three faces, one job each:
        --f-script   Great Vibes      → every script heading, both languages
        --f-signature Quick Signature → the N & P mark and "Save the Date"
-       --f-display  Season Serif     → couple names, dates, times, sub-heads
+       --f-names    CE Season Serif  → the couple's names, both languages
+       --f-display  Season Serif     → dates, times, sub-heads
        --f-body     Cormorant Garamond → body copy  */
   --f-script: var(--font-great-vibes), "Snell Roundhand", cursive;
   --f-signature: var(--font-quick-signature), "Snell Roundhand", cursive;
+  --f-names: var(--font-ce-season), var(--font-season), "Times New Roman", serif;
   --f-display: var(--font-season), "Times New Roman", serif;
   --f-body: var(--font-cormorant), Garamond, "Times New Roman", serif;
 
@@ -340,11 +342,12 @@ a {
 
 /* --------------------------------------------------------- TYPOGRAPHY */
 
-/* Season does not carry the stacked Vietnamese accents (ệ, ớ, ữ …), so
-   `.display` and `.num` fall back to Cormorant Garamond when the page language is
+/* Season does not carry the stacked Vietnamese accents (ệ, ớ, ữ …), so `.num`
+   and the headings fall back to Cormorant Garamond when the page language is
    Vietnamese — see the rule at the bottom of this block. `.script--latin`
-   opts out for strings that are Latin in both languages (names, times).
-   `.script` needs no such rule: Great Vibes covers both languages. */
+   opts out for strings that are Latin in both languages (times, dates).
+   `.script` and `.display` need no such rule: Great Vibes and CE Season Serif
+   both cover Vietnamese in full. */
 .script {
   font-family: var(--f-script);
   font-weight: 500;
@@ -362,9 +365,11 @@ a {
   color: var(--c-heading);
 }
 
-/* The couple's names — Season Serif, widely tracked, all caps. */
+/* The couple's names — CE Season Serif, widely tracked, all caps. It is the
+   one face on the page that carries the full Vietnamese range, so the names
+   keep their diacritics in either language and need no fallback. */
 .display {
-  font-family: var(--f-display);
+  font-family: var(--f-names);
   font-size: var(--fs-display);
   font-weight: 400;
   line-height: 1.15;
@@ -443,31 +448,24 @@ a {
   color: var(--c-gold);
 }
 
-/* Opt out: text that is Latin-only in both languages (names, "Pastel",
-   dates) keeps the script face even when the page is Vietnamese. */
+/* Opt out: text that is Latin-only in both languages ("Pastel", dates) keeps
+   the display face even when the page is Vietnamese. */
 /* Season Serif has no Vietnamese glyphs. A Vietnamese date set in `.num` would
    fallback to times new roman mid-word. Hand the whole run to Cormorant Garamond,
-   which covers the language fully. */
+   which covers the language fully. `.display` is exempt — it rides CE Season
+   Serif, which carries the accents itself. */
 html[lang="vi"] .h1:not(.script--latin),
 html[lang="vi"] .h2:not(.script--latin),
 html[lang="vi"] .h3:not(.script--latin) {
   font-family: var(--f-body);
 }
 
-html[lang="vi"] .num:not(.script--latin),
-html[lang="vi"] .display:not(.script--latin) {
+html[lang="vi"] .num:not(.script--latin) {
   font-family: var(--f-body);
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: var(--lh-heading);
-}
-
-html[lang="vi"] .display:not(.script--latin) {
-  font-size: clamp(1.75rem, 7.5vw, 2.5rem);
-  text-transform: uppercase;
-  font-style: normal;
-  letter-spacing: 0.1em;
 }
 
 /* ------------------------------------------------------------ DIVIDERS */
