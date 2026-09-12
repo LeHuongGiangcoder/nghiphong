@@ -56,11 +56,10 @@
   pointer-events: none;
 }
 
-/* The ornament itself. Lace 2.svg is a filled doily and the body is kept along
+/* The ornament itself. lace-2.svg is a filled doily and the body is kept along
    with the border, so the note sits on the lace rather than inside a ring of
    it. The pierced dots and the petal openings stay clear — they are holes in
-   the artwork — so the panel behind still reads through them. The file is
-   served from a path with a space in it, hence the %20. */
+   the artwork — so the panel behind still reads through them. */
 .lace::before {
   content: "";
   position: absolute;
@@ -70,8 +69,8 @@
      settling instead, so the ink itself does not have to be faint. */
   background-color: rgb(255 253 249);
   opacity: 0.92;
-  -webkit-mask: url('/decor/Lace%202.svg') center / 100% 100% no-repeat;
-  mask: url('/decor/Lace%202.svg') center / 100% 100% no-repeat;
+  -webkit-mask: url('/decor/lace-2.svg') center / 100% 100% no-repeat;
+  mask: url('/decor/lace-2.svg') center / 100% 100% no-repeat;
 }
 
 /* Held to the opening. The oval settles at ~550px wide for this note, so 61%
