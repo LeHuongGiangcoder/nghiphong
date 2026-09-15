@@ -52,16 +52,13 @@ export function Hero() {
         <Reveal delay={200}>
           <h1 className={styles.names}>
             <span className="display script--latin">{DISPLAY_NAMES.bride}</span>
-            <span className={styles.amp} aria-hidden="true">
-              <span className={styles.ampImage} />
-            </span>
-            <span className="sr-only"> {t.hero.and} </span>
+            <span className={styles.amp}> {t.hero.and} </span>
             <span className="display script--latin">{DISPLAY_NAMES.groom}</span>
           </h1>
         </Reveal>
 
         <Reveal delay={300} className={styles.saveTheDateRow}>
-          <p className={`num script--latin ${styles.saveTheDate}`}>{t.hero.saveTheDate}</p>
+          <p className={styles.saveTheDate}>{t.hero.saveTheDate}</p>
         </Reveal>
 
         <Reveal delay={400}>

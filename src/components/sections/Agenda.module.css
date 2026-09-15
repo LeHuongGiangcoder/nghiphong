@@ -15,15 +15,6 @@
   color: var(--c-body);
 }
 
-.wave {
-  display: block;
-  width: min(100%, 13rem);
-  height: auto;
-  margin-inline: auto;
-  color: var(--c-gold);
-  opacity: 0.7;
-}
-
 /* — venue —————————————————————————————————————— */
 .venue {
   --gap: var(--sp-md);

@@ -20,24 +20,14 @@
   line-height: 1;
 }
 
-.swatches {
-  display: flex;
-  justify-content: center;
-  gap: var(--sp-xs);
-  list-style: none;
-  margin-top: var(--sp-3xs);
-}
-
-/* The row sat in a lot of open space at 1.75rem — the palette is the point of
-   the dress-code block, so the dots carry it at a size you can actually read
-   the hues off. */
-.swatches li {
-  width: clamp(2.75rem, 11vw, 3.25rem);
-  height: clamp(2.75rem, 11vw, 3.25rem);
-  flex: none;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 1px 6px -2px rgba(120, 100, 65, 0.4);
+/* The palette is the point of the dress-code block, so the garland runs a
+   little wider than the prose column around it. */
+.ribbons {
+  width: calc(100% + var(--sp-lg));
+  max-width: none;
+  margin-inline: calc(var(--sp-lg) / -2);
+  margin-block: var(--sp-3xs) var(--sp-2xs);
+  filter: drop-shadow(0 1px 2px rgba(120, 100, 65, 0.25));
 }
 
 .avoid {
@@ -46,6 +36,34 @@
 }
 
 /* — form ——————————————————————————————————————— */
+/* The reply card: the inverse panel (globals.css) cut with a soft wave along
+   its top and bottom edges. The waves are masks, so they stretch with the
+   panel's width and the ground stays the --c-dark token. */
+.formPanel {
+  --wave: clamp(2.25rem, 10vw, 3.25rem);
+  --wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 8 C 90 -6, 150 32, 240 24 C 320 16, 370 2, 400 10 L 400 40 L 0 40 Z'/%3E%3C/svg%3E");
+  --wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L 400 0 L 400 30 C 310 44, 250 10, 160 16 C 80 22, 30 40, 0 32 Z'/%3E%3C/svg%3E");
+  padding-block: calc(var(--wave) + var(--sp-xl));
+  padding-inline: clamp(var(--sp-md), 6vw, var(--sp-xl));
+  -webkit-mask:
+    var(--wave-top) top / 100% var(--wave) no-repeat,
+    linear-gradient(#000 0 0) center / 100% calc(100% - var(--wave)) no-repeat,
+    var(--wave-bottom) bottom / 100% var(--wave) no-repeat;
+  mask:
+    var(--wave-top) top / 100% var(--wave) no-repeat,
+    /* overlaps half of each wave strip, where the strips are solid, so no
+       hairline seam shows where the layers meet */
+    linear-gradient(#000 0 0) center / 100% calc(100% - var(--wave)) no-repeat,
+    var(--wave-bottom) bottom / 100% var(--wave) no-repeat;
+}
+
+/* the confirmation keeps its layout but drops the light card surface */
+.formPanel :global(.card) {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
 .formTitle {
   font-size: var(--fs-script);
   line-height: 1;

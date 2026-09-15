@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { Vanilla } from "@/components/Vanilla";
-import { INITIALS, DISPLAY_NAMES } from "@/content/copy";
+import { DISPLAY_NAMES } from "@/content/copy";
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -19,15 +19,12 @@ export function Footer() {
         />
       </div>
       <Vanilla className={styles.flourish} />
-      <p className={`signature ${styles.names}`}>
+      <p className={styles.names}>
         <span className="sr-only">
           {DISPLAY_NAMES.bride} &amp; {DISPLAY_NAMES.groom}
         </span>
-        <span aria-hidden="true">
-          {INITIALS.bride} &amp; {INITIALS.groom}
-        </span>
+        <span className={styles.monogram} aria-hidden="true" />
       </p>
-
 
     </footer>
   );

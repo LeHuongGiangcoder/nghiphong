@@ -6,11 +6,21 @@
   margin-bottom: var(--sp-md);
 }
 
-/* The closing mark carries the section on its own now that the date line is
-   gone, so it sits a step larger than the greeting's sign-off. */
+/* The closing mark is the couple's NP monogram — drawn art used as a mask, like
+   the hero's "and", so its ink stays the --c-gold token. */
 .names {
-  font-size: clamp(5.5rem, 18vw, 7.5rem);
-  color: var(--c-gold);
+  display: flex;
+  justify-content: center;
+}
+
+.monogram {
+  display: block;
+  /* 1390.6 x 758.9 in the source artwork */
+  width: min(100%, clamp(13rem, 50vw, 17rem));
+  aspect-ratio: 1390.6 / 758.9;
+  background-color: var(--c-gold);
+  -webkit-mask: url('/component/monogram-np.svg') center / contain no-repeat;
+  mask: url('/component/monogram-np.svg') center / contain no-repeat;
 }
 
 .couple {

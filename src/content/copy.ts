@@ -45,6 +45,8 @@ type Dict = {
     eyebrow: string;
     title: string;
     dateFull: string;
+    month: string;
+    weekdays: string[];
     items: { time: string; title: string; note: string }[];
     venueTitle: string;
     venueName: string;
@@ -126,6 +128,8 @@ export const COPY: Record<Lang, Dict> = {
       eyebrow: "When & where",
       title: "The Celebration",
       dateFull: "Sunday, 13 December 2026",
+      month: "December 2026",
+      weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       items: [
         { time: "16:30", title: "First Look", note: "" },
         { time: "17:00", title: "Welcome", note: "" },
@@ -222,6 +226,8 @@ export const COPY: Record<Lang, Dict> = {
       eyebrow: "Thời gian & địa điểm",
       title: "Chương trình",
       dateFull: "Chủ Nhật, ngày 13 tháng 12 năm 2026",
+      month: "Tháng 12 · 2026",
+      weekdays: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"],
       items: [
         { time: "16:30", title: "First Look", note: "" },
         { time: "17:00", title: "Đón khách", note: "" },

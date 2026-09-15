@@ -28,6 +28,19 @@ const greatVibes = Great_Vibes({
   adjustFontFallback: false,
 });
 
+/* The hero's "and" and "Save the Date". Scarlett Mackenzie covers à, so the
+   Vietnamese "và" sets in the same face; it has no ơ / ư, so keep it to those
+   two strings. */
+const scarlett = localFont({
+  src: "./fonts/scarlett-mackenzie.woff2",
+  variable: "--font-scarlett",
+  display: "swap",
+  weight: "400",
+  style: "normal",
+  fallback: ["Snell Roundhand", "cursive"],
+  adjustFontFallback: false,
+});
+
 /* The couple's names, and only those. CE Season Serif is the Vietnamese cut of
    the same family — it carries the stacked accents (ô, ỹ, ễ) the trial Season
    Serif below is missing, which is what lets the names be set in full. */
@@ -100,7 +113,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${scarlett.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

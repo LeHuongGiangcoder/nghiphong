@@ -32,6 +32,7 @@
   --c-line: rgba(133, 102, 47, 0.34);
   --c-line-soft: rgba(133, 102, 47, 0.2);
   --c-error: #a8574b;
+  --c-dark: #5d5347;        /* ground of the inverse panel (.panel--ink) */
 
   /* — typography ——————————————————————————————
      Three faces, one job each:
@@ -42,6 +43,7 @@
        --f-body     Cormorant Garamond → body copy  */
   --f-script: var(--font-great-vibes), "Snell Roundhand", cursive;
   --f-signature: var(--font-quick-signature), "Snell Roundhand", cursive;
+  --f-accent: var(--font-scarlett), "Snell Roundhand", cursive; /* hero "and" + "Save the Date" */
   --f-names: var(--font-ce-season), var(--font-season), "Times New Roman", serif;
   --f-display: var(--font-season), "Times New Roman", serif;
   --f-body: var(--font-cormorant), Garamond, "Times New Roman", serif;
@@ -503,6 +505,35 @@ html[lang="vi"] .num:not(.script--latin) {
   background: var(--c-gold-wash);
   border-radius: var(--radius);
   padding: var(--sp-md);
+}
+
+/* The inverse surface: the heading brown as ground, cream ink on top. It does
+   not restyle anything — it re-points the colour tokens, so every type, form
+   and button class inside it flips on its own. Every ink below clears WCAG AA
+   on --c-dark. */
+.panel--ink {
+  --c-heading: #f9f4ea;
+  --c-body: #ece4d6;
+  --c-ink: #f9f4ea;
+  --c-muted: #d6cbb9;
+  --c-gold: #e3cd9b;
+  --c-gold-ink: #e3cd9b;
+  --c-gold-soft: #cdb27a;
+  --c-gold-wash: rgba(227, 205, 155, 0.12);
+  --c-line: rgba(249, 244, 234, 0.42);
+  --c-line-soft: rgba(249, 244, 234, 0.24);
+  --c-error: #f2b5a8;
+  /* text on a filled button */
+  --c-surface: var(--c-dark);
+  background: var(--c-dark);
+  color: var(--c-body);
+}
+
+@media (hover: hover) {
+  .panel--ink .btn--primary:hover {
+    background: var(--c-heading);
+    border-color: var(--c-heading);
+  }
 }
 
 /* full-bleed decorative background art behind a section */

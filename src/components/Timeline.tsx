@@ -15,6 +15,9 @@ const RIGHT = COL - 20; // x of a node on the right swing
 const LEAD = 62; // straight-ish run before the first node
 const TAIL = 64; // run after the last node, into the heart
 
+/** Where the curve enters at the top, relative to the centre of the timeline. */
+export const TIMELINE_START_OFFSET = LEFT - COL / 2;
+
 const nodeX = (i: number) => (i % 2 === 0 ? LEFT : RIGHT);
 const nodeY = (i: number) => LEAD + i * ROW;
 
