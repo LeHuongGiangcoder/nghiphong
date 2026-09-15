@@ -15,8 +15,10 @@ const RIGHT = COL - 20; // x of a node on the right swing
 const LEAD = 62; // straight-ish run before the first node
 const TAIL = 64; // run after the last node, into the heart
 
-/** Where the curve enters at the top, relative to the centre of the timeline. */
+/** The first pearl's x, relative to the centre of the timeline. */
 export const TIMELINE_START_OFFSET = LEFT - COL / 2;
+/** The first pearl's y below the top of the timeline. */
+export const TIMELINE_LEAD = LEAD;
 
 const nodeX = (i: number) => (i % 2 === 0 ? LEFT : RIGHT);
 const nodeY = (i: number) => LEAD + i * ROW;
@@ -28,7 +30,9 @@ const nodeY = (i: number) => LEAD + i * ROW;
  * chain of arcs.
  */
 function buildPath(count: number) {
-  const parts = [`M ${nodeX(0)} 0`, `L ${nodeX(0)} ${nodeY(0)}`];
+  // Starts on the first pearl: the stretch above it is drawn by <DateThread>,
+  // which sweeps down from the calendar heart onto this point.
+  const parts = [`M ${nodeX(0)} ${nodeY(0)}`];
 
   for (let i = 1; i < count; i++) {
     const x0 = nodeX(i - 1);

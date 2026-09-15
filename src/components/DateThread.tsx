@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import { TIMELINE_START_OFFSET } from "@/components/Timeline";
+import { TIMELINE_LEAD, TIMELINE_START_OFFSET } from "@/components/Timeline";
 import styles from "./DateThread.module.css";
 
 /* The wedding week, Monday 7 → Sunday 13 December 2026. */
@@ -14,7 +14,8 @@ const WEDDING_DAY = 13;
  * below — so the date and the schedule read as one thread.
  *
  * Render it directly above <Timeline>, with no gap between the two: the line
- * ends on this block's bottom edge, exactly where the timeline's curve begins.
+ * reaches down past this block's bottom edge onto the timeline's first pearl,
+ * exactly where the timeline's own curve begins.
  */
 export function DateThread({ month, weekdays }: { month: string; weekdays: string[] }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -46,19 +47,23 @@ export function DateThread({ month, weekdays }: { month: string; weekdays: strin
 
   let path = "";
   if (geo) {
-    const tx = geo.w / 2 + TIMELINE_START_OFFSET;
-    const dx = geo.x - tx;
-    const dy = geo.h - geo.y;
-    // A loose ribbon S: it leaves the heart heading down, swings across on a
-    // soft slope at the midpoint, and lands vertical into the timeline's lead.
-    // Both halves share the midpoint tangent and every control arm is long, so
-    // the line stays round the whole way with no straight run or corner.
-    const mx = tx + dx * 0.5;
-    const my = geo.y + dy * 0.5;
+    // The line runs all the way to the timeline's first pearl, which sits
+    // TIMELINE_LEAD below this block — the timeline itself starts its curve
+    // at that pearl, so there is no straight run between the two.
+    const nx = geo.w / 2 + TIMELINE_START_OFFSET;
+    const ny = geo.h + TIMELINE_LEAD;
+    const dx = geo.x - nx;
+    const dy = ny - geo.y;
+    // One balloon-string arc with no inflection: out of the heart's point
+    // heading down, bending steadily left until it runs level, then curling
+    // just past the pearl and down onto it — landing vertical, the tangent the
+    // timeline leaves the pearl with, so the thread reads as one stroke.
+    const mx = nx + dx * 0.32;
+    const my = ny - dy * 0.4;
     path = [
       `M ${geo.x} ${geo.y}`,
-      `C ${geo.x} ${geo.y + dy * 0.42}, ${mx + dx * 0.32} ${my - dy * 0.05}, ${mx} ${my}`,
-      `C ${mx - dx * 0.32} ${my + dy * 0.05}, ${tx} ${my + dy * 0.08}, ${tx} ${geo.h}`,
+      `C ${geo.x} ${geo.y + dy * 0.42}, ${mx + dx * 0.4} ${my}, ${mx} ${my}`,
+      `C ${mx - dx * 0.36} ${my}, ${nx} ${ny - dy * 0.22}, ${nx} ${ny}`,
     ].join(" ");
   }
 
@@ -89,8 +94,8 @@ export function DateThread({ month, weekdays }: { month: string; weekdays: strin
         <svg
           className={styles.line}
           width={geo.w}
-          height={geo.h}
-          viewBox={`0 0 ${geo.w} ${geo.h}`}
+          height={geo.h + TIMELINE_LEAD}
+          viewBox={`0 0 ${geo.w} ${geo.h + TIMELINE_LEAD}`}
           fill="none"
           stroke="currentColor"
           strokeWidth="1"
