@@ -123,9 +123,20 @@
   text-transform: uppercase;
 }
 
+/* The sign-off mark is the NP monogram, the same art that closes the page —
+   a mask, so its ink stays the heading token. Sized to the height the script
+   initials took, so the lace frame still clears it. */
 .signature {
-  /* the script face carries a tall ascent — pull it back up under the sign-off */
-  margin-top: -0.28em;
-  font-size: clamp(2.5rem, 12vw, 3.25rem);
-  line-height: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-2xs);
+}
+
+.monogram {
+  display: block;
+  width: clamp(5.5rem, 24vw, 6.5rem);
+  aspect-ratio: 1390.6 / 758.9;
+  background-color: var(--c-heading);
+  -webkit-mask: url('/component/monogram-np.svg') center / contain no-repeat;
+  mask: url('/component/monogram-np.svg') center / contain no-repeat;
 }

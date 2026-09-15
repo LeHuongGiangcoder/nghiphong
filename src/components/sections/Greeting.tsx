@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
 
-import { DISPLAY_NAMES, INITIALS } from "@/content/copy";
+import { DISPLAY_NAMES } from "@/content/copy";
 import styles from "./Greeting.module.css";
 
 export function Greeting() {
@@ -48,13 +48,11 @@ export function Greeting() {
 
           <Reveal delay={320}>
             <p className={`caption ${styles.signoff}`}>{t.greeting.signoff}</p>
-            <p className={`signature ${styles.signature}`}>
+            <p className={styles.signature}>
               <span className="sr-only">
                 {DISPLAY_NAMES.bride} &amp; {DISPLAY_NAMES.groom}
               </span>
-              <span aria-hidden="true">
-                {INITIALS.bride} &amp; {INITIALS.groom}
-              </span>
+              <span className={styles.monogram} aria-hidden="true" />
             </p>
           </Reveal>
         </div>

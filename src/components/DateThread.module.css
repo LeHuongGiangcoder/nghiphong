@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   /* room under the week for the line to fall into the timeline */
-  padding-bottom: clamp(6rem, 28vw, 8rem);
+  padding-bottom: clamp(2.5rem, 11vw, 3.5rem);
 }
 
 .month {
