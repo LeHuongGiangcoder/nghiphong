@@ -47,8 +47,19 @@ export function DateThread({ month, weekdays }: { month: string; weekdays: strin
   let path = "";
   if (geo) {
     const tx = geo.w / 2 + TIMELINE_START_OFFSET;
+    const dx = geo.x - tx;
     const dy = geo.h - geo.y;
-    path = `M ${geo.x} ${geo.y} C ${geo.x} ${geo.y + dy * 0.6}, ${tx} ${geo.h - dy * 0.55}, ${tx} ${geo.h}`;
+    // A loose ribbon S: it leaves the heart heading down, swings across on a
+    // soft slope at the midpoint, and lands vertical into the timeline's lead.
+    // Both halves share the midpoint tangent and every control arm is long, so
+    // the line stays round the whole way with no straight run or corner.
+    const mx = tx + dx * 0.5;
+    const my = geo.y + dy * 0.5;
+    path = [
+      `M ${geo.x} ${geo.y}`,
+      `C ${geo.x} ${geo.y + dy * 0.42}, ${mx + dx * 0.32} ${my - dy * 0.05}, ${mx} ${my}`,
+      `C ${mx - dx * 0.32} ${my + dy * 0.05}, ${tx} ${my + dy * 0.08}, ${tx} ${geo.h}`,
+    ].join(" ");
   }
 
   return (

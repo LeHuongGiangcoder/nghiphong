@@ -6,8 +6,9 @@
   margin-bottom: var(--sp-md);
 }
 
-/* The closing mark is the couple's NP monogram — drawn art used as a mask, like
-   the hero's "and", so its ink stays the --c-gold token. */
+/* The closing mark is the couple's NP monogram — drawn art used as a mask so
+   its ink stays a token. It is sized off the vanilla above it and inked in the
+   softer decorative gold, so the two read as one quiet pairing. */
 .names {
   display: flex;
   justify-content: center;
@@ -16,9 +17,9 @@
 .monogram {
   display: block;
   /* 1390.6 x 758.9 in the source artwork */
-  width: min(100%, clamp(13rem, 50vw, 17rem));
+  width: calc(var(--vanilla-size) * 1.1);
   aspect-ratio: 1390.6 / 758.9;
-  background-color: var(--c-gold);
+  background-color: var(--c-gold-soft);
   -webkit-mask: url('/component/monogram-np.svg') center / contain no-repeat;
   mask: url('/component/monogram-np.svg') center / contain no-repeat;
 }

@@ -40,21 +40,21 @@
    its top and bottom edges. The waves are masks, so they stretch with the
    panel's width and the ground stays the --c-dark token. */
 .formPanel {
-  --wave: clamp(2.25rem, 10vw, 3.25rem);
-  --wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 8 C 90 -6, 150 32, 240 24 C 320 16, 370 2, 400 10 L 400 40 L 0 40 Z'/%3E%3C/svg%3E");
-  --wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L 400 0 L 400 30 C 310 44, 250 10, 160 16 C 80 22, 30 40, 0 32 Z'/%3E%3C/svg%3E");
+  --wave: clamp(3.25rem, 15vw, 4.75rem);
+  --wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0 2 C 70 0, 110 42, 205 40 C 300 38, 330 4, 400 12 L 400 60 L 0 60 Z'/%3E%3C/svg%3E");
+  --wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L 400 0 L 400 48 C 330 60, 300 20, 195 22 C 100 24, 60 62, 0 54 Z'/%3E%3C/svg%3E");
   padding-block: calc(var(--wave) + var(--sp-xl));
   padding-inline: clamp(var(--sp-md), 6vw, var(--sp-xl));
   -webkit-mask:
-    var(--wave-top) top / 100% var(--wave) no-repeat,
-    linear-gradient(#000 0 0) center / 100% calc(100% - var(--wave)) no-repeat,
-    var(--wave-bottom) bottom / 100% var(--wave) no-repeat;
+    var(--wave-top) top / calc(100% + 2px) var(--wave) no-repeat,
+    linear-gradient(#000 0 0) center / 100% calc(100% - 1.5 * var(--wave)) no-repeat,
+    var(--wave-bottom) bottom / calc(100% + 2px) var(--wave) no-repeat;
   mask:
-    var(--wave-top) top / 100% var(--wave) no-repeat,
-    /* overlaps half of each wave strip, where the strips are solid, so no
-       hairline seam shows where the layers meet */
-    linear-gradient(#000 0 0) center / 100% calc(100% - var(--wave)) no-repeat,
-    var(--wave-bottom) bottom / 100% var(--wave) no-repeat;
+    var(--wave-top) top / calc(100% + 2px) var(--wave) no-repeat,
+    /* overlaps only the solid inner quarter of each wave strip: enough that no
+       hairline seam shows, not so much that it flattens the curve */
+    linear-gradient(#000 0 0) center / 100% calc(100% - 1.5 * var(--wave)) no-repeat,
+    var(--wave-bottom) bottom / calc(100% + 2px) var(--wave) no-repeat;
 }
 
 /* the confirmation keeps its layout but drops the light card surface */
