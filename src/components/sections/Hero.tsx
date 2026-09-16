@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { WaveHeart } from "@/components/Flourish";
 import { Vanilla } from "@/components/Vanilla";
 import { DISPLAY_NAMES } from "@/content/copy";
+import { swash } from "@/lib/swash";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -52,13 +53,19 @@ export function Hero() {
         <Reveal delay={200}>
           <h1 className={styles.names}>
             <span className="display script--latin">{DISPLAY_NAMES.bride}</span>
-            <span className={styles.amp}> {t.hero.and} </span>
+            <span className={styles.amp} aria-hidden="true">
+              {swash(t.hero.and)}
+            </span>
+            <span className="sr-only"> {t.hero.and} </span>
             <span className="display script--latin">{DISPLAY_NAMES.groom}</span>
           </h1>
         </Reveal>
 
         <Reveal delay={300} className={styles.saveTheDateRow}>
-          <p className={styles.saveTheDate}>{t.hero.saveTheDate}</p>
+          <p className={styles.saveTheDate}>
+            <span aria-hidden="true">{swash(t.hero.saveTheDate)}</span>
+            <span className="sr-only">{t.hero.saveTheDate}</span>
+          </p>
         </Reveal>
 
         <Reveal delay={400}>

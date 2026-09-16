@@ -34,7 +34,9 @@ const greatVibes = Great_Vibes({
 const scarlett = localFont({
   src: "./fonts/scarlett-mackenzie.woff2",
   variable: "--font-scarlett",
-  display: "swap",
+  /* the swash tails are Private Use glyphs — a fallback face would draw them
+     as empty boxes, so hold the text back until this font is in */
+  display: "block",
   weight: "400",
   style: "normal",
   fallback: ["Snell Roundhand", "cursive"],
