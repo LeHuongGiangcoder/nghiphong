@@ -83,7 +83,8 @@
 
 .title {
   margin-top: 0.25rem;
-  font-size: clamp(0.875rem, 3.5vw, 1rem);
+  font-size: clamp(1rem, 4vw, 1.125rem);
+  font-weight: 500;
   letter-spacing: 0.05em; /* Giảm letter-spacing vì không còn uppercase */
   line-height: 1.35;
   text-transform: none; /* Bỏ uppercase */
@@ -91,7 +92,7 @@
 
 .note {
   margin-top: var(--sp-3xs);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.5;
 }
 
@@ -110,11 +111,25 @@
   height: auto;
 }
 
+/* Under 352px there is no room for a label and a drawing either side of the
+   ribbon, so the drawings go and the label keeps the half it is on. The
+   padding below reserves the other half; the fixed basis the two share above
+   would add a second half on top of that, which is what used to push the
+   later rows off their own band and get them clipped by `.agenda`. */
 @media (max-width: 22rem) {
   .row[data-side="left"] {
     padding-right: calc(50% + 38px);
   }
   .row[data-side="right"] {
     padding-left: calc(50% + 38px);
+  }
+
+  .label {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .imageWrap {
+    display: none;
   }
 }

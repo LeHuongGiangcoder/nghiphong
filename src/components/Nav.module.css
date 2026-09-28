@@ -34,7 +34,7 @@
 .links {
   display: flex;
   align-items: center;
-  gap: clamp(0.5rem, 3.2vw, 1.5rem);
+  gap: clamp(0.45rem, 2.8vw, 1.5rem);
   list-style: none;
   min-width: 0;
 }
@@ -42,8 +42,13 @@
 .link {
   display: inline-block;
   padding-block: var(--sp-2xs);
-  font-size: 0.75rem;
-  letter-spacing: clamp(0.06em, 0.6vw, 0.18em);
+  /* The Vietnamese labels are the long pair ("LỜI CHÀO CHI TIẾT XÁC NHẬN"),
+     and all three plus the language button have to clear 375px. Size, gap and
+     tracking are all held to the narrowest measure that does — check both
+     languages at 320px before raising any of them. */
+  font-size: clamp(0.75rem, 3.2vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: clamp(0.04em, 0.42vw, 0.16em);
   text-transform: uppercase;
   color: var(--c-body);
   white-space: nowrap;
@@ -66,9 +71,30 @@
 .lang {
   flex: none;
   margin-left: auto;
-  --btn-px: 0.75rem;
-  font-size: 0.75rem;
+  --btn-px: 0.7rem;
+  font-size: 0.8125rem;
   color: var(--c-gold);
   border-color: var(--c-line-soft);
   border-radius: var(--radius-pill);
+}
+
+/* Under 376px the three Vietnamese labels and the language pill are within a
+   few pixels of each other, and `.links` has `min-width: 0` — so the row does
+   not wrap or scroll, the last label simply runs under the pill. Below that
+   width the bar drops to its tightest setting rather than relying on the
+   clamps above to land in the right place. */
+@media (max-width: 23.5rem) {
+  .links {
+    gap: 0.4rem;
+  }
+
+  .link {
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .lang {
+    --btn-px: 0.55rem;
+    font-size: 0.75rem;
+  }
 }

@@ -2,6 +2,13 @@
   overflow: hidden;
 }
 
+/* "Répondez s'il vous plaît" is the longest eyebrow on the page — tracked in
+   so it holds one line at the raised eyebrow size. */
+.formPanel :global(.eyebrow) {
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+}
+
 /* — dress code ————————————————————————————————— */
 .dressBody {
   display: flex;

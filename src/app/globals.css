@@ -51,26 +51,34 @@
   --fs-display: clamp(3.25rem, 15vw, 5.5rem);
   --fs-h1: clamp(2rem, 8.5vw, 3rem);
   --fs-h2: clamp(1.625rem, 6.5vw, 2.25rem);
-  --fs-h3: clamp(1.125rem, 4.5vw, 1.375rem);
-  --fs-lead: clamp(1.25rem, 4.8vw, 1.375rem);
+  --fs-h3: clamp(1.25rem, 5vw, 1.5rem);
+  --fs-lead: clamp(1.4375rem, 5.4vw, 1.5625rem);
   /* Cormorant runs on a small x-height — every step below is a notch above
-     what a sans would take so the copy reads at the same optical size. */
-  --fs-body: 1.25rem;
-  --fs-sm: 1.1875rem;
-  --fs-caption: 0.9375rem;
-  --fs-eyebrow: 0.8125rem;
+     what a sans would take so the copy reads at the same optical size. The
+     guest list skews older and reads this on a phone, so the whole scale sits
+     a further step up again: nothing on the page is below 1rem. */
+  --fs-body: 1.375rem;
+  --fs-sm: 1.25rem;
+  --fs-caption: 1.0625rem;
+  --fs-eyebrow: 1rem;
 
   /* Script headings. Sections take this token rather than setting a size of
      their own, so they cannot drift apart. */
   /* Every script heading is this one size — the greeting, the section titles
-     and the thank-you card all read as the same rank. */
-  --fs-script: clamp(2.625rem, 12.5vw, 3.5rem);
+     and the thank-you card all read as the same rank. Held a step below where
+     it was: the couple's names are capped by having to stay on one line, so
+     the section titles have to give way for the hero to read as the top of the
+     page rather than as another band. */
+  --fs-script: clamp(2.375rem, 11vw, 3.125rem);
 
   --lh-tight: 1.1;
   --lh-heading: 1.25;
   --lh-body: 1.85;
 
-  --ls-eyebrow: 0.34em;
+  /* Was 0.34em. At that measure the small caps read as separate letters
+     rather than words — the first thing to go when the type is already
+     small. Wide enough to still feel set, tight enough to read. */
+  --ls-eyebrow: 0.24em;
   --ls-heading: 0.02em;
   --ls-wide: 0.16em;
 
@@ -142,7 +150,9 @@ body {
   color: var(--c-body);
   font-family: var(--f-body);
   font-size: var(--fs-body);
-  font-weight: 400;
+  /* Cormorant's 400 is a light stroke, and on beige it greys out rather than
+     reads. 500 is the same face with enough weight to hold its edge. */
+  font-weight: 500;
   line-height: var(--lh-body);
   /* Cormorant defaults to old-style figures, which sit below the cap line and
      read as a different size next to the all-caps dates and times. */
@@ -401,13 +411,13 @@ a {
   font-size: var(--fs-h3);
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .eyebrow {
   font-family: var(--f-body);
   font-size: var(--fs-eyebrow);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--c-gold-ink);
@@ -418,12 +428,14 @@ a {
 .lead {
   font-size: var(--fs-lead);
   font-style: italic;
+  font-weight: 500;
   line-height: 1.75;
   color: var(--c-ink);
 }
 
 .body {
   font-size: var(--fs-body);
+  font-weight: 500;
   line-height: var(--lh-body);
   color: var(--c-body);
 }
@@ -434,6 +446,7 @@ a {
 
 .caption {
   font-size: var(--fs-caption);
+  font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--c-muted);
 }
@@ -569,7 +582,7 @@ html[lang="vi"] .num:not(.script--latin) {
 
 /* ------------------------------------------------------------- BUTTONS */
 .btn {
-  --btn-py: 0.9rem;
+  --btn-py: 0.95rem;
   --btn-px: 2rem;
   display: inline-flex;
   align-items: center;
@@ -579,7 +592,7 @@ html[lang="vi"] .num:not(.script--latin) {
   min-height: 2.75rem;
   font-family: var(--f-body);
   font-size: var(--fs-caption);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
   text-indent: var(--ls-wide);
@@ -597,7 +610,7 @@ html[lang="vi"] .num:not(.script--latin) {
   --btn-py: 0.625rem;
   --btn-px: 1.25rem;
   min-height: 2.25rem;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .btn--lg {
@@ -734,6 +747,7 @@ html[lang="vi"] .num:not(.script--latin) {
   border: 1px solid var(--c-line-soft);
   border-radius: var(--radius-pill);
   font-size: var(--fs-sm);
+  font-weight: 500;
   color: var(--c-body);
   cursor: pointer;
   transition: border-color var(--dur) var(--ease),
@@ -783,11 +797,13 @@ html[lang="vi"] .num:not(.script--latin) {
 
 .hint {
   font-size: var(--fs-caption);
+  font-weight: 500;
   color: var(--c-muted);
 }
 
 .error {
   font-size: var(--fs-caption);
+  font-weight: 500;
   color: var(--c-error);
 }
 

@@ -3,6 +3,24 @@
   --section-py: clamp(4.25rem, 16vw, 6rem);
 }
 
+/* The panel art is an embossed floral, so its relief runs right under the
+   names. A cream veil over the art — strongest in the middle, where the type
+   sits, and clearing at the edges so the pattern still reads as the band's
+   ground. It goes on the background layer, not over the content, so nothing
+   above it is tinted. */
+.hero :global(.section-bg)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    115% 75% at 50% 45%,
+    rgba(249, 244, 234, 0.62) 0%,
+    rgba(249, 244, 234, 0.45) 55%,
+    rgba(249, 244, 234, 0) 100%
+  );
+  pointer-events: none;
+}
+
 /* The vanilla motif with a flourish tail either side. It sits in the flow at the
    head of the column rather than straddling the section boundary, so the
    band's own padding gives it room above and its margin gives it room below. */
@@ -11,7 +29,7 @@
   align-items: center;
   justify-content: center;
   gap: clamp(0.25rem, 1.5vw, 0.75rem);
-  width: min(100%, 17rem);
+  width: min(100%, 20.5rem);
   margin-bottom: var(--sp-sm);
   pointer-events: none;
   user-select: none;
@@ -35,6 +53,25 @@
   gap: var(--sp-md);
 }
 
+/* This band is the one the page is named after, so its eyebrow outranks the
+   section eyebrows below it rather than matching them. The tracking is pulled
+   in from the global measure to keep "TOGETHER WITH OUR FAMILIES" — the
+   longest of the two languages — on one line at 375px. */
+.content :global(.eyebrow) {
+  font-size: 1.0625rem;
+  letter-spacing: 0.1em;
+  text-indent: 0.1em;
+  color: var(--c-gold);
+}
+
+/* The call to action closes the band — full width of the prose column and a
+   step up in size, so it reads as the page's one instruction. */
+.content :global(.btn) {
+  --btn-py: 1.05rem;
+  --btn-px: 2.25rem;
+  font-size: 1.0625rem;
+}
+
 .names {
   display: flex;
   flex-direction: column;
@@ -42,15 +79,22 @@
   gap: 0.6em;
   margin: 0;
   font-weight: 500;
-  /* sized + tracked so "NGUYEN THANH PHONG" stays on one line down to 320px —
-     the longer name is measured at that width before this is raised */
-  font-size: clamp(1.25rem, 6vw, 2.125rem);
+  /* "NGUYEN THANH PHONG" is set `nowrap`, so this is the widest the names can
+     go before the longer one runs past the column. Every term below is the
+     measured limit at the width that binds it: the vw term at 320px, where the
+     gutter is still at its 1.5rem floor and the column is only 272px, and the
+     ceiling at ≥528px, where the column stops growing at --container. The
+     tracking is what buys the size back — over 19 characters it is worth
+     most of a step, and the names now out-scale the script titles in the bands
+     beneath instead of sitting under them. Re-measure here before raising
+     any of the three. */
+  font-size: clamp(1.3125rem, 6.75vw, 2.25rem);
 }
 
 .names :global(.display) {
   font-size: inherit;
-  letter-spacing: 0.06em;
-  text-indent: 0.06em;
+  letter-spacing: 0.03em;
+  text-indent: 0.03em;
   white-space: nowrap;
 }
 
@@ -81,7 +125,7 @@
 .saveTheDate {
   margin-block: var(--sp-xs) 0;
   font-family: var(--f-accent);
-  font-size: clamp(2.25rem, 10vw, 3rem);
+  font-size: clamp(2.75rem, 12vw, 3.75rem);
   font-weight: 400;
   line-height: 1.2;
   color: var(--c-gold);
@@ -91,25 +135,29 @@
   /* pulled up against the save-the-date it dates — the column gap alone left
      the two lines reading as unrelated blocks */
   margin-top: calc(var(--sp-2xs) * -1);
-  font-size: clamp(1rem, 4.4vw, 1.25rem);
+  font-size: clamp(1.1875rem, 5.2vw, 1.5rem);
+  font-weight: 500;
   line-height: 1.3;
-  letter-spacing: 0.28em;
-  text-indent: 0.28em;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
   text-transform: uppercase;
   color: var(--c-gold);
 }
 
 .dateMeta {
   margin-top: var(--sp-3xs);
+  /* one step under the date it qualifies, and tracked tightly enough that the
+     day and the venue stay on one line together */
   font-size: var(--fs-caption);
-  letter-spacing: 0.16em;
-  text-indent: 0.16em;
-  color: var(--c-body);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-indent: 0.07em;
+  color: var(--c-ink);
 }
 
 .wave {
   display: block;
-  width: min(100%, 15rem);
+  width: min(100%, 17.5rem);
   height: auto;
   margin-inline: auto;
   color: var(--c-gold);
@@ -119,13 +167,14 @@
 /* A sentence, not a name plate — sentence case and a gentler measure so it
    stays readable under the display names. */
 .invite {
-  max-width: 22rem;
+  max-width: 24rem;
   margin-inline: auto;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-lead);
   font-style: italic;
+  font-weight: 500;
   letter-spacing: 0.02em;
-  line-height: 1.75;
-  color: var(--c-body);
+  line-height: 1.7;
+  color: var(--c-ink);
 }
 
 
