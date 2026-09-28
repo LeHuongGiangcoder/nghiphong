@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Great_Vibes } from "next/font/google";
+import { Alex_Brush } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
@@ -14,15 +14,22 @@ const quickSignature = localFont({
   adjustFontFallback: false,
 });
 
-/* Quick Signature has no Vietnamese glyphs — it is missing ơ, ư and the whole
-   U+1EA0–1EF9 block, so a Vietnamese heading set in it drops letters into a
-   serif fallback mid-word. Great Vibes is the same kind of formal signature
-   script and ships a full `vietnamese` subset, so it stands in for the script
-   face whenever the page language is Vietnamese. */
-const greatVibes = Great_Vibes({
+/* Every script heading on the page. Quick Signature has no Vietnamese glyphs —
+   it is missing ơ, ư and the whole U+1EA0–1EF9 block, so a Vietnamese heading
+   set in it drops letters into a serif fallback mid-word; this face ships a
+   full `vietnamese` subset and sets both languages.
+
+   Alex Brush, not the Great Vibes that used to sit here: Great Vibes is upright
+   formal copperplate, and next to the loose signature hand the hero is set in
+   it read as a different, stiffer voice. This is a flowing brush script with
+   looser joins and a lighter stroke — the same hand as the hero, which is what
+   the couple asked for. It ships one weight, and `.script` must stay at 400;
+   at 500 the browser synthesises a bold and thickens the whole letterform,
+   which is what made these headings look heavy. */
+const alexBrush = Alex_Brush({
   subsets: ["latin", "vietnamese"],
   weight: "400",
-  variable: "--font-great-vibes",
+  variable: "--font-alex-brush",
   display: "swap",
   fallback: ["Snell Roundhand", "cursive"],
   adjustFontFallback: false,
@@ -115,7 +122,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${greatVibes.variable} ${scarlett.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${quickSignature.variable} ${alexBrush.variable} ${scarlett.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

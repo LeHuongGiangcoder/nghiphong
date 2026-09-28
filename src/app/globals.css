@@ -36,12 +36,12 @@
 
   /* — typography ——————————————————————————————
      Three faces, one job each:
-       --f-script   Great Vibes      → every script heading, both languages
+       --f-script   Alex Brush       → every script heading, both languages
        --f-signature Quick Signature → the N & P mark and "Save the Date"
        --f-names    CE Season Serif  → the couple's names, both languages
        --f-display  Season Serif     → dates, times, sub-heads
        --f-body     Cormorant Garamond → body copy  */
-  --f-script: var(--font-great-vibes), "Snell Roundhand", cursive;
+  --f-script: var(--font-alex-brush), "Snell Roundhand", cursive;
   --f-signature: var(--font-quick-signature), "Snell Roundhand", cursive;
   --f-accent: var(--font-scarlett), "Snell Roundhand", cursive; /* hero "and" + "Save the Date" */
   --f-names: var(--font-ce-season), var(--font-season), "Times New Roman", serif;
@@ -65,11 +65,12 @@
   /* Script headings. Sections take this token rather than setting a size of
      their own, so they cannot drift apart. */
   /* Every script heading is this one size — the greeting, the section titles
-     and the thank-you card all read as the same rank. Held a step below where
-     it was: the couple's names are capped by having to stay on one line, so
-     the section titles have to give way for the hero to read as the top of the
-     page rather than as another band. */
-  --fs-script: clamp(2.375rem, 11vw, 3.125rem);
+     and the thank-you card all read as the same rank. Alex Brush sets on a
+     smaller x-height and narrower caps than the Great Vibes this replaced, so
+     the same nominal size read visibly smaller; this is the step back up. It
+     still leaves the hero leading the page — the names are large caps and
+     these are a light script, so the two do not compete at matched sizes. */
+  --fs-script: clamp(2.75rem, 12.5vw, 3.5rem);
 
   --lh-tight: 1.1;
   --lh-heading: 1.25;
@@ -295,9 +296,9 @@ a {
   margin-top: -0.3em;
 }
 
-/* Great Vibes has no such slack: at line-height 1 its ascender and descender
-   fill the whole line box, so a pull here would drive a capital's swash
-   straight through the eyebrow. It needs room, not less of it. */
+/* A brush script has no such slack: at line-height 1 its ascender and
+   descender fill the whole line box, so a pull here would drive a capital's
+   swash straight through the eyebrow. It needs room, not less of it. */
 .section__head .script {
   margin-top: 0.15em;
 }
@@ -358,11 +359,14 @@ a {
    and the headings fall back to Cormorant Garamond when the page language is
    Vietnamese — see the rule at the bottom of this block. `.script--latin`
    opts out for strings that are Latin in both languages (times, dates).
-   `.script` and `.display` need no such rule: Great Vibes and CE Season Serif
+   `.script` and `.display` need no such rule: Alex Brush and CE Season Serif
    both cover Vietnamese in full. */
 .script {
   font-family: var(--f-script);
-  font-weight: 500;
+  /* Alex Brush ships one weight. Anything above 400 here is not a heavier cut
+     but a browser-synthesised bold, which smears the thin upstrokes and is
+     what made these headings read heavy against the hero. Leave it at 400. */
+  font-weight: 400;
   line-height: var(--lh-tight);
   color: var(--c-heading);
 }
