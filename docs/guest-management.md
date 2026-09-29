@@ -49,6 +49,18 @@ Bấm `Deploy`, cấp quyền, rồi copy **Web app URL** (dạng
 > Mỗi lần sửa code phải `Deploy` → `Manage deployments` → bút chì → `Version: New version`.
 > Không làm bước này thì URL cũ vẫn chạy code cũ.
 
+URL hiện tại đã được **ghi thẳng trong code**, ở `src/components/GuestProvider.tsx`:
+
+```
+https://script.google.com/macros/s/AKfycbwy…/exec
+```
+
+Deploy lại Apps Script ra URL mới thì phải sửa lại đúng dòng đó rồi push.
+
+> URL này nằm công khai trong repo. Nó chỉ đổi slug lấy tên khách, nhưng ai có
+> URL thì đoán slug là đọc được tên và gửi được RSVP — đúng mức phơi bày như
+> chính cái link mời. Đã cân nhắc và chấp nhận.
+
 ## 4. Trang web gọi vào như thế nào
 
 **Lấy tên khách** — khi trang load, đọc `?to=` trên URL:
@@ -103,8 +115,20 @@ cột với tiêu đề đúng là script tự điền, **không phải sửa co
 Tiêu đề tiếng Việt cũng nhận: `Họ tên`, `Xác nhận`, `Lời chúc`, `Cập nhật`,
 `Số khách`, `Món`, `Ghi chú`.
 
-## 6. Còn thiếu gì
+## 6. Đã nối tới đâu
 
-Form RSVP trên web **chưa gọi vào endpoint này** — hiện nó mới `console.info`
-payload rồi hiện màn hình cảm ơn (xem `src/components/sections/Rsvp.tsx`).
-Phần nối web ↔ Apps Script (đọc `?to=`, chào đúng tên, POST thật) là bước tiếp theo.
+**Xong — chào tên khách.** `src/components/GuestProvider.tsx` đọc `?to=` trên
+URL, hỏi sheet xem đó là ai, và mục Welcome chào đúng tên:
+
+| Link khách mở | Thấy gì |
+|---|---|
+| `…/?to=le-huong-giang` | "Welcome / Lê Hương Giang" · "Thân chào / Lê Hương Giang" |
+| `…/` (không có `?to=`) | "Welcome" · "Lời chào" — như cũ |
+| slug sai, mạng lỗi, sheet chậm | "Welcome" — im lặng lùi về bản chung, không báo lỗi |
+
+Cỡ chữ tên tự co theo độ dài nên tên 2 chữ hay 5 chữ đều gọn một dòng trong
+vòng ren.
+
+**Chưa xong — gửi RSVP.** Form vẫn mới `console.info` payload rồi hiện màn hình
+cảm ơn (xem `src/components/sections/Rsvp.tsx`), chưa POST thật lên Apps Script.
+Phần `doPost` bên script đã sẵn sàng, chỉ thiếu bước gọi từ web.

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 /**
  * The Apps Script web app URL — the `…/exec` deployment of
@@ -27,14 +27,7 @@ export type Guest = {
   answered: boolean;
 };
 
-type Status = "idle" | "loading" | "ready";
-
-type Ctx = {
-  guest: Guest | null;
-  status: Status;
-};
-
-const GuestContext = createContext<Ctx>({ guest: null, status: "idle" });
+const GuestContext = createContext<Guest | null>(null);
 
 /**
  * Reads `?to=<slug>` off the URL and asks the sheet who that is.
@@ -45,7 +38,6 @@ const GuestContext = createContext<Ctx>({ guest: null, status: "idle" });
  */
 export function GuestProvider({ children }: { children: React.ReactNode }) {
   const [guest, setGuest] = useState<Guest | null>(null);
-  const [status, setStatus] = useState<Status>("idle");
 
   useEffect(() => {
     // Read the query off `window` rather than `useSearchParams`: this is a
@@ -55,7 +47,6 @@ export function GuestProvider({ children }: { children: React.ReactNode }) {
     const slug = (params.get("to") ?? params.get("slug") ?? "").trim();
     if (!slug || !ENDPOINT) return;
 
-    setStatus("loading");
     const abort = new AbortController();
 
     fetch(`${ENDPOINT}?slug=${encodeURIComponent(slug)}`, {
@@ -75,17 +66,15 @@ export function GuestProvider({ children }: { children: React.ReactNode }) {
       })
       .catch(() => {
         // offline, endpoint down, slug unknown — fall back to the general page
-      })
-      .finally(() => setStatus("ready"));
+      });
 
     return () => abort.abort();
   }, []);
 
-  const value = useMemo<Ctx>(() => ({ guest, status }), [guest, status]);
-
-  return <GuestContext.Provider value={value}>{children}</GuestContext.Provider>;
+  return <GuestContext.Provider value={guest}>{children}</GuestContext.Provider>;
 }
 
+/** The guest whose personal link was opened, or null for everyone else. */
 export function useGuest() {
   return useContext(GuestContext);
 }

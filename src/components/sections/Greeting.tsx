@@ -10,7 +10,7 @@ import styles from "./Greeting.module.css";
 
 export function Greeting() {
   const { t } = useLang();
-  const { guest } = useGuest();
+  const guest = useGuest();
 
   return (
     <section className={`section ${styles.greeting}`} id="greeting">
