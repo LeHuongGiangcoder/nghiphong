@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Alex_Brush } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { GuestProvider } from "@/components/GuestProvider";
 
 const quickSignature = localFont({
   src: "./fonts/quick-signature.woff2",
@@ -124,7 +125,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${quickSignature.variable} ${alexBrush.variable} ${scarlett.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <GuestProvider>{children}</GuestProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

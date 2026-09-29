@@ -87,6 +87,12 @@
 .head {
   gap: var(--sp-2xs) !important;
   margin-bottom: var(--sp-md) !important; /* Tăng khoảng cách để đẩy hoa và heading lên cao hơn so với chữ */
+  /* The column `.guestName` measures itself against, in `cqi`. It has to sit
+     here and not on the heading: `.section__head` lays its children out as
+     flex items, so size containment on a shrink-to-fit heading would stop it
+     contributing any intrinsic width and collapse the column to zero. This
+     div takes its width from `.content` instead, so containment is safe. */
+  container-type: inline-size;
 }
 
 /* The measure inside the oval is narrow enough that the eyebrow's full
@@ -118,6 +124,48 @@
 .title {
   font-size: var(--fs-script);
   line-height: 1;
+}
+
+/* The guest's own name, on its own line under the greeting. Set in the same
+   script hand so the two read as one phrase, but a notch down: names here run
+   to "Nguyễn Thanh Phong", and at the full heading size that would push past
+   the lace medallion the note sits on. It arrives after a fetch, so it fades
+   rather than snapping in. */
+.guestName {
+  display: block;
+  /* Alex Brush sets tight; the stacked Vietnamese accents (ườ, ễ, ỹ) need the
+     extra room or they clip into the greeting above. */
+  line-height: 1.35;
+  margin-top: 0.08em;
+  /* A name broken across two lines reads as a mistake, and most Vietnamese
+     names run three or four words — "Nguyễn Thanh Phong" wrapped at the size
+     below. So the size is derived from the length instead of fixed: Alex Brush
+     measures a steady ~0.44em per character across every name tested, so
+     `column width ÷ (characters × 0.46)` is the size that just fits on one
+     line, and 0.78em caps it so short names do not balloon. `--len` comes from
+     the component. Past ~30 characters the floor wins and it wraps — by then
+     one line would be too small to read anyway. */
+  font-size: 0.78em; /* fallback where container units are unsupported */
+  font-size: clamp(1.5rem, calc(100cqi / (var(--len, 14) * 0.46)), 0.78em);
+  text-wrap: balance; /* if the floor does force a wrap, break it evenly */
+  animation: guestNameIn 0.7s ease-out both;
+}
+
+@keyframes guestNameIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guestName {
+    animation: none;
+  }
 }
 
 .signoff {

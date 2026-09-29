@@ -40,7 +40,14 @@ type Dict = {
     cta: string;
   };
   countdown: { days: string; hours: string; minutes: string; seconds: string; over: string };
-  greeting: { eyebrow: string; title: string; body: string[]; signoff: string };
+  greeting: {
+    eyebrow: string;
+    title: string;
+    /** Heading used when we know who is reading — the guest's name goes under it */
+    titleGuest: string;
+    body: string[];
+    signoff: string;
+  };
   agenda: {
     eyebrow: string;
     title: string;
@@ -118,6 +125,7 @@ export const COPY: Record<Lang, Dict> = {
     greeting: {
       eyebrow: "A note from us",
       title: "Welcome",
+      titleGuest: "Welcome",
       body: [
         "There are moments a heart keeps quietly, and this is one of them. After all the seasons we have walked through side by side, we are finally saying yes — out loud, and in front of the people we love most.",
         "Your presence is the part we look forward to the very most. Come sit with us, raise a glass, and let the evening be gentle and full.",
@@ -216,6 +224,7 @@ export const COPY: Record<Lang, Dict> = {
     greeting: {
       eyebrow: "Đôi lời từ chúng mình",
       title: "Lời chào",
+      titleGuest: "Thân chào",
       body: [
         "Có những khoảnh khắc mà trái tim lặng lẽ giữ lại, và đây là một trong số đó. Sau bao mùa cùng nhau bước qua, chúng mình cuối cùng cũng nói lời đồng ý — thật to, trước những người thương yêu nhất.",
         "Điều chúng mình mong chờ nhất chính là sự có mặt của bạn. Hãy đến ngồi cùng chúng mình, nâng ly, và để buổi tối ấy thật dịu dàng và trọn vẹn.",

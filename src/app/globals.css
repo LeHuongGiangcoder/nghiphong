@@ -18,13 +18,14 @@
   --c-bg: #f9f4ea;          /* base beige, sampled from the panel art  */
   --c-bg-deep: #f2ead9;     /* alternating band                        */
   --c-surface: #fffdf8;     /* cards on beige                          */
-  /* Ink scale — every value below clears WCAG AA (4.5:1) on both beige
-     bands (--c-bg and --c-bg-deep). Do not lighten these; if something needs
-     to recede, use --c-muted rather than an opacity on a text colour. */
-  --c-heading: #5d5347;     /* headings (brand)                        */
-  --c-body: #55534f;        /* body copy (brand)                       */
-  --c-ink: #33322f;         /* emphasis inside body copy               */
-  --c-muted: #66635d;       /* captions & hints — still AA, never dim  */
+  /* Ink scale — warm near-black, not grey. Every value clears WCAG AAA (7:1)
+     on both beige bands (--c-bg and --c-bg-deep). Do not lighten these; if
+     something needs to recede, use --c-muted rather than an opacity on a
+     text colour. */
+  --c-heading: #211a12;     /* headings (brand)                        */
+  --c-body: #1c1710;        /* body copy (brand)                       */
+  --c-ink: #0f0c08;         /* emphasis inside body copy — near black  */
+  --c-muted: #3b3226;       /* captions & hints — dark, never dim      */
   --c-gold: #85662f;        /* gold used as *text* / icons             */
   --c-gold-ink: #80622d;    /* gold for small caps: eyebrows, labels   */
   --c-gold-soft: #9c7f46;   /* decorative gold only — not for copy     */

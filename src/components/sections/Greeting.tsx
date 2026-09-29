@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
+import { useGuest } from "@/components/GuestProvider";
 import { Reveal } from "@/components/Reveal";
 
 import { DISPLAY_NAMES } from "@/content/copy";
@@ -9,6 +10,7 @@ import styles from "./Greeting.module.css";
 
 export function Greeting() {
   const { t } = useLang();
+  const { guest } = useGuest();
 
   return (
     <section className={`section ${styles.greeting}`} id="greeting">
@@ -34,7 +36,21 @@ export function Greeting() {
             </Reveal>
 
             <Reveal delay={120}>
-              <h2 className={`script ${styles.title}`}>{t.greeting.title}</h2>
+              {/* One heading, two lines: the greeting and — when the guest
+                  opened their own link — their name. The name sets smaller so
+                  a long Vietnamese one still clears the lace medallion. */}
+              <h2 className={`script ${styles.title}`}>
+                {guest ? t.greeting.titleGuest : t.greeting.title}
+                {guest && (
+                  <span
+                    className={styles.guestName}
+                    // character count drives the auto-fit size — see the CSS
+                    style={{ "--len": guest.name.length } as React.CSSProperties}
+                  >
+                    {guest.name}
+                  </span>
+                )}
+              </h2>
             </Reveal>
           </div>
 
