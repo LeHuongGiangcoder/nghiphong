@@ -16,7 +16,7 @@ export function Hero() {
     <section className={`section section--hero ${styles.hero}`} id="hero">
       <div className="section-bg">
         <Image
-          src="/decor/panel-hero-17.webp"
+          src="/decor/panel-hero-18.webp"
           alt=""
           fill
           priority
