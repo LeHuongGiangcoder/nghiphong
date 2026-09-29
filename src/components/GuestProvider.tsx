@@ -16,7 +16,7 @@ import { createContext, useContext, useEffect, useState } from "react";
  * After re-deploying the Apps Script, paste the new `…/exec` URL here — see
  * docs/guest-management.md.
  */
-const ENDPOINT =
+export const RSVP_ENDPOINT =
   process.env.NEXT_PUBLIC_RSVP_ENDPOINT ??
   "https://script.google.com/macros/s/AKfycbwyHpm8BhV1N6OrslkM8gxr1J9dRxVfZZFlGy962T0AKvD6o_6sPTCCS7z0gwal1stx/exec";
 
@@ -45,11 +45,11 @@ export function GuestProvider({ children }: { children: React.ReactNode }) {
     // Suspense boundary and out of static rendering.
     const params = new URLSearchParams(window.location.search);
     const slug = (params.get("to") ?? params.get("slug") ?? "").trim();
-    if (!slug || !ENDPOINT) return;
+    if (!slug || !RSVP_ENDPOINT) return;
 
     const abort = new AbortController();
 
-    fetch(`${ENDPOINT}?slug=${encodeURIComponent(slug)}`, {
+    fetch(`${RSVP_ENDPOINT}?slug=${encodeURIComponent(slug)}`, {
       signal: abort.signal,
       // Apps Script answers `/exec` with a 302 to googleusercontent.com; the
       // final response is the one carrying the JSON and `Access-Control-Allow-Origin`.

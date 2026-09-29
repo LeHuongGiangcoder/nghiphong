@@ -123,18 +123,32 @@ Tiêu đề tiếng Việt cũng nhận: `Họ tên`, `Xác nhận`, `Lời chú
 
 ## 6. Đã nối tới đâu
 
-**Xong — chào tên khách.** `src/components/GuestProvider.tsx` đọc `?to=` trên
-URL, hỏi sheet xem đó là ai, và mục Welcome chào đúng tên:
+**Xong hết.** Trang web đọc `?to=` trên URL, hỏi sheet xem đó là ai, và gửi câu
+trả lời ngược về đúng dòng của khách.
 
 | Link khách mở | Thấy gì |
 |---|---|
-| `…/?to=le-huong-giang` | "Welcome / Lê Hương Giang" · "Thân chào / Lê Hương Giang" |
-| `…/` (không có `?to=`) | "Welcome" · "Lời chào" — như cũ |
+| `…/?to=huong-giang` | "Welcome / Hương Giang", ô tên tự điền sẵn |
+| `…/` (không có `?to=`) | "Welcome", ô tên để trống — như cũ |
 | slug sai, mạng lỗi, sheet chậm | "Welcome" — im lặng lùi về bản chung, không báo lỗi |
 
 Cỡ chữ tên tự co theo độ dài nên tên 2 chữ hay 5 chữ đều gọn một dòng trong
 vòng ren.
 
-**Chưa xong — gửi RSVP.** Form vẫn mới `console.info` payload rồi hiện màn hình
-cảm ơn (xem `src/components/sections/Rsvp.tsx`), chưa POST thật lên Apps Script.
-Phần `doPost` bên script đã sẵn sàng, chỉ thiếu bước gọi từ web.
+Khi bấm **Gửi**: nút chuyển thành "Đang gửi…" và bị khoá, script ghi
+`Attendance · Number · Meal · Wish · Updated` vào đúng dòng của khách, rồi web
+hiện màn hình cảm ơn.
+
+Gửi hỏng (mất mạng, sheet sập) thì **không xoá gì cả** — khách thấy dòng báo
+lỗi, mọi thứ họ vừa gõ vẫn còn nguyên, bấm gửi lại được ngay. Một lời chúc dài
+không bao giờ bị mất vì sự cố mạng.
+
+Khách vào thẳng trang chủ không có `?to=` vẫn trả lời được — script thêm một
+dòng mới ở cuối sheet.
+
+### Một chỗ dễ vấp
+
+POST phải để `Content-Type: text/plain`. Để `application/json` thì trình duyệt
+bắn preflight `OPTIONS` trước, mà Apps Script không trả lời `OPTIONS`, nên toàn
+bộ form sẽ chết vì CORS. Chỗ này đã ghi chú ngay trong
+`src/components/sections/Rsvp.tsx`, đừng sửa thành json.

@@ -87,6 +87,7 @@ type Dict = {
     wishesPlaceholder: string;
     submit: string;
     submitting: string;
+    sendError: string;
     thanksYesTitle: string;
     thanksYesBody: string;
     thanksNoTitle: string;
@@ -184,6 +185,8 @@ export const COPY: Record<Lang, Dict> = {
       wishesPlaceholder: "Write something we can keep…",
       submit: "Send",
       submitting: "Sending…",
+      sendError:
+        "That did not go through — your answer is still here, please try again.",
       thanksYesTitle: "See you there",
       thanksYesBody:
         "Thank you — your seat is saved. We cannot wait to celebrate with you on 13 December.",
@@ -283,6 +286,8 @@ export const COPY: Record<Lang, Dict> = {
       wishesPlaceholder: "Viết đôi dòng để chúng mình giữ lại…",
       submit: "Gửi",
       submitting: "Đang gửi…",
+      sendError:
+        "Chưa gửi được — câu trả lời của bạn vẫn còn đây, thử lại giúp mình nhé.",
       thanksYesTitle: "Hẹn gặp bạn nhé",
       thanksYesBody:
         "Cảm ơn bạn — chỗ ngồi đã được giữ. Chúng mình rất mong đến ngày 13 tháng 12.",

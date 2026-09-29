@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useId, useState } from "react";
 import { useLang } from "@/components/LanguageProvider";
+import { RSVP_ENDPOINT, useGuest } from "@/components/GuestProvider";
 import { Reveal } from "@/components/Reveal";
 import { WaveHeart } from "@/components/Flourish";
 import { Ribbons } from "@/components/Ribbons";
@@ -12,10 +13,12 @@ import styles from "./Rsvp.module.css";
 type Attending = "yes" | "no";
 
 /**
- * The shape that will be POSTed once a backend exists. Keeping it named and
- * in one place means wiring up Sheets / n8n later is a single call site.
+ * What gets POSTed to the Apps Script web app. `slug` is what lets the script
+ * write the answer back into this guest's own row instead of appending a new
+ * one — see docs/guest-management.md.
  */
 export type RsvpPayload = {
+  slug: string;
   name: string;
   attending: Attending;
   guests?: number;
@@ -26,11 +29,19 @@ export type RsvpPayload = {
   submittedAt: string;
 };
 
+type SendStatus = "idle" | "sending" | "error";
+
 export function Rsvp() {
   const { t, lang } = useLang();
+  const guest = useGuest();
   const uid = useId();
 
-  const [name, setName] = useState("");
+  /* null means "the guest has not touched this field", so the name from their
+     invite link still shows. Deriving it this way rather than seeding state in
+     an effect matters: the guest lookup resolves after first paint, and an
+     effect that overwrote the field could land while they were typing. */
+  const [name, setName] = useState<string | null>(null);
+  const guestName = name ?? guest?.name ?? "";
   const [guests, setGuests] = useState("1");
   const [attending, setAttending] = useState<Attending | null>(null);
   const [meal, setMeal] = useState<number>(0);
@@ -38,12 +49,14 @@ export function Rsvp() {
   const [wishes, setWishes] = useState("");
   const [errors, setErrors] = useState<{ name?: boolean; attending?: boolean; guests?: boolean; mealNotes?: boolean }>({});
   const [sent, setSent] = useState<Attending | null>(null);
+  const [status, setStatus] = useState<SendStatus>("idle");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === "sending") return;
 
-    const next = { 
-      name: name.trim().length === 0, 
+    const next = {
+      name: guestName.trim().length === 0,
       attending: attending === null,
       guests: attending === "yes" && (!guests || isNaN(Number(guests)) || Number(guests) < 1),
       mealNotes: attending === "yes" && meal === 3 && mealNotes.trim().length === 0
@@ -52,7 +65,8 @@ export function Rsvp() {
     if (next.name || next.attending || next.guests || next.mealNotes) return;
 
     const payload: RsvpPayload = {
-      name: name.trim(),
+      slug: guest?.slug ?? "",
+      name: guestName.trim(),
       attending: attending as Attending,
       guests: attending === "yes" ? Number(guests) : undefined,
       meal: attending === "yes" ? t.rsvp.meals[meal] : null,
@@ -62,13 +76,32 @@ export function Rsvp() {
       submittedAt: new Date().toISOString(),
     };
 
-    // TODO: replace with the real endpoint — `await fetch("/api/rsvp", …)`.
-    console.info("RSVP", payload);
-    setSent(payload.attending);
+    setStatus("sending");
+    try {
+      const res = await fetch(RSVP_ENDPOINT, {
+        method: "POST",
+        /* text/plain on purpose. application/json would make this a
+           "non-simple" CORS request, and the browser would send an OPTIONS
+           preflight first — which Apps Script does not answer, so the whole
+           submission would fail. The script parses the body itself. */
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        redirect: "follow",
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!data?.ok) throw new Error(String(data?.error ?? "rejected"));
+
+      setStatus("idle");
+      setSent(payload.attending);
+    } catch {
+      /* Nothing is cleared — a guest who wrote a long wish must not lose it
+         because the sheet was unreachable. They see the error and can resend. */
+      setStatus("error");
+    }
   }
 
   function reset() {
-    setName("");
+    setName(null); // back to the name on their invite link, if they have one
     setGuests("1");
     setAttending(null);
     setMeal(0);
@@ -76,6 +109,7 @@ export function Rsvp() {
     setWishes("");
     setErrors({});
     setSent(null);
+    setStatus("idle");
   }
 
   return (
@@ -145,7 +179,7 @@ export function Rsvp() {
                     type="text"
                     autoComplete="name"
                     placeholder={t.rsvp.namePlaceholder}
-                    value={name}
+                    value={guestName}
                     aria-invalid={errors.name || undefined}
                     aria-describedby={errors.name ? `${uid}-name-err` : undefined}
                     onChange={(e) => {
@@ -276,8 +310,19 @@ export function Rsvp() {
                   />
                 </div>
 
-                <button type="submit" className="btn btn--primary btn--block btn--lg">
-                  {t.rsvp.submit}
+                {status === "error" && (
+                  <p className="error" role="alert">
+                    {t.rsvp.sendError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="btn btn--primary btn--block btn--lg"
+                  disabled={status === "sending"}
+                  aria-busy={status === "sending" || undefined}
+                >
+                  {status === "sending" ? t.rsvp.submitting : t.rsvp.submit}
                 </button>
               </form>
             )}
