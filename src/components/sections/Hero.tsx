@@ -5,7 +5,6 @@ import { useLang } from "@/components/LanguageProvider";
 import { Countdown } from "@/components/Countdown";
 import { Reveal } from "@/components/Reveal";
 import { WaveHeart } from "@/components/Flourish";
-import { Vanilla } from "@/components/Vanilla";
 import { DISPLAY_NAMES } from "@/content/copy";
 import { swash } from "@/lib/swash";
 import styles from "./Hero.module.css";
@@ -26,23 +25,37 @@ export function Hero() {
         />
       </div>
 
+      {/* The two corner sprays. They sit after the background so they paint
+          over it, and both are `.decor` — behind the content, inert. */}
+      <div className={`decor ${styles.cornerLeft}`} aria-hidden="true">
+        <Image
+          src="/decor/hero-corner-left.webp"
+          alt=""
+          width={900}
+          height={545}
+          sizes="(max-width: 40rem) 58vw, 23rem"
+        />
+      </div>
+      <div className={`decor ${styles.cornerRight}`} aria-hidden="true">
+        <Image
+          src="/decor/hero-corner-right.webp"
+          alt=""
+          width={760}
+          height={874}
+          sizes="(max-width: 40rem) 40vw, 16rem"
+        />
+      </div>
+
       <div className={`container ${styles.content}`}>
-        {/* the vanilla motif flanked by the two flourish tails */}
+        {/* the flower-and-ribbon crest that opens the band */}
         <div className={styles.crest} aria-hidden="true">
           <Image
-            className={styles.crestWing}
-            src="/decor/flourish-left.webp"
+            src="/decor/hero-crest.webp"
             alt=""
-            width={900}
-            height={123}
-          />
-          <Vanilla className={styles.crestFigure} />
-          <Image
-            className={styles.crestWing}
-            src="/decor/flourish-right.webp"
-            alt=""
-            width={900}
-            height={127}
+            width={1280}
+            height={381}
+            priority
+            sizes="(max-width: 40rem) 92vw, 34rem"
           />
         </div>
 
