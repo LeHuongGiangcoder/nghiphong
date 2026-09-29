@@ -7,10 +7,17 @@
    not a motif with a tail either side, so it only needs a width — the ribbons
    run to the edges of the artwork and set their own margins. It sits in the
    flow at the head of the column rather than straddling the section boundary,
-   so the band's own padding gives it room above and its margin below. */
+   so the band's own padding gives it room above and its margin below.
+
+   The blossom is not at the middle of its own artwork — it measures at 0.52 of
+   the width, with the longer ribbon running off to the right — so centring the
+   image leaves the flower reading right of the column. The shift below is what
+   puts the blossom where the eye expects it; it is a transform, so the art
+   moves without dragging the column's centre with it. */
 .crest {
-  width: min(92%, 21rem);
+  width: min(100%, 24rem);
   margin-bottom: calc(var(--sp-sm) * -1);
+  transform: translateX(-4%);
   pointer-events: none;
   user-select: none;
 }
@@ -31,22 +38,38 @@
   bottom: 0;
   /* under the copy, over the panel art */
   opacity: 0.95;
+  /* The band below paints over anything hanging past the hero's box, so these
+     end in a hard horizontal cut straight across the ribbons. Fading the last
+     fifth of each one lets the art dissolve into the band instead, so the seam
+     reads as the ornament running out rather than as a crop. */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 62%,
+    rgba(0, 0, 0, 0.55) 84%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 62%,
+    rgba(0, 0, 0, 0.55) 84%,
+    transparent 100%
+  );
 }
 
 .cornerLeft {
   left: 0;
-  width: min(58%, 23rem);
-  /* Only sideways, and only a little. The band below paints over anything that
-     hangs under the hero's own box, so a negative bottom margin here does not
-     bleed — it just hides that much of the flower. The bloom sits at the very
-     left of this artwork, so the sideways pull has to stay small too or it
-     takes the flower with it. */
+  width: min(50%, 20rem);
+  /* Only sideways, and only a little. The bloom sits at the very left of this
+     artwork, so the sideways pull has to stay small or it takes the flower
+     with it. */
   margin-left: -3%;
 }
 
 .cornerRight {
   right: 0;
-  width: min(46%, 18rem);
+  width: min(39%, 15.5rem);
   margin-right: -7%;
 }
 
