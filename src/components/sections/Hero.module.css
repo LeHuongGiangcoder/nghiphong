@@ -3,24 +3,6 @@
   --section-py: clamp(4.25rem, 16vw, 6rem);
 }
 
-/* The panel art is an embossed floral, so its relief runs right under the
-   names. A cream veil over the art — strongest in the middle, where the type
-   sits, and clearing at the edges so the pattern still reads as the band's
-   ground. It goes on the background layer, not over the content, so nothing
-   above it is tinted. */
-.hero :global(.section-bg)::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    115% 75% at 50% 45%,
-    rgba(249, 244, 234, 0.62) 0%,
-    rgba(249, 244, 234, 0.45) 55%,
-    rgba(249, 244, 234, 0) 100%
-  );
-  pointer-events: none;
-}
-
 /* The flower-and-ribbon crest that opens the band. It is one piece of art now,
    not a motif with a tail either side, so it only needs a width — the ribbons
    run to the edges of the artwork and set their own margins. It sits in the
