@@ -99,18 +99,24 @@ dòng mới ở cuối sheet, để không mất câu trả lời nào.
 
 ## 5. Muốn lưu thêm số khách / món ăn
 
-Sheet hiện có 7 cột nên **`guests`, `meal`, `mealNotes` gửi lên sẽ bị bỏ đi** —
-không có chỗ để ghi.
+Script dò cột theo **tên tiêu đề ở hàng 1**, không theo vị trí. Thêm cột hay
+đổi chỗ cột đều **không phải sửa code** — cột `Number` và `Meal` chính là thêm
+vào sau, script tự nhận và tự dịch `Wish`/`Updated` sang vị trí mới.
 
-Script dò cột theo **tên tiêu đề ở hàng 1**, không theo vị trí. Nên chỉ cần thêm
-cột với tiêu đề đúng là script tự điền, **không phải sửa code**:
+Sheet hiện là 9 cột:
+
+```
+A No · B Name · C Slug · D Link · E Attendance · F Number · G Meal · H Wish · I Updated
+```
+
+Còn hai tiêu đề nữa script nhận nếu muốn lưu thêm:
 
 | Thêm tiêu đề | Sẽ chứa |
 |---|---|
-| `Guests` | Số khách đi cùng |
-| `Meal` | Món đã chọn |
-| `Note` | Ghi chú dị ứng (ô "Khác / dị ứng") |
+| `Note` | Ghi chú dị ứng — chính là ô "Khác / dị ứng" trên form |
 | `Lang` | Khách xem bản `vi` hay `en` |
+
+Chưa có cột `Note` thì nội dung ô "Khác / dị ứng" gửi lên sẽ bị bỏ đi.
 
 Tiêu đề tiếng Việt cũng nhận: `Họ tên`, `Xác nhận`, `Lời chúc`, `Cập nhật`,
 `Số khách`, `Món`, `Ghi chú`.

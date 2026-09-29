@@ -5,20 +5,22 @@
  * "Thanh Phong & Mỹ Nghi_Guest Management".
  * Hướng dẫn cài đặt: docs/guest-management.md
  *
- * Sheet "RSVP" hiện có 7 cột:
- *   A No · B Name · C Slug · D Link · E Attendance · F Wish · G Updated
+ * Sheet "RSVP" hiện có 9 cột:
+ *   A No · B Name · C Slug · D Link · E Attendance
+ *   F Number · G Meal · H Wish · I Updated
  *
  * Cô dâu chú rể chỉ điền cột B (Name). Menu "💌 Wedding → Tạo slug + link"
  * sinh ra A, C, D. Khách mở link riêng, trả lời form, script ghi ngược
  * E–G vào ĐÚNG dòng của khách đó (tìm theo slug) chứ không thêm dòng mới.
  *
- * Cột được nhận diện theo TÊN TIÊU ĐỀ ở hàng 1, không theo vị trí. Muốn lưu
- * thêm số khách / món ăn thì chỉ cần thêm cột tiêu đề "Guests", "Meal",
- * "Note", "Lang" ở bất kỳ đâu — script tự điền, không phải sửa code.
+ * Cột được nhận diện theo TÊN TIÊU ĐỀ ở hàng 1, không theo vị trí. Thêm hay
+ * đổi chỗ cột đều không phải sửa code — "Number" và "Meal" ở trên chính là
+ * thêm vào sau và script tự nhận. Còn nhận được "Note" (ghi chú dị ứng) và
+ * "Lang" (khách xem bản vi hay en) nếu muốn lưu thêm.
  */
 
 // ⚠️ Sửa thành domain thật của web cưới, KHÔNG có dấu / ở cuối.
-const SITE_URL = 'https://nghiphong.vercel.app';
+const SITE_URL = 'https://nghiphong.gloweb.site';
 
 const SHEET_NAME = 'RSVP';
 const FIRST_ROW = 2; // hàng 1 là tiêu đề
