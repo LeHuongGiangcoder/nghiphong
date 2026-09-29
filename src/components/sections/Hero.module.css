@@ -17,7 +17,7 @@
 .crest {
   width: min(100%, 24rem);
   margin-bottom: calc(var(--sp-sm) * -1);
-  transform: translateX(-4%);
+  transform: translateX(-8%);
   pointer-events: none;
   user-select: none;
 }
