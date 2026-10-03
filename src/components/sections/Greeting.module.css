@@ -169,7 +169,7 @@
    it fades rather than snapping in. */
 .guestName {
   display: block;
-  font-size: 0.6em;
+  font-size: 0.85em;
   /* Alex Brush sets tight, and this line can now be two or three of them: the
      leading has to clear both the stacked Vietnamese accents (ườ, ễ, ỹ) and
      the descenders of the line above. */
