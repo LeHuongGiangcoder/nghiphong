@@ -103,8 +103,8 @@
   color: var(--c-gold-ink);
   /* The lace runs `--lace-bleed` past the top of the box below, so that is
      where the medallion really starts — the gap is measured from there, not
-     from `.frameWrap`. Without it the title would sit on the pierced band. */
-  margin-bottom: calc(var(--lace-bleed) + var(--sp-sm));
+     from `.frameWrap`. We subtract to tighten the optical gap. */
+  margin-bottom: calc(var(--lace-bleed) - var(--sp-md));
 }
 
 /* The hairline that closes the title. It fades at both ends, so it reads as a
