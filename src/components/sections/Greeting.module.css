@@ -1,9 +1,18 @@
 .greeting {
   text-align: center;
   overflow: hidden;
+  /* A column now: the card's title stands above the lace medallion rather than
+     inside it, so the two are stacked and centred together. */
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100svh;
+  /* How far the lace ring is grown past its box on every side. It lives here
+     rather than on `.frameWrap` because the title above has to clear it — it
+     is the medallion's real top edge, so the title's margin is measured from
+     it. `.frameWrap` inherits it. */
+  --lace-bleed: clamp(4.5rem, 9vw, 5rem);
 }
 
 /* The box the lace medallion is drawn around. Its padding is the inset between
@@ -23,12 +32,6 @@
   padding-block: clamp(4.75rem, 13.5vw, 5.25rem);
   /* almost none: every pixel here is width the medallion and the copy lose */
   padding-inline: 0.5rem;
-  /* How far the ring is grown past this box on every side. It is what buys the
-     clearance between the lace band and the copy — the ring simply runs off
-     the screen instead of the note being squeezed to fit inside it. Lace 2
-     leaves a margin of its own around the doily, so it is grown harder than
-     the first lace needed. */
-  --lace-bleed: clamp(4.5rem, 9vw, 5rem);
 }
 
 /* The lace medallion, at the ornament's own ratio — top and bottom pin its
@@ -81,31 +84,36 @@
   max-width: min(86vw, 20.5rem);
 }
 
-/* The card's title — the first line on the page, over the lace. It outranks
-   the eyebrow under it rather than matching it: a step larger, in the darker
-   gold, and closed by a short centred hairline, so the two caps lines read as
-   title then eyebrow instead of as a pair. */
+/* The card's title. It is the page's first line and it names the page, so it
+   outranks everything in the medallion below: the largest of the three caps
+   lines, in the darkest gold, and closed by a short centred hairline. The
+   eyebrow inside the medallion is a step smaller and lighter, so the two read
+   as title then eyebrow rather than as a pair. */
 .cardTitle {
-  margin-bottom: var(--sp-sm);
+  position: relative; /* over the panel art, not under it */
   font-family: var(--f-body);
-  font-size: var(--fs-eyebrow);
+  font-size: clamp(1.0625rem, 4.6vw, 1.3125rem);
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.28em;
   /* letter-spacing hangs a space off the last letter — pull the line back so
      it still sits centred */
-  text-indent: 0.22em;
+  text-indent: 0.28em;
   line-height: 1.3;
   text-transform: uppercase;
   color: var(--c-gold-ink);
+  /* The lace runs `--lace-bleed` past the top of the box below, so that is
+     where the medallion really starts — the gap is measured from there, not
+     from `.frameWrap`. Without it the title would sit on the pierced band. */
+  margin-bottom: calc(var(--lace-bleed) + var(--sp-sm));
 }
 
 /* The hairline that closes the title. It fades at both ends, so it reads as a
    flourish rather than as a border under a label. */
 .cardTitleRule {
   display: block;
-  width: 4.5rem;
+  width: 5rem;
   height: 1px;
-  margin: var(--sp-2xs) auto 0;
+  margin: var(--sp-xs) auto 0;
   background: linear-gradient(to right, transparent, var(--c-gold), transparent);
 }
 
