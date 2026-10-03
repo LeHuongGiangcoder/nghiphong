@@ -30,26 +30,25 @@ export function Greeting() {
         <div className={`measure ${styles.content}`}>
 
 
+          {/* The card's title, the first line on the page — so the invitation
+              announces what it is before it says anything else. */}
+          <Reveal as="p" className={styles.cardTitle}>
+            {t.greeting.cardTitle}
+            <span className={styles.cardTitleRule} aria-hidden="true" />
+          </Reveal>
+
           <div className={`section__head ${styles.head}`}>
-            <Reveal as="p" className="eyebrow">
+            <Reveal as="p" className="eyebrow" delay={80}>
               {t.greeting.eyebrow}
             </Reveal>
 
             <Reveal delay={120}>
               {/* One heading, two lines: the greeting and — when the guest
-                  opened their own link — their name. The name sets smaller so
-                  a long Vietnamese one still clears the lace medallion. */}
+                  opened their own link — their name. The name holds one fixed
+                  size whatever its length and wraps when it has to. */}
               <h2 className={`script ${styles.title}`}>
                 {guest ? t.greeting.titleGuest : t.greeting.title}
-                {guest && (
-                  <span
-                    className={styles.guestName}
-                    // character count drives the auto-fit size — see the CSS
-                    style={{ "--len": guest.name.length } as React.CSSProperties}
-                  >
-                    {guest.name}
-                  </span>
-                )}
+                {guest && <span className={styles.guestName}>{guest.name}</span>}
               </h2>
             </Reveal>
           </div>

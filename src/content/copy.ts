@@ -41,6 +41,8 @@ type Dict = {
   };
   countdown: { days: string; hours: string; minutes: string; seconds: string; over: string };
   greeting: {
+    /** The card's own title — the first line on the page, above everything */
+    cardTitle: string;
     eyebrow: string;
     title: string;
     /** Heading used when we know who is reading — the guest's name goes under it */
@@ -124,6 +126,7 @@ export const COPY: Record<Lang, Dict> = {
       over: "Today is the day",
     },
     greeting: {
+      cardTitle: "Wedding Invitation",
       eyebrow: "A note from us",
       title: "Welcome",
       titleGuest: "Welcome",
@@ -225,6 +228,7 @@ export const COPY: Record<Lang, Dict> = {
       over: "Hôm nay là ngày ấy",
     },
     greeting: {
+      cardTitle: "Thiệp mời",
       eyebrow: "Đôi lời từ chúng mình",
       title: "Lời chào",
       titleGuest: "Thân chào",
