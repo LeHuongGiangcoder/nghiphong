@@ -161,18 +161,18 @@
    to "Gia đình anh Tuấn & chị Kim Nhi", and at the full heading size that
    would push past the lace medallion the note sits on.
 
-   The size is fixed. It used to be derived from the character count so every
-   name was squeezed onto one line, which left long names set visibly smaller
-   than short ones — the same heading changing rank guest to guest. Now one
-   size holds for everybody and a long name simply wraps, with the leading and
-   the margins below giving the extra lines room. It arrives after a fetch, so
-   it fades rather than snapping in. */
+   One size for everybody: it used to be derived from the character count, so
+   long names were set visibly smaller than short ones — the same heading
+   changing rank guest to guest. A name that still does not fit in two lines at
+   this size is stepped down by `--name-scale`, which the component sets after
+   measuring it; nothing shorter is touched. It arrives after a fetch, so it
+   fades rather than snapping in. */
 .guestName {
   display: block;
-  font-size: 0.85em;
-  /* Alex Brush sets tight, and this line can now be two or three of them: the
-     leading has to clear both the stacked Vietnamese accents (ườ, ễ, ỹ) and
-     the descenders of the line above. */
+  font-size: calc(0.85em * var(--name-scale, 1));
+  /* Alex Brush sets tight, and this line can be two of them: the leading has
+     to clear both the stacked Vietnamese accents (ườ, ễ, ỹ) and the descenders
+     of the line above. */
   line-height: 1.5;
   /* Air above, so the name reads as its own line rather than as a third line
      of the greeting, and air below before the note starts. */
@@ -180,7 +180,7 @@
   margin-bottom: 0.15em;
   /* a touch in from the measure, so a wrapped line never runs to the lace */
   padding-inline: 0.5em;
-  text-wrap: balance; /* break a long name into even lines */
+  text-wrap: balance; /* break a long name into two even lines */
   animation: guestNameIn 0.7s ease-out both;
 }
 

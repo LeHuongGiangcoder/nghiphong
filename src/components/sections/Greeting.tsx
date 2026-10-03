@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { useGuest } from "@/components/GuestProvider";
@@ -8,9 +9,58 @@ import { Reveal } from "@/components/Reveal";
 import { DISPLAY_NAMES } from "@/content/copy";
 import styles from "./Greeting.module.css";
 
+/** The most lines the guest's name may take before it is scaled down. */
+const NAME_MAX_LINES = 2;
+/** How far the name may be scaled down before it stops — below this it would
+    be too small to sit under the greeting as part of the same phrase. */
+const NAME_MIN_SCALE = 0.62;
+
 export function Greeting() {
   const { t } = useLang();
   const guest = useGuest();
+  const nameRef = useRef<HTMLSpanElement>(null);
+  const guestName = guest?.name;
+
+  /**
+   * Holds the name to two lines at most.
+   *
+   * The size in the CSS is the one every name gets — a short name is never
+   * shrunk to match a long one. Only when a name still wraps past
+   * `NAME_MAX_LINES` at that size does this step it down, a notch at a time,
+   * until it fits. Measured rather than guessed from the character count:
+   * Alex Brush's widths vary enough per letter that an estimate either wrapped
+   * anyway or shrank names that would have fitted.
+   */
+  const fitName = useCallback(() => {
+    const el = nameRef.current;
+    if (!el) return;
+
+    // back to full size first, so a name that no longer needs the step-down
+    // (a wider window, a shorter name) gets it back
+    el.style.removeProperty("--name-scale");
+
+    const overflows = () => {
+      const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+      // sub-pixel rounding: a hair over two lines is still two lines
+      return el.scrollHeight > lineHeight * NAME_MAX_LINES + 1;
+    };
+
+    let scale = 1;
+    while (overflows() && scale > NAME_MIN_SCALE) {
+      scale = Math.max(NAME_MIN_SCALE, scale - 0.04);
+      el.style.setProperty("--name-scale", String(scale));
+    }
+  }, []);
+
+  useLayoutEffect(fitName, [fitName, guestName]);
+
+  useEffect(() => {
+    window.addEventListener("resize", fitName);
+    // the script face is still loading on a first visit, and its metrics are
+    // what the fit is measured against
+    document.fonts?.ready.then(fitName);
+    return () => window.removeEventListener("resize", fitName);
+  }, [fitName]);
 
   return (
     <section className={`section ${styles.greeting}`} id="greeting">
@@ -47,7 +97,11 @@ export function Greeting() {
                   size whatever its length and wraps when it has to. */}
               <h2 className={`script ${styles.title}`}>
                 {guest ? t.greeting.titleGuest : t.greeting.title}
-                {guest && <span className={styles.guestName}>{guest.name}</span>}
+                {guest && (
+                  <span ref={nameRef} className={styles.guestName}>
+                    {guest.name}
+                  </span>
+                )}
               </h2>
             </Reveal>
           </div>
