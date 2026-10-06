@@ -37,9 +37,58 @@
   filter: drop-shadow(0 1px 2px rgba(120, 100, 65, 0.25));
 }
 
+/* The "kindly avoid" line. It used to be the quietest thing in the block —
+   italic and held back by an opacity — which put the one instruction a guest
+   can actually get wrong *below* the line telling them what is fine. It is
+   framed instead: a clay hairline and wash, the weight up, the italic and the
+   opacity gone. Still a caption, so it does not outrank the heading above it;
+   it simply stops being a footnote. */
 .avoid {
-  font-style: italic;
-  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2xs);
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  margin-top: var(--sp-3xs);
+  padding: var(--sp-xs) var(--sp-md);
+  border: 1px solid var(--c-caution-line);
+  border-radius: var(--radius);
+  background: var(--c-caution-wash);
+  color: var(--c-caution);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+
+/* The three colours to leave at home, said again as ink. White needs a line
+   around it or it disappears into the wash; the other two carry their own
+   edge, so only white gets one. */
+.swatches {
+  display: flex;
+  gap: var(--sp-2xs);
+}
+
+.swatches span {
+  display: block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(120, 100, 65, 0.3);
+}
+
+.swatches span[data-swatch="black"] {
+  background: #15110c;
+}
+
+.swatches span[data-swatch="red"] {
+  background: #b3302a;
+}
+
+.swatches span[data-swatch="white"] {
+  background: #fff;
+  border: 1px solid var(--c-caution-line);
 }
 
 /* — form ——————————————————————————————————————— */

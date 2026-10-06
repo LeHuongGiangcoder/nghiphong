@@ -6,6 +6,20 @@
   margin-bottom: var(--sp-md);
 }
 
+/* The closing thank-you. Two lines, each its own paragraph so the break holds
+   at every width rather than being left to the wrap — the second line is the
+   couple's own welcome and has to land on its own. Set a step under the page's
+   body size: this is a sign-off, not copy to read. */
+.thanks {
+  margin-bottom: var(--sp-md);
+}
+
+.thanks :global(.body) {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
 /* The closing mark is the couple's NP monogram — drawn art used as a mask so
    its ink stays a token. It is sized off the vanilla above it and inked in the
    softer decorative gold, so the two read as one quiet pairing. */

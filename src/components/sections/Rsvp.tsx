@@ -137,7 +137,18 @@ export function Rsvp() {
               colors={["#f3d9d6", "#f6ecd2", "#dfe7d8", "#d8e3ec", "#e2dae9"]}
             />
             <p className="caption">{t.dress.yes}</p>
-            <p className={`caption ${styles.avoid}`}>{t.dress.no}</p>
+            {/* The one instruction in this block a guest must not miss, so it
+                is framed rather than left as the quietest line. The three
+                swatches say it a second way, without words — the garland above
+                does the same job for the palette to wear. */}
+            <p className={`caption ${styles.avoid}`}>
+              <span className={styles.swatches} aria-hidden="true">
+                <span data-swatch="black" />
+                <span data-swatch="red" />
+                <span data-swatch="white" />
+              </span>
+              {t.dress.no}
+            </p>
           </div>
           <WaveHeart className={styles.wave} />
         </Reveal>

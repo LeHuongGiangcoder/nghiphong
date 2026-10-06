@@ -33,6 +33,12 @@
   --c-line: rgba(133, 102, 47, 0.34);
   --c-line-soft: rgba(133, 102, 47, 0.2);
   --c-error: #a8574b;
+  /* The dress code's "kindly avoid" note. A darker clay than --c-error:
+     that one is sized for form messages, and at caption size on the beige it
+     lands just under AA. This clears it with room to spare. */
+  --c-caution: #8a4034;
+  --c-caution-line: rgba(138, 64, 52, 0.3);
+  --c-caution-wash: rgba(138, 64, 52, 0.07);
   --c-dark: #3f362d;        /* ground of the inverse panel (.panel--ink) — espresso of the heading brown */
 
   /* — typography ——————————————————————————————
@@ -144,6 +150,16 @@ html {
   scroll-behavior: smooth;
   /* sticky nav offset for anchor jumps */
   scroll-padding-top: 4.5rem;
+}
+
+/* The cover gates the page: until its button is pressed, the invitation below
+   cannot be scrolled to. One `overflow: hidden` stops the wheel, the touch
+   drag and the arrow keys together. The attribute is set by `Cover` rather
+   than being the default here, so a page whose JS never ran is an ordinary
+   scrolling document instead of one nobody can get out of. */
+html[data-cover="closed"],
+html[data-cover="closed"] body {
+  overflow: hidden;
 }
 
 body {

@@ -38,8 +38,8 @@ type Dict = {
     invite: string[];
     /** the line that hands the reader on to the invitation proper */
     next: string[];
-    /** the scroll cue's label, read out but not drawn */
-    scroll: string;
+    /** the button that opens the invitation proper */
+    enter: string;
   };
   nav: { greeting: string; agenda: string; rsvp: string; skip: string };
   hero: {
@@ -54,8 +54,6 @@ type Dict = {
   };
   countdown: { days: string; hours: string; minutes: string; seconds: string; over: string };
   greeting: {
-    /** The card's own title — the first line on the page, above everything */
-    cardTitle: string;
     eyebrow: string;
     title: string;
     /** Heading used when we know who is reading — the guest's name goes under it */
@@ -109,7 +107,12 @@ type Dict = {
     thanksNoBody: string;
     again: string;
   };
-  footer: { line: string; date: string };
+  footer: {
+    line: string;
+    date: string;
+    /** the closing thank-you, under the vanilla and above the monogram */
+    thanks: string[];
+  };
 };
 
 export const COPY: Record<Lang, Dict> = {
@@ -123,8 +126,8 @@ export const COPY: Record<Lang, Dict> = {
         "You are warmly invited",
         "to celebrate this special day with us.",
       ],
-      next: ["Please scroll down", "for the wedding details."],
-      scroll: "Scroll to the invitation",
+      next: ["Please open the invitation", "for the wedding details."],
+      enter: "Open invitation",
     },
     nav: {
       greeting: "Our note",
@@ -150,7 +153,6 @@ export const COPY: Record<Lang, Dict> = {
       over: "Today is the day",
     },
     greeting: {
-      cardTitle: "Wedding Invitation",
       eyebrow: "A note from us",
       title: "Welcome",
       titleGuest: "Welcome",
@@ -222,7 +224,14 @@ export const COPY: Record<Lang, Dict> = {
         "We will miss you on the day, but we are grateful you let us know. Your wishes mean the world.",
       again: "Send another reply",
     },
-    footer: { line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong", date: "13 . 12 . 2026" },
+    footer: {
+      line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong",
+      date: "13 . 12 . 2026",
+      thanks: [
+        "Thank you for sharing this day with us.",
+        "It will be our honour to welcome you.",
+      ],
+    },
   },
 
   vi: {
@@ -235,8 +244,8 @@ export const COPY: Record<Lang, Dict> = {
         "Trân trọng kính mời bạn",
         "đến chung vui cùng chúng mình trong ngày đặc biệt này.",
       ],
-      next: ["Vui lòng kéo xuống", "để xem chi tiết buổi lễ."],
-      scroll: "Kéo xuống để xem thiệp mời",
+      next: ["Vui lòng mở thiệp", "để xem chi tiết buổi lễ."],
+      enter: "Mở thiệp mời",
     },
     nav: {
       greeting: "Lời chào",
@@ -263,7 +272,6 @@ export const COPY: Record<Lang, Dict> = {
       over: "Hôm nay là ngày ấy",
     },
     greeting: {
-      cardTitle: "Thiệp mời",
       eyebrow: "Đôi lời từ chúng mình",
       title: "Lời chào",
       titleGuest: "Thân chào",
@@ -335,6 +343,13 @@ export const COPY: Record<Lang, Dict> = {
         "Chúng mình sẽ nhớ bạn trong ngày ấy, nhưng thật biết ơn vì bạn đã báo trước. Lời chúc của bạn là món quà lớn.",
       again: "Gửi phản hồi khác",
     },
-    footer: { line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong", date: "13 . 12 . 2026" },
+    footer: {
+      line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong",
+      date: "13 . 12 . 2026",
+      thanks: [
+        "Cảm ơn bạn đã cùng chúng mình sẻ chia ngày vui này.",
+        "Chúng mình hân hạnh được đón tiếp.",
+      ],
+    },
   },
 };

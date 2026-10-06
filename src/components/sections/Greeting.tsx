@@ -27,14 +27,6 @@ export function Greeting() {
         />
       </div>
 
-      {/* The card's title, the first line on the page — so the invitation
-          announces what it is before it says anything else. It stands clear of
-          the lace medallion below rather than sitting inside it. */}
-      <Reveal as="p" className={styles.cardTitle}>
-        {t.greeting.cardTitle}
-        <span className={styles.cardTitleRule} aria-hidden="true" />
-      </Reveal>
-
       <div className={styles.frameWrap}>
         <span className={styles.lace} aria-hidden="true" />
 
