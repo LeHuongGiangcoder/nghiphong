@@ -206,6 +206,21 @@
   display: block;
   margin: 0;
   font-weight: 400;
+  transition: opacity 0.45s ease;
+}
+
+/* Who the card is addressed to, while we are still finding out.
+ *
+ * The markup on a personal link is the general greeting until the sheet
+ * answers — so on a slow connection the cover used to open on "Our treasured
+ * guest" and swap to the guest's own name a second or two later, which reads
+ * as a mistake being corrected. Held at zero opacity instead: the heading
+ * keeps its box, so nothing below it moves, and it fades up once as whichever
+ * greeting turned out to be the right one. The attribute comes off in
+ * `GuestProvider`, and is never set at all on a link without a slug.
+ */
+:global(html[data-guest="pending"]) .address {
+  opacity: 0;
 }
 
 /* "Dear" — the quiet half of the heading. It is set in the display serif so it
@@ -441,5 +456,10 @@
   .guestName,
   .enterChevron {
     animation: none;
+  }
+
+  /* the greeting still waits, it just appears rather than fades */
+  .address {
+    transition: none;
   }
 }

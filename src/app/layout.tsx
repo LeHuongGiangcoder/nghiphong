@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 import { Alex_Brush } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
-import { GuestProvider } from "@/components/GuestProvider";
+import { GUEST_PENDING_SCRIPT, GuestProvider } from "@/components/GuestProvider";
+import { InlineScript } from "@/components/InlineScript";
 
 const quickSignature = localFont({
   src: "./fonts/quick-signature.woff2",
@@ -123,7 +124,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${quickSignature.variable} ${alexBrush.variable} ${scarlett.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
+    /* `data-guest` starts at "ready" and is rendered here rather than only
+       being set by the script: an attribute the server never wrote is a
+       hydration mismatch, whereas a different value for one it did write is
+       what `suppressHydrationWarning` is for. The same suppression covers
+       `lang`, which LanguageProvider sets from localStorage. */
+    <html suppressHydrationWarning lang="en" data-guest="ready" className={`${quickSignature.variable} ${alexBrush.variable} ${scarlett.variable} ${ceSeason.variable} ${season.variable} ${cormorant.variable}`}>
+      <head>
+        {/* Runs while the document is still parsing, so the greeting is held
+            back before anything is painted — see GUEST_PENDING_SCRIPT. */}
+        <InlineScript html={GUEST_PENDING_SCRIPT} />
+      </head>
       <body>
         <LanguageProvider>
           <GuestProvider>{children}</GuestProvider>
