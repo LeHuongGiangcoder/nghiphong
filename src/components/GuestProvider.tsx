@@ -1,6 +1,11 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useSyncExternalStore,
+} from "react";
 
 /**
  * The Apps Script web app URL — the `…/exec` deployment of
@@ -26,8 +31,6 @@ export type Guest = {
   /** true once this guest has already answered the form */
   answered: boolean;
 };
-
-const GuestContext = createContext<Guest | null>(null);
 
 /** Where a resolved name is kept, keyed by slug. */
 const CACHE_PREFIX = "np-guest:";
@@ -55,19 +58,54 @@ function readSlug() {
  * even hydrated already carries the general greeting. Nothing React does can
  * stop that paint — which is why, for the second or two the sheet takes, a
  * personal link used to flash "Our treasured guest" first. So the decision is
- * made in the document itself: if the URL carries a slug, `data-guest=pending`
- * replaces the `data-guest="ready"` the layout renders while the document is
- * still parsing, and the CSS holds the greeting back until `GuestProvider`
- * puts it back to "ready".
+ * made in the document itself: if the URL carries a slug, this turns the
+ * `data-guest="ready"` the layout renders into `data-guest="pending"` while
+ * the document is still parsing, and the CSS holds the greeting back until
+ * `GuestProvider` puts it back to "ready".
  *
- * It clears the attribute itself after a while too. The provider's own timeout
- * normally gets there first; this one covers the case where the React bundle
- * never arrives, so a blocked bundle can't leave the greeting hidden for good.
+ * It settles the attribute itself after a while too. The provider's own
+ * timeout normally gets there first; this one covers the case where the React
+ * bundle never arrives, so a blocked script can't hide the greeting for good.
  */
 export const GUEST_PENDING_SCRIPT = `try{
 var p=new URLSearchParams(location.search),s=(p.get('to')||p.get('slug')||'').trim(),r=document.documentElement;
 if(s){r.setAttribute('data-guest','pending');setTimeout(function(){r.setAttribute('data-guest','ready')},${RESOLVE_TIMEOUT_MS + 2000})}
 }catch(e){}`;
+
+/* --------------------------------------------------------------------------
+ * The guest is external state too — it starts life in localStorage, the same
+ * as the chosen language, and is read the same way: the server and the
+ * hydrating client both start from "nobody", then React re-renders once with
+ * whatever this browser already knows. Remembering the name is what makes a
+ * second visit to the same link instant instead of another round trip.
+ * -------------------------------------------------------------------------- */
+
+/** undefined until the cache has been looked at; null once it came up empty. */
+let snapshot: Guest | null | undefined;
+const listeners = new Set<() => void>();
+
+function readSnapshot(): Guest | null {
+  if (snapshot === undefined) {
+    const slug = readSlug();
+    snapshot = slug ? readCache(slug) : null;
+  }
+  return snapshot;
+}
+
+function serverSnapshot(): Guest | null {
+  return null;
+}
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  return () => listeners.delete(onChange);
+}
+
+function publish(next: Guest) {
+  snapshot = next;
+  writeCache(next.slug, next);
+  listeners.forEach((l) => l());
+}
 
 function readCache(slug: string): Guest | null {
   try {
@@ -93,6 +131,10 @@ function writeCache(slug: string, guest: Guest) {
   }
 }
 
+/* -------------------------------------------------------------------------- */
+
+const GuestContext = createContext<Guest | null>(null);
+
 /**
  * Reads `?to=<slug>` off the URL and asks the sheet who that is.
  *
@@ -101,7 +143,7 @@ function writeCache(slug: string, guest: Guest) {
  * an error because a spreadsheet was slow, so nothing here throws or retries.
  */
 export function GuestProvider({ children }: { children: React.ReactNode }) {
-  const [guest, setGuest] = useState<Guest | null>(null);
+  const guest = useSyncExternalStore(subscribe, readSnapshot, serverSnapshot);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -120,14 +162,10 @@ export function GuestProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    // A name this browser has already been told. Applied in this first commit,
-    // so a guest reopening their link sees it at hydration rather than after
-    // another round trip — and never sees the general greeting in between.
-    const cached = readCache(slug);
-    if (cached) {
-      setGuest(cached);
-      settle();
-    }
+    // A name this browser has already been told is on screen by now, so there
+    // is nothing to wait for; the fetch below still runs, in case the sheet
+    // has since been corrected.
+    if (snapshot) settle();
 
     const abort = new AbortController();
     const timer = window.setTimeout(settle, RESOLVE_TIMEOUT_MS);
@@ -141,13 +179,11 @@ export function GuestProvider({ children }: { children: React.ReactNode }) {
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (!data || !data.ok || !data.name) return;
-        const next: Guest = {
+        publish({
           slug: String(data.slug || slug),
           name: String(data.name).trim(),
           answered: Boolean(data.answered),
-        };
-        setGuest(next);
-        writeCache(slug, next);
+        });
       })
       .catch(() => {
         // offline, endpoint down, slug unknown — fall back to the general page
