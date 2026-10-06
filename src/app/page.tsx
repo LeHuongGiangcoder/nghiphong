@@ -1,4 +1,5 @@
 import { Nav } from "@/components/Nav";
+import { Cover } from "@/components/sections/Cover";
 import { Greeting } from "@/components/sections/Greeting";
 import { Hero } from "@/components/sections/Hero";
 import { Agenda } from "@/components/sections/Agenda";
@@ -11,6 +12,7 @@ export default function Home() {
     <div className="shell">
       <Nav />
       <main id="main">
+        <Cover />
         <Greeting />
         <Hero />
         <SectionDivider />

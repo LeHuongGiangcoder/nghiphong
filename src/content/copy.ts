@@ -28,6 +28,19 @@ export const INITIALS = { bride: "N", groom: "P" };
 
 type Dict = {
   langLabel: string;
+  cover: {
+    /** the card's own name, set across the top of the opening page */
+    title: string;
+    /** the word above the guest's name */
+    dear: string;
+    /** stands in for the name when the link carries no slug */
+    dearFallback: string;
+    invite: string[];
+    /** the line that hands the reader on to the invitation proper */
+    next: string[];
+    /** the scroll cue's label, read out but not drawn */
+    scroll: string;
+  };
   nav: { greeting: string; agenda: string; rsvp: string; skip: string };
   hero: {
     eyebrow: string;
@@ -102,6 +115,17 @@ type Dict = {
 export const COPY: Record<Lang, Dict> = {
   en: {
     langLabel: "Tiếng Việt",
+    cover: {
+      title: "Wedding Invitation",
+      dear: "Dear",
+      dearFallback: "Our treasured guest",
+      invite: [
+        "You are warmly invited",
+        "to celebrate this special day with us.",
+      ],
+      next: ["Please scroll down", "for the wedding details."],
+      scroll: "Scroll to the invitation",
+    },
     nav: {
       greeting: "Our note",
       agenda: "Details",
@@ -203,6 +227,17 @@ export const COPY: Record<Lang, Dict> = {
 
   vi: {
     langLabel: "English",
+    cover: {
+      title: "Thiệp mời",
+      dear: "Thân gửi",
+      dearFallback: "Quý khách",
+      invite: [
+        "Trân trọng kính mời bạn",
+        "đến chung vui cùng chúng mình trong ngày đặc biệt này.",
+      ],
+      next: ["Vui lòng kéo xuống", "để xem chi tiết buổi lễ."],
+      scroll: "Kéo xuống để xem thiệp mời",
+    },
     nav: {
       greeting: "Lời chào",
       agenda: "Chi tiết",
