@@ -175,10 +175,10 @@
   margin-top: var(--sp-3xs);
   /* one step under the date it qualifies, and tracked tightly enough that the
      day and the venue stay on one line together */
-  font-size: var(--fs-caption);
+  font-size: var(--fs-sm);
   font-weight: 600;
-  letter-spacing: 0.07em;
-  text-indent: 0.07em;
+  letter-spacing: 0.05em;
+  text-indent: 0.05em;
   color: var(--c-ink);
 }
 

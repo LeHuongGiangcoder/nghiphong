@@ -238,10 +238,10 @@ export const COPY: Record<Lang, Dict> = {
     langLabel: "English",
     cover: {
       title: "Thiệp mời",
-      dear: "Thân gửi",
+      dear: "Kính gửi",
       dearFallback: "Quý khách",
       invite: [
-        "Trân trọng kính mời bạn",
+        "Trân trọng kính mời anh chị/bạn",
         "đến chung vui cùng chúng mình trong ngày đặc biệt này.",
       ],
       next: ["Vui lòng mở thiệp", "để xem chi tiết buổi lễ."],
@@ -258,7 +258,7 @@ export const COPY: Record<Lang, Dict> = {
       and: "và",
       saveTheDate: "Save the Date",
       invite:
-        "trân trọng kính mời bạn đến chung vui trong ngày hạnh phúc của chúng mình",
+        "trân trọng kính mời anh chị/bạn đến chung vui trong ngày hạnh phúc của chúng mình",
       dateLine: "13 . 12 . 2026",
       dayLine: "Chủ Nhật",
       venueShort: "Khách sạn Nikko Sài Gòn",

@@ -48,9 +48,11 @@ const onServer = () => false;
 export function Cover() {
   const { t } = useLang();
   const guest = useGuest();
-  // One line at the cover's size; it is set larger than the greeting's, so a
-  // long name steps down further before it is allowed a second line.
-  const nameRef = useFitName(guest?.name, { maxLines: 2, minScale: 0.5 });
+  // The address holds to a single line: the name is read at a glance, and a
+  // two-line break through a long Vietnamese name ("Chị Quế / Thuyền") splits
+  // it where nobody would. It steps down further than anywhere else on the
+  // page instead, which a script hand carries better than a bad break does.
+  const nameRef = useFitName(guest?.name, { maxLines: 1, minScale: 0.34 });
   // Flow until mounted, then the fixed sheet — see the note above.
   const mounted = useSyncExternalStore(neverChanges, onClient, onServer);
   const [closing, setClosing] = useState(false);
