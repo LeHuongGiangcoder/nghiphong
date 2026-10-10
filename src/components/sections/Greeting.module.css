@@ -100,7 +100,7 @@
    Vibes sets its ink right at the top of its line box, so at gap 0 the title
    crowds the eyebrow instead — it needs a real gap back. */
 .head {
-  gap: var(--sp-2xs) !important;
+  gap: var(--sp-sm) !important;
   margin-bottom: var(--sp-md) !important; /* Tăng khoảng cách để đẩy hoa và heading lên cao hơn so với chữ */
 }
 
@@ -155,7 +155,7 @@
   line-height: 1.5;
   /* Air above, so the name reads as its own line rather than as a third line
      of the greeting, and air below before the note starts. */
-  margin-top: 0.3em;
+  margin-top: 0.6em;
   margin-bottom: 0.15em;
   /* a touch in from the measure, so a wrapped line never runs to the lace */
   padding-inline: 0.5em;
