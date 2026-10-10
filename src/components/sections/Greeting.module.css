@@ -14,6 +14,17 @@
   --lace-bleed: clamp(9.5rem, 24vw, 13rem);
 }
 
+/* The band has to be deep enough to hold the whole medallion: the ring is
+   grown `--lace-bleed` past `.frameWrap` on both sides, and `overflow: hidden`
+   above — which is what keeps the circle from widening the page — cuts off
+   anything past the band's own edge. At the shared `--section-py` that cut
+   landed across the scalloped border and the doily ended in a straight line.
+   The doubled class is there to beat the `.section:has(+ .section)` seam rule
+   in globals.css, which halves the bottom padding where two bands meet. */
+.greeting.greeting {
+  padding-block: calc(var(--lace-bleed) + var(--sp-xs));
+}
+
 /* The box the lace medallion is drawn around. Its padding is the inset between
    the copy and the ornament, so the frame grows with the note instead of the
    note having to fit a fixed ring. */

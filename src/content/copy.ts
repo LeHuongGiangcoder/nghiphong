@@ -337,8 +337,8 @@ export const COPY: Record<Lang, Dict> = {
         "Chưa gửi được — câu trả lời của bạn vẫn còn đây, thử lại giúp mình nhé.",
       thanksYesTitle: "Hẹn gặp bạn nhé",
       thanksYesBody:
-        "Cảm ơn bạn — chỗ ngồi đã được giữ. Chúng mình rất mong đến ngày 13 tháng 12.",
-      thanksNoTitle: "Cảm ơn bạn",
+        "Cảm ơn anh chị/bạn — chỗ ngồi đã được giữ. Chúng mình rất mong đến ngày 13 tháng 12.",
+      thanksNoTitle: "Cảm ơn anh chị/bạn",
       thanksNoBody:
         "Chúng mình sẽ nhớ bạn trong ngày ấy, nhưng thật biết ơn vì bạn đã báo trước. Lời chúc của bạn là món quà lớn.",
       again: "Gửi phản hồi khác",
@@ -347,7 +347,7 @@ export const COPY: Record<Lang, Dict> = {
       line: "Ngô Mỹ Nghi & Nguyễn Thanh Phong",
       date: "13 . 12 . 2026",
       thanks: [
-        "Cảm ơn bạn đã cùng chúng mình sẻ chia ngày vui này.",
+        "Cảm ơn anh chị/bạn đã cùng chúng mình sẻ chia ngày vui này.",
         "Chúng mình hân hạnh được đón tiếp.",
       ],
     },
