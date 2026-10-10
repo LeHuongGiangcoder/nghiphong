@@ -7,12 +7,18 @@ const DEFAULT_MAX_LINES = 2;
 /** How far the name may be scaled down before it stops — below this it would
     be too small to sit under the greeting as part of the same phrase. */
 const DEFAULT_MIN_SCALE = 0.62;
+/** The step the scale comes down in while the name is being fitted. */
+const STEP = 0.04;
 
 type Options = {
-  /** lines the name may run to at full size */
+  /** lines the name may run to before it is scaled down at all */
   maxLines?: number;
   /** floor on `--name-scale` */
   minScale?: number;
+  /** lines we would rather the name took, if a small step down buys it */
+  preferLines?: number;
+  /** how far the name may be stepped down to reach `preferLines` */
+  preferScale?: number;
 };
 
 /**
@@ -25,13 +31,27 @@ type Options = {
  * script faces' widths vary enough per letter that an estimate either wrapped
  * anyway or shrank names that would have fitted.
  *
+ * `preferLines` is the second half of it. A name is best read on one line, and
+ * most names reach that on a step or two down — "Chị Quế Thuyền" at 0.8 is
+ * still a full-sized heading. A guest list also carries names no step would
+ * fit on one line ("Gia đình anh Hoàng Vinh & chị Diên Châu"), and shrinking
+ * those until they do leaves the longest names set smallest, which is the one
+ * thing this hook exists to avoid. So the one-line fit is attempted first and
+ * only as far as `preferScale`; a name that cannot reach it keeps its full
+ * size and takes the second line instead.
+ *
  * Both the cover and the greeting set the guest's name in the same script
  * hand, at their own sizes, and both need this — so it lives here rather than
  * being written out twice.
  */
 export function useFitName(
   name: string | undefined,
-  { maxLines = DEFAULT_MAX_LINES, minScale = DEFAULT_MIN_SCALE }: Options = {},
+  {
+    maxLines = DEFAULT_MAX_LINES,
+    minScale = DEFAULT_MIN_SCALE,
+    preferLines,
+    preferScale,
+  }: Options = {},
 ) {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -39,22 +59,35 @@ export function useFitName(
     const el = ref.current;
     if (!el) return;
 
-    // back to full size first, so a name that no longer needs the step-down
-    // (a wider window, a shorter name) gets it back
-    el.style.removeProperty("--name-scale");
-
-    const overflows = () => {
-      const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
-      // sub-pixel rounding: a hair over the last line is still that line
-      return el.scrollHeight > lineHeight * maxLines + 1;
+    const setScale = (scale: number) => {
+      if (scale === 1) el.style.removeProperty("--name-scale");
+      else el.style.setProperty("--name-scale", String(scale));
     };
 
-    let scale = 1;
-    while (overflows() && scale > minScale) {
-      scale = Math.max(minScale, scale - 0.04);
-      el.style.setProperty("--name-scale", String(scale));
-    }
-  }, [maxLines, minScale]);
+    const fitsIn = (lines: number) => {
+      const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+      // sub-pixel rounding: a hair over the last line is still that line
+      return el.scrollHeight <= lineHeight * lines + 1;
+    };
+
+    /** Steps down from full size until the name fits `lines`, or gives up at
+        `floor` — and says which it was. */
+    const stepTo = (lines: number, floor: number) => {
+      let scale = 1;
+      setScale(scale);
+      while (!fitsIn(lines) && scale > floor) {
+        scale = Math.max(floor, scale - STEP);
+        setScale(scale);
+      }
+      return fitsIn(lines);
+    };
+
+    // A short step down to keep the name on one line, where that is on offer.
+    if (preferLines && preferScale && stepTo(preferLines, preferScale)) return;
+
+    // Otherwise full size, and as many lines as it takes up to `maxLines`.
+    stepTo(maxLines, minScale);
+  }, [maxLines, minScale, preferLines, preferScale]);
 
   useLayoutEffect(fit, [fit, name]);
 

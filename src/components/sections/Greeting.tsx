@@ -12,8 +12,13 @@ import styles from "./Greeting.module.css";
 export function Greeting() {
   const { t } = useLang();
   const guest = useGuest();
-  // holds the name to two lines at the heading size — see useFitName
-  const nameRef = useFitName(guest?.name);
+  // one line where a short step down buys it, two at full size otherwise —
+  // the same rule the cover's address follows; see useFitName
+  const nameRef = useFitName(guest?.name, {
+    preferLines: 1,
+    preferScale: 0.8,
+    maxLines: 3,
+  });
 
   return (
     <section className={`section ${styles.greeting}`} id="greeting">

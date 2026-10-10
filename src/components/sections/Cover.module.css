@@ -18,8 +18,11 @@
      floating somewhere near it. */
   --frame-inset: clamp(0.625rem, 3vw, 1.25rem);
   /* The button is absolutely placed, so the band has to keep its own room
-     clear of it — otherwise a long name runs straight into it. */
-  padding-block: clamp(4.5rem, 14vw, 6rem);
+     clear of it — otherwise a long name runs straight into it. The foot keeps
+     more than the head: the button's whole height sits inside it, and a name
+     on three lines pushes the copy down to meet it. */
+  padding-top: clamp(4.5rem, 14vw, 6rem);
+  padding-bottom: clamp(7.5rem, 23vw, 9.5rem);
 }
 
 /* — the sheet ————————————————————————————————
@@ -226,9 +229,10 @@
    reads as the lead-in to the script below rather than as a label. */
 .dear {
   display: block;
-  /* a breath below the title's sprig: the address is the start of a new
-     thought, and the rule above it was sitting too close to read that way */
-  margin-top: clamp(0.5rem, 2.5vw, 0.875rem);
+  /* The address starts a new thought, so it keeps a little air under the
+     title's sprig — but only a little: the sprig, "Dear" and the name read as
+     one block, and a deeper gap left the lead-in floating on its own. */
+  margin-top: clamp(0.125rem, 0.8vw, 0.3125rem);
   font-family: var(--f-display);
   font-size: clamp(1.5rem, 6vw, 1.875rem);
   font-weight: 400;
@@ -262,6 +266,8 @@
   /* a touch in from the measure, so a wrapped line never runs to the frame */
   padding-inline: 0.3em;
   color: var(--c-gold);
+  /* a long name takes two lines at full size now, so even them up */
+  text-wrap: balance;
   animation: nameIn 0.7s ease-out both;
 }
 

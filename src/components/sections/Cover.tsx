@@ -48,11 +48,18 @@ const onServer = () => false;
 export function Cover() {
   const { t } = useLang();
   const guest = useGuest();
-  // The address holds to a single line: the name is read at a glance, and a
-  // two-line break through a long Vietnamese name ("Chị Quế / Thuyền") splits
-  // it where nobody would. It steps down further than anywhere else on the
-  // page instead, which a script hand carries better than a bad break does.
-  const nameRef = useFitName(guest?.name, { maxLines: 1, minScale: 0.34 });
+  // One line where a short step down buys it — a name read at a glance — and
+  // full size over as many lines as it takes for the names no step would fit.
+  // The ceiling is three because the longest names on the list ("Gia đình anh
+  // Hoàng Vinh & chị Diên Châu") run to three at this size on a phone, and
+  // shrinking them to reach two is the thing the fit is there to avoid. See
+  // useFitName.
+  const nameRef = useFitName(guest?.name, {
+    preferLines: 1,
+    preferScale: 0.76,
+    maxLines: 3,
+    minScale: 0.5,
+  });
   // Flow until mounted, then the fixed sheet — see the note above.
   const mounted = useSyncExternalStore(neverChanges, onClient, onServer);
   const [closing, setClosing] = useState(false);
