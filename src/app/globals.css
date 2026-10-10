@@ -486,14 +486,20 @@ a {
 
 /* Opt out: text that is Latin-only in both languages ("Pastel", dates) keeps
    the display face even when the page is Vietnamese. */
-/* Season Serif has no Vietnamese glyphs. A Vietnamese date set in `.num` would
-   fallback to times new roman mid-word. Hand the whole run to Cormorant Garamond,
-   which covers the language fully. `.display` is exempt — it rides CE Season
-   Serif, which carries the accents itself. */
+/* Season Serif has no Vietnamese glyphs. A Vietnamese heading set in it would
+   fall back to Times New Roman mid-word, so the whole run is handed to CE
+   Season Serif — the Vietnamese cut of the same family, which the names
+   already ride. It was Cormorant Garamond before, and that is a different
+   face: smaller on the body and lighter in the stem, so every Vietnamese
+   heading read a step down from the same heading in English, and a heading
+   with an English word in it ("First Look" under "Đón khách") set the two
+   faces side by side. Same family now, so the two languages match.
+
+   `.display` is exempt — it rides CE Season Serif already. */
 html[lang="vi"] .h1:not(.script--latin),
 html[lang="vi"] .h2:not(.script--latin),
 html[lang="vi"] .h3:not(.script--latin) {
-  font-family: var(--f-body);
+  font-family: var(--f-names);
 }
 
 html[lang="vi"] .num:not(.script--latin) {
