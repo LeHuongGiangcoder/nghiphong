@@ -155,6 +155,10 @@
   /* narrower than the page measure: the frame has to stay visible either side
      of the copy, and these lines are short by design */
   max-width: min(84vw, 21rem);
+  /* The button is absolutely placed at the bottom and has visual weight.
+     Push the content up so it optically centers in the available space
+     above the button rather than mathematically centering in the screen. */
+  margin-bottom: clamp(3rem, 10vh, 5rem);
 }
 
 /* — the card's title ——————————————————————————— */

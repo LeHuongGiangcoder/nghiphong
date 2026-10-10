@@ -502,12 +502,12 @@ html[lang="vi"] .h3:not(.script--latin) {
   font-family: var(--f-names);
 }
 
+/* Same swap for a Vietnamese date — and the same reason. It used to be set in
+   Cormorant italic, so "THÁNG 12 · 2026" was a lighter, smaller, sloped line
+   where the English "DECEMBER 2026" above the same calendar was upright and
+   tracked. CE Season Serif keeps the one styling in both languages. */
 html[lang="vi"] .num:not(.script--latin) {
-  font-family: var(--f-body);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: var(--lh-heading);
+  font-family: var(--f-names);
 }
 
 /* ------------------------------------------------------------ DIVIDERS */

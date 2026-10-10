@@ -177,10 +177,13 @@
      day and the venue stay on one line together */
   /* The one line a guest has to come away with — the day and the place — so
      it is set above the body step rather than as a caption under the date. */
-  font-size: clamp(1.25rem, 5.4vw, 1.4375rem);
+  /* The Vietnamese line is the long one — "Chủ Nhật · Khách sạn Nikko Sài
+     Gòn" — and it has to stay on one line at 375px, so the vw term is set by
+     that string rather than by the shorter English one. */
+  font-size: clamp(1rem, 4.35vw, 1.4375rem);
   font-weight: 600;
-  letter-spacing: 0.02em;
-  text-indent: 0.02em;
+  letter-spacing: 0;
+  text-indent: 0;
   color: var(--c-ink);
 }
 
