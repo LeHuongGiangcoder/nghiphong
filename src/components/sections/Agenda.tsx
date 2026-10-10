@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { Reveal } from "@/components/Reveal";
 import { Timeline } from "@/components/Timeline";
+import { Vanilla } from "@/components/Vanilla";
 import { DateThread } from "@/components/DateThread";
 import { MAPS_URL } from "@/content/copy";
 import { downloadIcs } from "@/lib/calendar";
@@ -27,6 +28,10 @@ export function Agenda() {
 
       <div className="container">
         <Reveal className="section__head">
+          {/* The motif that opens the dress-code and RSVP heads, so this one
+              opens the same way — it is the mark that says a new part of the
+              card is starting. */}
+          <Vanilla />
           <p className="eyebrow">{t.agenda.eyebrow}</p>
           <h2 className={`script ${styles.title}`}>{t.agenda.title}</h2>
           <p className={`num ${styles.dateFull}`}>{t.agenda.dateFull}</p>

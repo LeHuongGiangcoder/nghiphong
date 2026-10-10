@@ -2,6 +2,14 @@
   overflow: hidden;
 }
 
+/* The seam rule in globals.css halves the top padding where an ornament sits
+   between two bands, which left the vanilla mark crowding the divider above
+   it. This band keeps a full one; the doubled class matches that rule's
+   specificity so it wins. */
+.agenda.agenda {
+  padding-top: var(--section-py);
+}
+
 .title {
   font-size: var(--fs-script);
   line-height: 1;
