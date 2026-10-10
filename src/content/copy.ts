@@ -274,7 +274,7 @@ export const COPY: Record<Lang, Dict> = {
     greeting: {
       eyebrow: "Đôi lời từ chúng mình",
       title: "Lời chào",
-      titleGuest: "Thân gửi",
+      titleGuest: "Kính gửi",
       body: [
         "Có những khoảnh khắc mà trái tim lặng lẽ giữ lại, và đây là một trong số đó. Sau bao mùa cùng nhau bước qua, chúng mình cuối cùng cũng nói lời đồng ý — thật to, trước những người thương yêu nhất.",
         "Điều chúng mình mong chờ nhất chính là sự có mặt của bạn. Hãy đến ngồi cùng chúng mình, nâng ly, và để buổi tối ấy thật dịu dàng và trọn vẹn.",
