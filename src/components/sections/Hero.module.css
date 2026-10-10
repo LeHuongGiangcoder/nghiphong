@@ -180,10 +180,13 @@
   /* The Vietnamese line is the long one — "Chủ Nhật · Khách sạn Nikko Sài
      Gòn" — and it has to stay on one line at 375px, so the vw term is set by
      that string rather than by the shorter English one. */
-  font-size: clamp(1rem, 4.35vw, 1.4375rem);
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(1.1875rem, 5vw, 1.4375rem);
   font-weight: 600;
-  letter-spacing: 0;
-  text-indent: 0;
+  letter-spacing: 0.02em;
+  text-indent: 0.02em;
+  line-height: 1.45;
   color: var(--c-ink);
 }
 

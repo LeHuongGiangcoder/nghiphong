@@ -83,8 +83,15 @@ export function Hero() {
 
         <Reveal delay={400}>
           <p className={`num script--latin ${styles.date}`}>{t.hero.dateLine}</p>
+          {/* The day and the place, stacked rather than run together on one
+              line with a middot. Vietnamese sets "Chủ Nhật · Khách sạn Nikko
+              Sài Gòn" a good deal wider than the English, so holding both to
+              one line meant sizing the type to the longest string — which left
+              the one line a guest has to come away with smaller than the body
+              copy. Two lines take the size instead. */}
           <p className={`num ${styles.dateMeta}`}>
-            {t.hero.dayLine} &middot; {t.hero.venueShort}
+            <span>{t.hero.dayLine}</span>
+            <span>{t.hero.venueShort}</span>
           </p>
         </Reveal>
 
