@@ -45,6 +45,9 @@ const neverChanges = () => () => {};
 const onClient = () => true;
 const onServer = () => false;
 
+/** The sheet the name has to stay inside — see `within` below. */
+const coverEl = () => document.getElementById("cover");
+
 export function Cover() {
   const { t } = useLang();
   const guest = useGuest();
@@ -59,6 +62,8 @@ export function Cover() {
     preferScale: 0.76,
     maxLines: 3,
     minScale: 0.5,
+    // and whatever the lines come to, never taller than the sheet itself
+    within: coverEl,
   });
   // Flow until mounted, then the fixed sheet — see the note above.
   const mounted = useSyncExternalStore(neverChanges, onClient, onServer);
@@ -149,7 +154,14 @@ export function Cover() {
 
       {/* The two corner sprays, the same art the hero uses. The left one is
           flipped onto the top corner so the florals run diagonally across the
-          page the way they do on the printed card. */}
+          page the way they do on the printed card.
+
+          They are held in a clipping layer of their own. Both bleed past the
+          trim on purpose, and the sheet scrolls when it has to — without the
+          clip that bleed is scrollable overflow, so every cover had a few
+          pixels of scroll in it and the frame drawn on the sheet's edges
+          could be dragged off the top. */}
+      <div className={styles.decorClip} aria-hidden="true">
       <div className={`decor ${styles.sprayTop}`} aria-hidden="true">
         <Image
           src="/decor/hero-corner-left.webp"
@@ -172,6 +184,7 @@ export function Cover() {
           priority
           sizes="(max-width: 40rem) 52vw, 21rem"
         />
+      </div>
       </div>
 
       {/* The gold rule frame — a double hairline inset from the trim, with a

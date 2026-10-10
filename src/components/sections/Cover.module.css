@@ -96,6 +96,16 @@
    the top corner, the right one kept at the bottom. Both are sized off the
    shell so they stop growing with the column, and both bleed past the trim the
    way printed art does — `.shell` clips the overhang. */
+/* The layer the corner sprays are drawn in — see the note in Cover.tsx. It is
+   the sheet's own box, and it clips: the art bleeds past the trim, and inside
+   a sheet that may scroll that bleed would otherwise be scrollable height. */
+.decorClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .sprayTop,
 .sprayBottom {
   opacity: 0.95;
@@ -173,7 +183,9 @@
   flex-direction: column;
   align-items: center;
   gap: var(--sp-xs);
-  margin-bottom: clamp(2rem, 7vw, 2.75rem);
+  /* tightened at phone width: the gaps either side of the address are the
+     only slack the sheet has, and a name on three lines needs all of it */
+  margin-bottom: clamp(1.25rem, 5vw, 2.75rem);
   margin-top: clamp(1.5rem, 5vh, 2.5rem);
 }
 
@@ -310,7 +322,7 @@
 .invite {
   display: flex;
   flex-direction: column;
-  margin-top: clamp(1.75rem, 6vw, 2.25rem);
+  margin-top: clamp(1.25rem, 5vw, 2.25rem);
   /* a step under the page's body size: the break after "invited" is a
      typographic choice, and at the full body step the second line wraps on a
      narrow phone and the choice is lost */
@@ -326,7 +338,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--sp-sm);
-  margin-top: clamp(1.75rem, 6vw, 2.25rem);
+  margin-top: clamp(1.25rem, 5vw, 2.25rem);
 }
 
 .nextSprig {
