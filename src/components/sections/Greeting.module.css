@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100svh;
   /* How far the lace ring is grown past its box on every side — the
      medallion's real top edge, which is further out than `.frameWrap`'s.
@@ -22,7 +22,8 @@
    The doubled class is there to beat the `.section:has(+ .section)` seam rule
    in globals.css, which halves the bottom padding where two bands meet. */
 .greeting.greeting {
-  padding-block: calc(var(--lace-bleed) + var(--sp-xs));
+  padding-top: calc(var(--lace-bleed) + clamp(2rem, 8vh, 4rem));
+  padding-bottom: calc(var(--lace-bleed) + var(--sp-xs));
 }
 
 /* The box the lace medallion is drawn around. Its padding is the inset between
@@ -40,7 +41,8 @@
      band sits outside that, so the copy has to clear the last 15% on each
      side. Everything past that reads as the frame drifting away from the note
      it is meant to hold. */
-  padding-block: clamp(6.25rem, 17vw, 7rem);
+  padding-top: clamp(4rem, 12vw, 5rem);
+  padding-bottom: clamp(6.25rem, 17vw, 7rem);
   /* almost none: every pixel here is width the medallion and the copy lose */
   padding-inline: 0.5rem;
 }
