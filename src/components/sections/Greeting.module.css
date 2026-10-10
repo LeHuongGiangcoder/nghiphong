@@ -11,7 +11,7 @@
   /* How far the lace ring is grown past its box on every side — the
      medallion's real top edge, which is further out than `.frameWrap`'s.
      `.frameWrap` inherits it. */
-  --lace-bleed: clamp(4.5rem, 9vw, 5rem);
+  --lace-bleed: clamp(9.5rem, 24vw, 13rem);
 }
 
 /* The box the lace medallion is drawn around. Its padding is the inset between
@@ -23,12 +23,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* Deep enough that the eyebrow and the signature clear the band, and no
+  /* Deep enough that the eyebrow at the top and the monogram at the foot both
+     sit clear of the pierced band rather than touching it, and no
      deeper — the doily's body runs solid to 35% of the box and the pierced
      band sits outside that, so the copy has to clear the last 15% on each
      side. Everything past that reads as the frame drifting away from the note
      it is meant to hold. */
-  padding-block: clamp(4.75rem, 13.5vw, 5.25rem);
+  padding-block: clamp(6.25rem, 17vw, 7rem);
   /* almost none: every pixel here is width the medallion and the copy lose */
   padding-inline: 0.5rem;
 }

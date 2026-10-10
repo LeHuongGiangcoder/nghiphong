@@ -332,7 +332,7 @@
   /* The one line that tells the reader what to do next, so it is set at the
      body step and in the body ink rather than as a caption aside — at the
      smaller size guests were missing it and never opening the card. */
-  font-size: var(--fs-sm);
+  font-size: var(--fs-body);
   font-style: italic;
   font-weight: 500;
   line-height: 1.6;
