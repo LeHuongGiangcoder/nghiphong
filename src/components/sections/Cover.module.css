@@ -62,6 +62,7 @@
   .cover[data-fixed] {
     transition: none;
   }
+
   .cover[data-closing] {
     transform: translateX(-50%);
   }
@@ -114,20 +115,16 @@
      gradient runs `to top` because the mask is in the element's own space and
      the flip above turns it over: local top is what lands at screen bottom,
      which is the end that has to fade. */
-  -webkit-mask-image: linear-gradient(
-    to top,
-    #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.5) 84%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to top,
-    #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.5) 84%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(to top,
+      #000 0%,
+      #000 58%,
+      rgba(0, 0, 0, 0.5) 84%,
+      transparent 100%);
+  mask-image: linear-gradient(to top,
+      #000 0%,
+      #000 58%,
+      rgba(0, 0, 0, 0.5) 84%,
+      transparent 100%);
 }
 
 .sprayBottom {
@@ -136,24 +133,21 @@
   width: min(54%, 21rem);
   margin-right: -8%;
   margin-bottom: -2%;
-  -webkit-mask-image: linear-gradient(
-    to top,
-    #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.5) 84%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to top,
-    #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.5) 84%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(to top,
+      #000 0%,
+      #000 58%,
+      rgba(0, 0, 0, 0.5) 84%,
+      transparent 100%);
+  mask-image: linear-gradient(to top,
+      #000 0%,
+      #000 58%,
+      rgba(0, 0, 0, 0.5) 84%,
+      transparent 100%);
 }
 
 .content {
-  position: relative; /* over the panel art and the frame, not under them */
+  position: relative;
+  /* over the panel art and the frame, not under them */
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -239,7 +233,7 @@
 }
 
 /* Season Serif carries no Vietnamese accents, so the Vietnamese lead-in
-   ("Thân gửi") sets in Cormorant — the same swap the globals make for `.h1`. */
+   ("Kính gửi") sets in Cormorant — the same swap the globals make for `.h1`. */
 :global(html[lang="vi"]) .dear {
   font-family: var(--f-body);
   font-style: italic;
@@ -278,6 +272,7 @@
     opacity: 0;
     transform: translateY(0.25em);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -449,17 +444,20 @@
 }
 
 @keyframes enterNudge {
+
   0%,
   70%,
   100% {
     transform: none;
   }
+
   35% {
     transform: translateY(0.2rem);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .guestName,
   .enterChevron {
     animation: none;
