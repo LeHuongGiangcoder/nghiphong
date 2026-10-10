@@ -165,7 +165,7 @@ export const COPY: Record<Lang, Dict> = {
     agenda: {
       eyebrow: "When & where",
       title: "The Celebration",
-      dateFull: "Sunday, 13 December 2026",
+      dateFull: "Sunday 13.12.2026",
       month: "December 2026",
       weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       items: [
@@ -284,7 +284,7 @@ export const COPY: Record<Lang, Dict> = {
     agenda: {
       eyebrow: "Thời gian & địa điểm",
       title: "Chương trình",
-      dateFull: "Chủ Nhật, ngày 13 tháng 12 năm 2026",
+      dateFull: "Chủ nhật 13.12.2026",
       month: "Tháng 12 · 2026",
       weekdays: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"],
       items: [

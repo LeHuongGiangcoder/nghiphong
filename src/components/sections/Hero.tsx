@@ -90,7 +90,6 @@ export function Hero() {
               the one line a guest has to come away with smaller than the body
               copy. Two lines take the size instead. */}
           <p className={`num ${styles.dateMeta}`}>
-            <span>{t.hero.dayLine}</span>
             <span>{t.hero.venueShort}</span>
           </p>
         </Reveal>
