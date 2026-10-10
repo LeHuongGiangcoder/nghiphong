@@ -103,11 +103,19 @@ export function useFitName(
     const confine = (from: number) => {
       const box = within?.();
       if (!box) return;
+      const over = () => box.scrollHeight > box.clientHeight + 1;
+      if (!over()) return;
+
       let scale = from;
-      while (box.scrollHeight > box.clientHeight + 1 && scale > minScale) {
+      while (over() && scale > minScale) {
         scale = Math.max(minScale, scale - STEP);
         setScale(scale);
       }
+      // A window too short for the copy at any size — a phone on its side, or
+      // one of the longest names on a small screen. The sheet scrolls there
+      // and its frame grows with it, so a name set at the floor would be
+      // giving up its size for nothing. Hand it back.
+      if (over()) setScale(from);
     };
 
     // A short step down to keep the name on one line, where that is on offer.

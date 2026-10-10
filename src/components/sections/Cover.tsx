@@ -152,6 +152,14 @@ export function Cover() {
         />
       </div>
 
+      {/* Everything the frame encloses lives on one sheet, and the sheet is
+          what the frame, the sprays and the button are measured against. The
+          band itself is only as tall as the viewport, so hanging them off it
+          meant that whenever the copy outgrew the viewport — a long name, a
+          short window — the frame stayed one screen tall and scrolled away
+          from the copy it was meant to hold. The sheet grows with the copy
+          instead, so the frame closes around it at any height. */}
+      <div className={styles.sheet}>
       {/* The two corner sprays, the same art the hero uses. The left one is
           flipped onto the top corner so the florals run diagonally across the
           page the way they do on the printed card.
@@ -255,6 +263,7 @@ export function Cover() {
           <path d="M1.5 1.5 8 8l6.5-6.5" />
         </svg>
       </a>
+      </div>
     </section>
   );
 }

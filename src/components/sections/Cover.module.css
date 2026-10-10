@@ -17,7 +17,23 @@
      placed against the same value, so the art meets the rule rather than
      floating somewhere near it. */
   --frame-inset: clamp(0.625rem, 3vw, 1.25rem);
-  /* The button is absolutely placed, so the band has to keep its own room
+  /* The sheet inside carries the band's padding, so the band itself keeps
+     none — the shared `--section-py` would be added on top of it. */
+  padding-block: 0;
+}
+
+/* The sheet — see the note in Cover.tsx. It fills the band and then grows with
+   its own copy, which is what lets the frame, the sprays and the button be
+   placed against the copy's real height rather than against one screen. */
+.sheet {
+  position: relative;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* The button is absolutely placed, so the sheet has to keep its own room
      clear of it — otherwise a long name runs straight into it. The foot keeps
      more than the head: the button's whole height sits inside it, and a name
      on three lines pushes the copy down to meet it. */
