@@ -89,7 +89,7 @@ export function Hero() {
               one line meant sizing the type to the longest string — which left
               the one line a guest has to come away with smaller than the body
               copy. Two lines take the size instead. */}
-          <p className={`num ${styles.dateMeta}`}>
+          <p className={styles.dateMeta}>
             <span>{t.hero.venueShort}</span>
           </p>
         </Reveal>
