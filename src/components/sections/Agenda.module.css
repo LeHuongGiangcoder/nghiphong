@@ -16,7 +16,7 @@
 }
 
 .dateFull {
-  font-size: var(--fs-caption);
+  font-size: clamp(1.1rem, 4.5vw, 1.25rem);
   font-weight: 600;
   /* tracked in from the standard wide measure so the full date stays on one
      line at the raised caption size */
