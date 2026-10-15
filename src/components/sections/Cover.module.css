@@ -256,7 +256,7 @@
      whatever lands in it, so the tallest setting of the page — Vietnamese,
      whose invitation line runs to three — has to come out of here. Raising
      it again means checking that page on a 375 x 812 phone. */
-  margin-bottom: clamp(2.25rem, 6.5vh, 3.75rem);
+  margin-bottom: clamp(2rem, 5vh, 3.25rem);
 }
 
 /* — the card's title ——————————————————————————— */
@@ -361,7 +361,7 @@
      themselves can ask for one. A floor instead: the slot is three lines tall
      whatever lands in it, so no ordinary name moves anything, and the one
      that asks for more grows the sheet rather than printing over it. */
-  font-size: clamp(1.5rem, 6.8vw, 2.125rem);
+  font-size: clamp(1.625rem, 7.45vw, 2.3rem);
   min-height: calc(3 * 1.3em);
 }
 
