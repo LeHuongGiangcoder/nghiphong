@@ -193,6 +193,23 @@ export function Cover() {
         onClick={toggle}
         lang={lang === "en" ? "vi" : "en"}
       >
+        {/* The globe is what makes it read as a language switch at a glance:
+            the label alone is a word in a language the reader may not be
+            looking for, set small in a corner of a florid card, and it was
+            being missed. */}
+        <svg
+          className={styles.langGlobe}
+          viewBox="0 0 16 16"
+          role="presentation"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.1"
+        >
+          <circle cx="8" cy="8" r="6.4" />
+          <ellipse cx="8" cy="8" rx="2.7" ry="6.4" />
+          <path d="M1.9 5.8h12.2M1.9 10.2h12.2" strokeLinecap="round" />
+        </svg>
         {t.langLabel}
       </button>
 

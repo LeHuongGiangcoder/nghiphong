@@ -191,30 +191,45 @@
   /* the tap-target floor every control on the page is held to, kept off the
      label itself so the pill stays small */
   min-height: 2.25rem;
-  padding: 0.4rem 0.85rem;
-  border: 1px solid var(--c-line-soft);
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  /* It has to be found before it can be used, and on this card it was not:
+     a hairline pill in the softest gold, over florals, in the corner a
+     reader's eye reaches last. The gold rule, the fuller ground and the
+     globe beside the label are all there to let it be seen at a glance. */
+  border: 1px solid var(--c-gold-soft);
   border-radius: var(--radius-pill);
-  background: rgba(255, 253, 248, 0.55);
+  background: rgba(255, 253, 248, 0.86);
   -webkit-backdrop-filter: blur(10px) saturate(1.3);
   backdrop-filter: blur(10px) saturate(1.3);
+  box-shadow: 0 6px 18px -12px rgba(120, 100, 65, 0.6);
   font-family: var(--f-body);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: var(--ls-wide);
   text-indent: var(--ls-wide);
   text-transform: uppercase;
   line-height: 1;
-  color: var(--c-gold);
+  color: var(--c-gold-ink);
   cursor: pointer;
   transition: background-color var(--dur) var(--ease),
     border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
+.langGlobe {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  /* the label is set in caps; the globe rides their optical middle */
+  margin-top: -0.05em;
+  opacity: 0.85;
+}
+
 @media (hover: hover) {
   .lang:hover {
-    background: rgba(255, 253, 248, 0.78);
-    border-color: var(--c-line);
-    color: var(--c-gold-ink);
+    background: rgb(255, 253, 248);
+    border-color: var(--c-gold);
+    color: var(--c-gold);
   }
 }
 
