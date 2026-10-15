@@ -127,18 +127,24 @@
   opacity: 0.95;
 }
 
+/* How far into the page each spray reaches. The art is drawn to bleed off
+   the trim, but the bleed was deep enough that on a phone only a sliver of
+   each flower was left inside the frame and both read as smudges in the
+   corners rather than as the sprays they are. They are pulled back in and
+   sized up a little; what leaves the page now is the stem end, not the
+   bloom. */
 .sprayTop {
   top: 0;
   left: 0;
-  width: min(68%, 27rem);
+  width: min(80%, 29rem);
   /* Flipped vertically, so the spray opens downward out of the top corner.
      The origin has to stay at the box's middle: flipping about `top` would
      throw the whole element a full height above its own box, which is off the
      page entirely. */
   transform: scaleY(-1);
   transform-origin: center;
-  margin-left: -8%;
-  margin-top: -5%;
+  margin-left: -3%;
+  margin-top: -1%;
   /* The art ends in a hard cut where it leaves the corner; fade the tail so it
      dissolves into the panel instead — the same treatment the hero uses. The
      gradient runs `to top` because the mask is in the element's own space and
@@ -159,9 +165,9 @@
 .sprayBottom {
   right: 0;
   bottom: 0;
-  width: min(54%, 21rem);
-  margin-right: -8%;
-  margin-bottom: -2%;
+  width: min(66%, 24rem);
+  margin-right: -3%;
+  margin-bottom: 0;
   -webkit-mask-image: linear-gradient(to top,
       #000 0%,
       #000 58%,
