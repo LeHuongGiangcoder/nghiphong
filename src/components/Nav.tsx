@@ -7,7 +7,7 @@ import styles from "./Nav.module.css";
 const SECTIONS = ["greeting", "agenda", "rsvp"] as const;
 
 export function Nav() {
-  const { t, lang, toggle } = useLang();
+  const { t } = useLang();
   const [lifted, setLifted] = useState(false);
   const [active, setActive] = useState<string | null>(null);
 
@@ -55,14 +55,6 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        <button
-          type="button"
-          className={`btn btn--ghost btn--sm ${styles.lang}`}
-          onClick={toggle}
-          lang={lang === "en" ? "vi" : "en"}
-        >
-          {t.langLabel}
-        </button>
       </nav>
     </header>
   );

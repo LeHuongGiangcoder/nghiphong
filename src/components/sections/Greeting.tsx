@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { useGuest } from "@/components/GuestProvider";
-import { useFitName } from "@/components/useFitName";
 import { Reveal } from "@/components/Reveal";
 
 import { DISPLAY_NAMES } from "@/content/copy";
@@ -12,14 +11,6 @@ import styles from "./Greeting.module.css";
 export function Greeting() {
   const { t } = useLang();
   const guest = useGuest();
-  // one line where a short step down buys it, two at full size otherwise —
-  // the same rule the cover's address follows; see useFitName
-  const nameRef = useFitName(guest?.name, {
-    preferLines: 1,
-    preferScale: 0.8,
-    maxLines: 3,
-  });
-
   return (
     <section className={`section ${styles.greeting}`} id="greeting">
       <div className="section-bg">
@@ -48,7 +39,7 @@ export function Greeting() {
               <h2 className={`script ${styles.title}`}>
                 {guest ? t.greeting.titleGuest : t.greeting.title}
                 {guest && (
-                  <span ref={nameRef} className={styles.guestName}>
+                  <span className={styles.guestName}>
                     {guest.name}
                   </span>
                 )}

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useLang } from "@/components/LanguageProvider";
 import { useGuest } from "@/components/GuestProvider";
-import { useFitName } from "@/components/useFitName";
 import { Reveal } from "@/components/Reveal";
 import { Sprig, WaveHeart } from "@/components/Flourish";
 import styles from "./Cover.module.css";
@@ -45,26 +44,9 @@ const neverChanges = () => () => {};
 const onClient = () => true;
 const onServer = () => false;
 
-/** The sheet the name has to stay inside — see `within` below. */
-const coverEl = () => document.getElementById("cover");
-
 export function Cover() {
-  const { t } = useLang();
+  const { t, lang, toggle } = useLang();
   const guest = useGuest();
-  // One line where a short step down buys it — a name read at a glance — and
-  // full size over as many lines as it takes for the names no step would fit.
-  // The ceiling is three because the longest names on the list ("Gia đình anh
-  // Hoàng Vinh & chị Diên Châu") run to three at this size on a phone, and
-  // shrinking them to reach two is the thing the fit is there to avoid. See
-  // useFitName.
-  const nameRef = useFitName(guest?.name, {
-    preferLines: 1,
-    preferScale: 0.76,
-    maxLines: 3,
-    minScale: 0.5,
-    // and whatever the lines come to, never taller than the sheet itself
-    within: coverEl,
-  });
   // Flow until mounted, then the fixed sheet — see the note above.
   const mounted = useSyncExternalStore(neverChanges, onClient, onServer);
   const [closing, setClosing] = useState(false);
@@ -200,6 +182,20 @@ export function Cover() {
           art but under the copy. */}
       <span className={styles.frame} aria-hidden="true" />
 
+      {/* The language switch. It lives here rather than in the nav because
+          this is the first thing a guest sees: the choice is made once, on
+          the envelope, and the invitation behind it is already in the
+          language they picked. Set quietly in the top corner so it reads as
+          a mark on the stock rather than as a control on the card. */}
+      <button
+        type="button"
+        className={styles.lang}
+        onClick={toggle}
+        lang={lang === "en" ? "vi" : "en"}
+      >
+        {t.langLabel}
+      </button>
+
       <div className={`measure ${styles.content}`}>
         <Reveal as="p" className={styles.title} delay={80}>
           <Sprig className={styles.titleSprig} />
@@ -212,13 +208,17 @@ export function Cover() {
               to. The name is the page's only gold script, so it is where the
               eye lands. */}
           <h2 className={styles.address}>
-            <span className={styles.dear}>{t.cover.dear}</span>
-            <span
-              ref={nameRef}
-              className={`script ${styles.guestName}`}
-              data-fallback={guest ? undefined : "true"}
-            >
-              {name},
+            <span className={styles.dear}>{t.cover.dear},</span>
+            {/* The name sits in a box of its own, and the box keeps the same
+                height whether the name takes one line or three — see the
+                note on `.nameSlot`. */}
+            <span className={styles.nameSlot}>
+              <span
+                className={`script ${styles.guestName}`}
+                data-fallback={guest ? undefined : "true"}
+              >
+                {name}
+              </span>
             </span>
           </h2>
         </Reveal>
