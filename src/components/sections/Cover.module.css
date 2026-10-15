@@ -356,9 +356,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  /* the size the name is set at, so the slot can be stated in its lines */
+  /* `height` was fixed here, which overlapped the copy above and below on the
+     rare name that needs a fourth line — and a couple who break the name
+     themselves can ask for one. A floor instead: the slot is three lines tall
+     whatever lands in it, so no ordinary name moves anything, and the one
+     that asks for more grows the sheet rather than printing over it. */
   font-size: clamp(1.5rem, 6.8vw, 2.125rem);
-  height: calc(3 * 1.3em);
+  min-height: calc(3 * 1.3em);
 }
 
 /* The guest's own name — the one thing on the cover set in gold, and the
@@ -376,7 +380,12 @@
   /* a touch in from the measure, so a wrapped line never runs to the frame */
   padding-inline: 0.3em;
   color: var(--c-gold);
-  /* a name on more than one line reads better broken evenly than ragged */
+  /* A break the couple typed into the sheet is theirs to keep — see
+     `readableName`. Everything else still wraps on the measure, and a line
+     they chose that is too long for the card still wraps rather than
+     running out of the frame. */
+  white-space: pre-line;
+  /* a name we broke ourselves reads better even than ragged */
   text-wrap: balance;
   animation: nameIn 0.7s ease-out both;
 }

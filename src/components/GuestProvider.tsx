@@ -25,6 +25,30 @@ export const RSVP_ENDPOINT =
   process.env.NEXT_PUBLIC_RSVP_ENDPOINT ??
   "https://script.google.com/macros/s/AKfycbwyHpm8BhV1N6OrslkM8gxr1J9dRxVfZZFlGy962T0AKvD6o_6sPTCCS7z0gwal1stx/exec";
 
+/**
+ * The guest's name as the couple typed it in the sheet, line breaks and all.
+ *
+ * A name is the one string on the page the couple cannot preview before they
+ * send the link, and the wrap the browser picks is not always the one they
+ * want — "Gia đình Anh Hoàng Vinh & Chị Diên Châu" reads better broken before
+ * the "&" than wherever the measure happens to run out. So a break they put
+ * in the cell is kept: Alt+Enter inside the cell, a literal `\n`, or a `|`
+ * where typing a newline is awkward (a phone, a paste from somewhere else).
+ *
+ * Everything else about the name is left alone — no capitalising, no
+ * collapsing of their spacing beyond what sits either side of a break.
+ */
+export function readableName(raw: string) {
+  return String(raw)
+    .replace(/\r\n?/g, "\n")
+    // the two written markers, treated as the newline they stand for
+    .replace(/\\n/g, "\n")
+    .replace(/\s*\|\s*/g, "\n")
+    // a break carries its own space; anything either side of it is a typo
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .trim();
+}
+
 export type Guest = {
   slug: string;
   name: string;
@@ -113,7 +137,7 @@ function readCache(slug: string): Guest | null {
     if (!raw) return null;
     const data = JSON.parse(raw);
     if (!data || typeof data.name !== "string" || !data.name) return null;
-    return { slug, name: data.name, answered: Boolean(data.answered) };
+    return { slug, name: readableName(data.name), answered: Boolean(data.answered) };
   } catch {
     // no storage, or something else wrote nonsense there — ask the sheet
     return null;
@@ -181,7 +205,7 @@ export function GuestProvider({ children }: { children: React.ReactNode }) {
         if (!data || !data.ok || !data.name) return;
         publish({
           slug: String(data.slug || slug),
-          name: String(data.name).trim(),
+          name: readableName(data.name),
           answered: Boolean(data.answered),
         });
       })

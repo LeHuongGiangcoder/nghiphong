@@ -157,6 +157,8 @@
   margin-bottom: 0.15em;
   /* a touch in from the measure, so a wrapped line never runs to the lace */
   padding-inline: 0.5em;
+  /* a break typed into the sheet is kept; see `readableName` */
+  white-space: pre-line;
   text-wrap: balance; /* break a long name into two even lines */
   animation: guestNameIn 0.7s ease-out both;
 }

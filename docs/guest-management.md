@@ -36,6 +36,27 @@ Hai khách trùng tên tự được `-2`, `-3`. Dấu tiếng Việt và chữ 
 > **Đừng sửa tay cột Slug.** Slug là thứ nối link đã gửi với dòng trong sheet;
 > sửa nó là link đã gửi cho khách thành vô hiệu.
 
+### Tự chọn chỗ xuống dòng cho tên khách
+
+Mặc định tên khách tự xuống dòng theo bề ngang màn hình, và chỗ ngắt không
+phải lúc nào cũng đẹp. Muốn tự quyết, ngắt ngay trong ô `Name`:
+
+| Gõ trong ô Name | Trang mời hiện |
+|---|---|
+| `Gia đình Anh Hoàng Vinh \| & Chị Diên Châu` | `Gia đình Anh Hoàng Vinh`<br>`& Chị Diên Châu` |
+| Alt+Enter (Mac: ⌥+Enter) ngay trong ô | đúng như trong ô |
+
+Dấu `|` và phím Alt+Enter cho kết quả như nhau — dùng cái nào tiện hơn. Khoảng
+trắng thừa hai bên chỗ ngắt tự được bỏ, nên không cần căn tay.
+
+Vài điều nên biết:
+
+- Slug không đổi vì chỗ ngắt, nên link đã gửi vẫn sống.
+- Trang bìa chừa sẵn chỗ cho **3 dòng**. Ngắt tới dòng thứ 4 thì bìa phải cao
+  thêm và sẽ cuộn được một chút — đẹp nhất là 2 dòng, nhiều nhất là 3.
+- Một dòng bạn tự ngắt mà vẫn quá dài so với khổ thiệp thì nó vẫn tự xuống
+  dòng tiếp, chứ không tràn ra ngoài khung.
+
 ## 3. Deploy làm Web App
 
 Trong Apps Script: `Deploy` → `New deployment` → chọn type **Web app**.
